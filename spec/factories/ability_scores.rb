@@ -10,7 +10,7 @@ FactoryGirl.define do
   factory :strength, parent: :ability_score do
     name "Strength"
     short_name "Str"
-    title "Measures your character’s physical power. It’s important for most characters who fight hand-to-hand"
+    title "Measures your character's physical power. It's important for most characters who fight hand-to-hand"
     description ["Melee basic attacks are based on Strength.",
       "Clerics, fighters, paladins, rangers, and warlords have powers based on Strength.",
       "Your Strength might contribute to your Fortitude defense.",
@@ -20,7 +20,7 @@ FactoryGirl.define do
   factory :constitution, parent: :ability_score do
     name "Constitution"
     short_name "Con"
-    title "Represents your character’s health, stamina, and vital force. All characters benefia from a high Constitution score."
+    title "Represents your character's health, stamina, and vital force. All characters benefia from a high Constitution score."
     description ["Your Constitution score is added to your hit points at 1st level.",
       "The number of healing surges you can use each day is influenced by your Constitution.",
       "Many warlock powers are based on Constitution.",

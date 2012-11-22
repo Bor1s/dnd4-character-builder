@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :power do
-    # @type [:utility, :attack] Type of power
-    type
+    # @power_type [:utility, :attack] Type of power
+    power_type
   end
 
   factory :at_will, parent: :power do
