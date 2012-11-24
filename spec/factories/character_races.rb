@@ -16,23 +16,23 @@ FactoryGirl.define do
     #languages [common_language, draconic]
     skill_bonuses Hash.new({ history: 2, intimidate: 2 })
 
-    #TODO maybe make racial_traits a separate class.
     traits [
       { name: "Dragonborn Fury", 
         description: "When you're bloodied, you gain a +1 racial bonus to attack rolls.",
-        keyword: "info",
-        bonus: nil
+        keyword: :info,
+        bonus: 0
       },
       { name: "Draconic Heritage", 
         description: "Your healing surge value is equal to one-quarter of your maximum hit points + your Constitution modifier.",
-        keyword: "healing_surge_value",
-        bonus: ->(){ ability_scores.constitution_modifier }
+        keyword: :healing_surge_value,
+        bonus: "->(){ character.ability_scores.constitution_modifier }"
       },
       {
         # TODO implement powers and racial powers
         name: "Dragon Breath",
         description: "You can use Dragon Breath as an encounter power.",
-        keyword: "racial_powers"
+        keyword: "racial_powers",
+        bonus: 0
       }
     ]
     powers ""
@@ -41,5 +41,16 @@ FactoryGirl.define do
   factory :dwarf, parent: :character_race do
     name "Dwarf"
     description "Masters of stone and iron, dauntless and unyielding in the face of adversity"
+    avg_height (4.3..4.9) # Feet
+    avg_weight (160..220) # Lbs.
+    ability_scores_bonuses Hash.new({ con: 2, wis: 2 })
+    size :medium
+    vision :low_light
+    speed 5
+    #languages [common_language, draconic]
+    skill_bonuses Hash.new({ dungeoneering: 2, endurance: 2 })
+
+    #TODO set racial traits from PH
+    traits []
   end
 end

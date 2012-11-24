@@ -11,8 +11,8 @@ FactoryGirl.define do
     end"
   end
 
-  factory :healing_surges_number, parent: :rule do
-    name :healing_surges_number
+  factory :healing_surges, parent: :rule do
+    name :healing_surges
     formula "->() do
       character_class.healing_surges_per_day + ability_scores.constitution_modifier
     end"
