@@ -3,8 +3,6 @@ require 'spec_helper'
 describe AbilityScoreGenerator do
   subject { AbilityScoreGenerator }
 
-  specify { subject.should respond_to :roll_ability_scores }
-
   it "calculates correct modifiers" do 
     subject.send(:modifier_of, 20).should eq(5)
     subject.send(:modifier_of, 21).should eq(5) 
@@ -49,8 +47,12 @@ describe AbilityScoreGenerator do
   end
 
   describe ".roll_ability_scores" do
-    it "should provide 6 ability score each of which is not lower then 8" do
+    specify { subject.should respond_to :roll_ability_scores }
 
+    it "should provide 6 ability scores with modifiers in 4..8 range" do
+      modifiers_sum = subject.roll_ability_scores.map { |as| subject.send(:modifier_of, as) }.sum
+
+      (4..8).should cover(modifiers_sum)
     end
   end
 end

@@ -14,7 +14,16 @@ class AbilityScoreGenerator
     end
 
     def roll_ability_scores
-      #TODO implement
+      result_ability_scores = []
+
+      6.times do
+        _rand_values = []
+        4.times { _rand_values << rand(1..6) }
+        result_ability_scores << _rand_values.sort.reverse.take(3).sum
+      end
+      
+      result = result_ability_scores.map { |as| modifier_of(as) }.sum
+      (4..8) === result ? result_ability_scores : roll_ability_scores
     end
 
     protected
