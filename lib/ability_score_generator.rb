@@ -13,6 +13,7 @@ class AbilityScoreGenerator
       { scores: [8, 10, 10, 10, 10, 10], spend_points: 22 }
     end
 
+    # Randomly generated ability scores
     def roll_ability_scores
       result_ability_scores = []
 

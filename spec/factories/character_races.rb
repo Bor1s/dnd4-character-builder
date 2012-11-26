@@ -28,14 +28,13 @@ FactoryGirl.define do
         bonus: "->(){ character.ability_scores.constitution_modifier }"
       },
       {
-        # TODO implement powers and racial powers
         name: "Dragon Breath",
         description: "You can use Dragon Breath as an encounter power.",
         keyword: "racial_powers",
         bonus: 0
       }
     ]
-    powers ""
+    powers [] #[dragon_breath] TODO create real models and migrations
   end
 
   factory :dwarf, parent: :character_race do

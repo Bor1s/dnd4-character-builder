@@ -2,12 +2,14 @@ require 'spec_helper'
 require_relative "../shared/character/name.rb"
 require_relative "../shared/character/alignment.rb"
 require_relative "../shared/character/hit_points.rb"
+require_relative "../shared/character/race.rb"
 
 describe Character do
   it 'basicaly initialized' do
     subject.should be
   end
   
+  include_context "race"
   include_context "name"
   include_context "alignment"
   include_context "hit points"
