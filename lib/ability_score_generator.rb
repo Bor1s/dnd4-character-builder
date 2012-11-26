@@ -9,11 +9,11 @@ class AbilityScoreGenerator
 
     # Start scores and points to spend for upgrading (See score_up_cost table).
     # @return [Hash<Array, Integer>] 
-    def custom_scores
+    def custom_ability_scores
       { scores: [8, 10, 10, 10, 10, 10], spend_points: 22 }
     end
 
-    def roll_scores
+    def roll_ability_scores
       #TODO implement
     end
 

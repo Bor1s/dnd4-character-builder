@@ -3,7 +3,7 @@ require 'spec_helper'
 describe AbilityScoreGenerator do
   subject { AbilityScoreGenerator }
 
-  specify { subject.should respond_to :roll_scores }
+  specify { subject.should respond_to :roll_ability_scores }
 
   it "calculates correct modifiers" do 
     subject.send(:modifier_of, 20).should eq(5)
@@ -16,7 +16,7 @@ describe AbilityScoreGenerator do
     lambda { subject.send(:modifier_of, -1) }.should raise_exception 
   end
 
-  describe "#standard_array" do
+  describe ".standard_array" do
     specify { subject.should respond_to :standard_array }
 
     it "returns predefined ability scores" do
@@ -24,12 +24,12 @@ describe AbilityScoreGenerator do
     end
   end
 
-  describe "#custom_scores" do
-    specify { subject.should respond_to :custom_scores }
+  describe ".custom_ability_scores" do
+    specify { subject.should respond_to :custom_ability_scores }
 
     it "returns hash with predefined values" do
       expected_result = { scores: [8, 10, 10, 10, 10, 10], spend_points: 22 }
-      subject.custom_scores.should eq expected_result
+      subject.custom_ability_scores.should eq expected_result
     end
 
     it "gets proper score costs" do
@@ -45,6 +45,12 @@ describe AbilityScoreGenerator do
       subject.send(:score_up_cost, 17).should eq 12
       subject.send(:score_up_cost, 18).should eq 16
       lambda { subject.send(:score_up_cost, 100500) }.should raise_exception 
+    end
+  end
+
+  describe ".roll_ability_scores" do
+    it "should provide 6 ability score each of which is not lower then 8" do
+
     end
   end
 end
