@@ -12,7 +12,7 @@ describe Character do
   include_context "race"
   include_context "name"
   include_context "alignment"
-  include_context "hit points"
+  include_context "hit points" #Should belong to class
 
   it 'has age' do
     subject.should respond_to :age
