@@ -1,38 +1,38 @@
 FactoryGirl.define do
   factory :character do
     ability_scores do
-      ability_scores = AbilityScoreGenerator.roll_ability_scores
-      OpenStruct.new(:strength, :dexterity, :constitution, :wisdom, :charisma, :intelligence).tap do |abil|
-        abil.strength = ability_scores.pop
-        abil.dexterity = ability_scores.pop
-        abil.constitution = ability_scores.pop
-        abil.wisdom = ability_scores.pop
-        abil.charisma = ability_scores.pop
-        abil.intelligence = ability_scores.pop
+      abils = AbilityScoreGenerator.roll_ability_scores
+      OpenStruct.new.tap do |abil|
+        abil.strength = abils.pop
+        abil.dexterity = abils.pop
+        abil.constitution = abils.pop
+        abil.wisdom = abils.pop
+        abil.charisma = abils.pop
+        abil.intelligence = abils.pop
       end
     end
 
     #Basic defences are eq 10
     defences do
-      OpenStruct.new(:armor_class, :reflexes, :fortitude, :will).tap do |defence|
+      OpenStruct.new.tap do |defence|
         defence.armor_class = 10 
-        defences.reflexes = 10
-        defences.fortitude = 10
-        defences.will = 10
+        defence.reflexes = 10
+        defence.fortitude = 10
+        defence.will = 10
       end
     end
   end
 
   factory :dragonborn_character, parent: :character do
-    dragonborn
+    character_race { FactoryGirl.build(:dragonborn) }
     name 'Trall'
-    aligment 'good'
+    alignment 'good'
     age 25
     height { self.character_race.height }
     weight { self.character_race.weight }
     gender :male
     background 'Foobar ...'
-    deity ''
+    deities ''
     languages []
     level 1
     expirience 900

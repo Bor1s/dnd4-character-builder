@@ -5,6 +5,8 @@ require_relative "../shared/character/hit_points.rb"
 require_relative "../shared/character/race.rb"
 
 describe Character do
+  subject { FactoryGirl.build(:dragonborn_character) }
+
   it 'basicaly initialized' do
     subject.should be
   end

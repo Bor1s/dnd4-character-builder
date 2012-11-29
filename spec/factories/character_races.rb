@@ -7,8 +7,8 @@ FactoryGirl.define do
   factory :dragonborn, parent: :character_race do
     name "Dragonborn"
     description "Proud, honorable warriors, born from the blood of an ancient dragon god"
-    avg_height (6.2..6.8) # Feet
-    avg_weight (220..320) # Lbs.
+    height (6.2..6.8) # Feet
+    weight (220..320) # Lbs.
     ability_scores_bonuses Hash.new({ str: 2, cha: 2 })
     size :medium
     vision :normal
@@ -40,8 +40,8 @@ FactoryGirl.define do
   factory :dwarf, parent: :character_race do
     name "Dwarf"
     description "Masters of stone and iron, dauntless and unyielding in the face of adversity"
-    avg_height (4.3..4.9) # Feet
-    avg_weight (160..220) # Lbs.
+    height (4.3..4.9) # Feet
+    weight (160..220) # Lbs.
     ability_scores_bonuses Hash.new({ con: 2, wis: 2 })
     size :medium
     vision :low_light
