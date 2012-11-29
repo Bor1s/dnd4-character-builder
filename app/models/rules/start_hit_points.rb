@@ -1,4 +1,5 @@
 class Rules::StartHitPoints < Rules::Base
-  def process
+  def result
+    # Get start hit points from character class
   end
 end

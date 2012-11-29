@@ -1,5 +1,5 @@
 class Rules::HitPoints < Rules::Base
-  def process
-    Rules::StartHitPoints.new.process + Rules::HitPointsByLevel.new.process
+  def result
+    Rules::StartHitPoints.new.result + Rules::HitPointsByLevel.new.result
   end
 end
