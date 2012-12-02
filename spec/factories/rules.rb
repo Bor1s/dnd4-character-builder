@@ -1,16 +1,3 @@
-#FactoryGirl.define do
-  #factory :rule do
-  #end
-
-  #factory :hit_points, parent: :rule do
-    #name :hit_points
-    #formula "->() do
-      #character_class.basic_hit_points +
-        #(level == 1 ? 0 : character_class.per_level_hit_points) +
-          #ability_scores.constitution
-    #end"
-  #end
-
   #factory :healing_surges, parent: :rule do
     #name :healing_surges
     #formula "->() do
@@ -27,36 +14,54 @@
     #name :bloodied_value
     #formula "->(){ hit_points / 2 }"
   #end
-#end
 
-
-
-#FactoryGirl.define do
-  #factory :rule, class: "Rules::Base" do
-  #end
+FactoryGirl.define do
+  factory :rule do
+  end
   
-  #factory :hit_points_by_level, parent: :rule do
-    #name :hit_points_by_level
-    #result :per_level_hit_points #take from character class 
-    #conditions Hash[
-      #left: :level, #take from character
-      #right: 0,
-      #operator: :>
-    #]
-  #end
+  #performs:
+    #what: Array or symbol. #:method taken from character adapter that responds to this method.
+      #if :symbol ends with _rule - lookup in rules table.   
+    #how (optional) how to concat array (+, -, /, * etc.)
 
-  #factory :start_hit_points, parent: :rule do
-    #name :start_hit_points
-    #result Hash[ 
-      #left: :basic_hit_points, #take from character class
-      #right: :constitution, #take from character ability scores
-      #operator: :+
-    #]
-  #end
+  #as_soon_as:  ##Optional
+    #Array of conditions. By default they merges with logical AND.
 
-  ## Hit points: hit_points_by_level + start_hit_points
-  #factory :hit_points, parent: :rule do
-    #name :hit_points
-    #result [FactoryGirl.build(:hit_points_by_level), FactoryGirl.build(:start_hit_points)]
-  #end
-#end
+    #level: { more_then: 20 } #character should respond_to :level
+    #level: { more_then_or_equal: 20 }
+    #level: { less_then: 20 }
+    #level: { less_then_or_equal: 20 }
+    #level: { equal: 20 }
+    #level: { between: 20..40 }
+    #level: { is_not: 20..40 }
+    #level: { is: 20 }
+    #level: { any_in: 20 }
+    #level: { all_in: 20 }
+
+
+  factory :hit_points_by_level_rule, parent: :rule do
+    name :hit_points_by_level_rule
+    performs Hash.new[
+      what: :per_level_hit_points
+    ] 
+    as_soon_as [
+      level: { more_then: 1 }
+    ]
+  end
+
+  factory :start_hit_points_rule, parent: :rule do
+    name :start_hit_points_rule
+    performs Hash[ 
+      what: [:basic_hit_points, :constitution],
+      how: :+
+    ]
+  end
+
+  factory :hit_points_rule, parent: :rule do
+    name :hit_points_rule
+    performs Hash[
+      what: [:hit_points_by_level_rule, :start_hit_points_rule],
+      how: :+ 
+    ]
+  end
+end
