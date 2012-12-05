@@ -25,11 +25,10 @@ FactoryGirl.define do
 
   factory :dragonborn_character, parent: :character do
     character_race { FactoryGirl.build(:dragonborn) }
+    character_class { FactoryGirl.build(:cleric) }
     name 'Trall'
     alignment 'good'
     age 25
-    height { self.character_race.height }
-    weight { self.character_race.weight }
     gender :male
     background 'Foobar ...'
     deities ''

@@ -41,7 +41,7 @@ FactoryGirl.define do
 
   factory :hit_points_by_level_rule, parent: :rule do
     name :hit_points_by_level_rule
-    performs Hash.new[
+    performs Hash[
       what: :per_level_hit_points
     ] 
     as_soon_as [

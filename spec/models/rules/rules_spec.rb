@@ -69,11 +69,8 @@ describe Rule do
 
     it 'should be parsed with Symbol value and _rule suffics' do
 
-      #TODO Create CharacterClass factory
+      #TODO: Create CharacterClass factory
       dragonborn_character = FactoryGirl.build(:dragonborn_character)
-      dragonborn_character.stub(constitution: 11)
-      dragonborn_character.stub(basic_hit_points: 12)
-
       subject.character = dragonborn_character
 
       subject.stub(:performs => { what: :hit_points_rule })

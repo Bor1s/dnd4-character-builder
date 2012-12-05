@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative "../shared/character/ability_scores.rb"
 require_relative "../shared/character/name.rb"
 require_relative "../shared/character/alignment.rb"
 require_relative "../shared/character/hit_points.rb"
@@ -10,7 +11,8 @@ describe Character do
   it 'basicaly initialized' do
     subject.should be
   end
-  
+
+  include_context "ability scores"
   include_context "race"
   include_context "name"
   include_context "alignment"
@@ -51,10 +53,6 @@ describe Character do
 
   it 'has expirience' do
     subject.should respond_to :expirience
-  end
-
-  it 'has ability scores' do
-    subject.should respond_to :ability_scores
   end
 
   it 'has defences' do
