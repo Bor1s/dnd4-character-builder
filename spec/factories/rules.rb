@@ -1,10 +1,3 @@
-  #factory :healing_surges, parent: :rule do
-    #name :healing_surges
-    #formula "->() do
-      #character_class.healing_surges_per_day + ability_scores.constitution_modifier
-    #end"
-  #end
-
   #factory :healing_surge_value, parent: :rule do
     #name :healing_surge_value
     #formula "->(){ hit_points / 4 }"
@@ -37,8 +30,31 @@ FactoryGirl.define do
     #level: { is: 20 }
     #level: { any_in: 20 }
     #level: { all_in: 20 }
+  
+  # Abstract rules
+  factory :foobar_rule, parent: :rule do
+    name :foobar_rule
+    performs Hash[
+      what: 1
+    ]
+  end
+  
+  factory :barbaz_rule, parent: :rule do
+    name :barbaz_rule
+    performs Hash[
+      what: 2
+    ]
+  end
 
+  factory :some_rule, parent: :rule do
+    name :some_rule
+    performs Hash[
+      what: 7
+    ]
+    root true
+  end
 
+  # Hit points rules
   factory :hit_points_by_level_rule, parent: :rule do
     name :hit_points_by_level_rule
     performs Hash[
@@ -52,7 +68,7 @@ FactoryGirl.define do
   factory :start_hit_points_rule, parent: :rule do
     name :start_hit_points_rule
     performs Hash[ 
-      what: [:basic_hit_points, :constitution],
+      what: [:hit_points_at_first_level, :constitution],
       how: :+
     ]
   end
@@ -63,5 +79,16 @@ FactoryGirl.define do
       what: [:hit_points_by_level_rule, :start_hit_points_rule],
       how: :+ 
     ]
+    root true
+  end
+
+  # Healing surges rules
+  factory :healing_surges_rule, parent: :rule do
+    name :healing_surges_rule
+    performs Hash[ 
+      what: [:healing_surges_per_day, :constitution_modifier],
+      how: :+
+    ]
+    root true
   end
 end

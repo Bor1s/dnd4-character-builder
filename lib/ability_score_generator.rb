@@ -27,8 +27,6 @@ class AbilityScoreGenerator
       (4..8) === result ? result_ability_scores : roll_ability_scores
     end
 
-    protected
-
     # @param [Integer(1..30)] Ability score to calculate it's modifier.
     # @return [Integer] Positive or negative modifier.
     def modifier_of(ability_score)

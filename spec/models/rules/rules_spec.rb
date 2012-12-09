@@ -7,48 +7,26 @@ describe Rule do
   end
 
   it 'should respond to :performs' do
-    subject.should respond_to :name
+    subject.should respond_to :performs
   end
 
   it 'should respond to :as_soon_as' do
-    subject.should respond_to :name
+    subject.should respond_to :as_soon_as
   end
 
-  it 'should respond to :character' do
-    subject.should respond_to :character
+  it 'should respond to :process' do
+    subject.should respond_to :process
   end
 
-  context "abstract rule's'"do
+  it 'should respond_to :root?' do
+    subject.should respond_to :root?
+  end
 
-    before :all do
-      FactoryGirl.create(:hit_points_rule)
-      FactoryGirl.create(:hit_points_by_level_rule)
-      FactoryGirl.create(:start_hit_points_rule)
-    end
+  context "#process" do
+    specify { subject.should respond_to :parse_performs }
+    specify { subject.should respond_to :parse_as_soon_as }
 
-    it 'should respond_to :parse_as_soon_as' do
-      subject.should respond_to :parse_performs
-    end
-
-    it 'as_soon_as should be parsed' do
-      dragonborn_character = FactoryGirl.build(:dragonborn_character)
-      subject.character = dragonborn_character
-
-      subject.stub( as_soon_as: [ { level: { more_then: 20 } } ])
-      subject.send(:parse_as_soon_as).should be_false
-
-      subject.stub( as_soon_as: [ { level: { is: 1 } } ])
-      subject.send(:parse_as_soon_as).should be_true
-
-      subject.stub( as_soon_as: [ { level: { any_of: [1,2,3] } } ])
-      subject.send(:parse_as_soon_as).should be_true
-    end
-
-    it 'should respond to :parse_performs' do
-      subject.should respond_to :parse_performs
-    end
-
-    it 'performs should be parsed with plain value(s)' do
+    it 'should engage parse_performs properly' do
       subject.stub(:performs => { what: [1, 2], how: :+ })
       subject.send(:parse_performs).should eq 3
 
@@ -56,27 +34,60 @@ describe Rule do
       subject.send(:parse_performs).should eq 1
     end
 
-    it 'should be parsed with Symbol value(s)' do
-      dragonborn_character = FactoryGirl.build(:dragonborn_character)
-      subject.character = dragonborn_character
+    it 'should engage parse_as_soon_as properly' do
+      FactoryGirl.create(:foobar_rule)
+      FactoryGirl.create(:barbaz_rule)
 
-      subject.stub(:performs => { what: :level })
-      subject.send(:parse_performs).should eq subject.character.level
+      subject.stub( as_soon_as: [ { foobar_rule: { more_then: 20 } } ])
+      subject.send(:parse_as_soon_as).should be_false
 
-      subject.stub(:performs => { what: [:level, :expirience], how: :+ })
-      subject.send(:parse_performs).should eq(subject.character.level + subject.character.expirience)
+      subject.stub( as_soon_as: [ { foobar_rule: { is: 1 } } ])
+      subject.send(:parse_as_soon_as).should be_true
+
+      subject.stub( as_soon_as: [ { foobar_rule: { any_of: [1,2,3] } } ])
+      subject.send(:parse_as_soon_as).should be_true
     end
 
-    it 'should be parsed with Symbol value and _rule suffics' do
+    it "of standalone rule should be correct" do
+      foobar = FactoryGirl.create(:foobar_rule)
+      foobar.process.should eq 1
+    end
 
-      #TODO: Create CharacterClass factory
-      dragonborn_character = FactoryGirl.build(:dragonborn_character)
-      subject.character = dragonborn_character
+    it 'of combined rules should be correct' do
+      foobar = FactoryGirl.create(:foobar_rule)
+      barbaz = FactoryGirl.create(:barbaz_rule)
 
-      subject.stub(:performs => { what: :hit_points_rule })
+      subject.stub(:performs => { what: :foobar_rule })
+      subject.send(:parse_performs).should eq 1
 
-      expected_result = dragonborn_character.constitution + dragonborn_character.basic_hit_points
-      subject.send(:parse_performs).should eq expected_result
+      subject.stub(:performs => { what: [:foobar_rule, :barbaz_rule], how: :+ })
+      subject.send(:parse_performs).should eq(1+2)
+    end
+  end
+
+  context "interacting with Character" do
+    subject { FactoryGirl.create(:some_rule) }
+
+    it 'should respond to :character' do
+      subject.should respond_to :character
+    end
+
+    it 'should raise exception if no such method in related character to store result' do
+      subject.character = FactoryGirl.create(:character)
+      expect { subject.process }.to raise_exception(Rule::NoStorageForRuleResultException)
+    end
+
+    it 'should process rule properly' do
+      character = FactoryGirl.create(:character)
+
+      class << character
+        attr_accessor :some
+      end
+
+      subject.character = character
+
+      subject.process
+      subject.character.some.should eq 7
     end
   end
 

@@ -1,43 +1,22 @@
-class Character
-  include ActiveModel::Validations
+class Character < ActiveRecord::Base
 
-  attr_accessor :name, :age, :background, :alignment, :deities, :languages,
-    :level, :expirience, :height, :weight, :gender, :ability_scores, :defences,
-    :character_race, :character_class, :powers
+  attr_accessor :hit_points, :healing_surges#, :healing_surge_value, :bloodied_value
 
-  #NOTE: Character Race delegation
-  delegate :height, to: :character_race
-  delegate :weight, to: :character_race
-  
-  #NOTE: Ability score delegation
-  delegate :strength, to: :ability_scores
-  delegate :dexterity, to: :ability_scores
-  delegate :wisdom, to: :ability_scores
-  delegate :charisma, to: :ability_scores
-  delegate :constitution, to: :ability_scores
-  delegate :intelligence, to: :ability_scores
-  
-  #NOTE: Character Class delegation
-  delegate :basic_hit_points, to: :character_class
+  belongs_to :character_race
+  belongs_to :character_class
 
-  validates :name, length: { maximum: 50, minimum: 3 }
+  store :ability_scores, accessors: [:constitution, :dexterity, :strength, :intelligence, :charisma, :wisdom]
 
-  def hit_points
+  def constitution
+    ability_scores[:constitution] || 0
   end
 
-  def healing_surges
+  def constitution_modifier
+    AbilityScoreGenerator.modifier_of(constitution)
   end
 
-  def healing_surge_value
-  end
-
-  def bloodied_value
-  end
-
-  def method_missing(meth_name, *args)
-    if meth_name =~ /\A(.+)_modifier\z/
-      AbilityScoreGenerator.send(:modifier_of, method($1.to_sym).call)
-    end
-  end
+  #NOTE Character Class delegation
+  delegate :hit_points_at_first_level, to: :character_class
+  delegate :healing_surges_per_day, to: :character_class
 
 end

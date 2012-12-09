@@ -4,27 +4,21 @@ class Rule < ActiveRecord::Base
   serialize :performs
   serialize :as_soon_as, Array
 
+  scope :roots, ->(){ where(root: true) }
+
   attr_accessor :character
 
   def process
     if parse_as_soon_as
-      parse_performs
-    else
-      0
-    end
-  end
-
-  def determine(value)
-    if [String, Symbol].include? value.class
-      if value.match(/.+_rule\z/)
-        rule = Rule.where(name: value).first
-        rule.character = character
-        rule.process
+      if root?
+        name_without_rule_suffix = name.to_s.gsub(/_rule\z/, '')
+        unless character.respond_to? "#{name_without_rule_suffix}="
+          raise NoStorageForRuleResultException, "Accessor :#{name_without_rule_suffix} should be defined in character to store #{name} value!" 
+        end
+        character.method("#{name_without_rule_suffix}=").call(parse_performs)
       else
-        character.method(value).call
+        parse_performs 
       end
-    else
-      value
     end
   end
 
@@ -60,11 +54,29 @@ class Rule < ActiveRecord::Base
         else
           thing
         end
-      end
+      end.compact #Removes rules with unsuccessful conditions
     when "Symbol"
       determine(something)
     else
       something
     end
   end
+
+  def determine(value)
+    if [String, Symbol].include? value.class
+      if value.match(/.+_rule\z/)
+        rule = Rule.where(name: value).first
+        raise RuleNotFoundException, "Rule with name #{value} not found!" unless rule
+        rule.character = character
+        rule.process
+      else
+        character.method(value).call
+      end
+    else
+      value
+    end
+  end
+
+  class RuleNotFoundException < StandardError; end
+  class NoStorageForRuleResultException < StandardError; end
 end
