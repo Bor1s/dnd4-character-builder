@@ -40,7 +40,8 @@ class Rule < ActiveRecord::Base
       operand1 = condition.keys.first
       operator = condition[operand1].keys.first
       operand2 = condition[operand1][operator]
-
+      
+      #TODO Raise exception when operator is not found. Add specs for it.
       method(operator).call(determine(operand1), determine(operand2))
     end
   end
