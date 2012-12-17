@@ -1,6 +1,7 @@
 class Character < ActiveRecord::Base
 
   attr_accessor :hit_points, :healing_surges#, :healing_surge_value, :bloodied_value
+  #TODO has_many :ability_scores columns: character_id, ability_score_name, ability_score_modifier
 
   belongs_to :character_race
   belongs_to :character_class
