@@ -17,7 +17,7 @@ FactoryGirl.define do
       #if :symbol ends with _rule - lookup in rules table.   
     #how (optional) how to concat array (+, -, /, * etc.)
 
-  #as_soon_as:  ##Optional
+  #as_soon_as (optional):
     #Array of conditions. By default they merges with logical AND.
 
     #level: { more_then: 20 } #character should respond_to :level
@@ -87,6 +87,15 @@ FactoryGirl.define do
     name :healing_surges_rule
     performs Hash[ 
       what: [:healing_surges_per_day, :constitution_modifier],
+      how: :+
+    ]
+    root true
+  end
+
+  factory :healing_surge_value_rule, parent: :rule do
+    name :healing_surges_rule
+    performs Hash[ 
+      what: [:hit_points, 4],
       how: :+
     ]
     root true

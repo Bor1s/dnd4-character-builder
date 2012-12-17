@@ -6,4 +6,7 @@ shared_context "healing surges" do
     
     subject.character.healing_surges.should eq 7+AbilityScoreGenerator.modifier_of(subject.character.constitution)
   end
+
+  it 'should calculate correct healing surge value' do
+  end
 end

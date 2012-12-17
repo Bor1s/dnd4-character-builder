@@ -48,7 +48,7 @@ describe Rule do
       subject.send(:parse_as_soon_as).should be_true
     end
 
-    it "of standalone rule should be correct" do
+    it "of 'root' rule should be correct" do
       foobar = FactoryGirl.create(:foobar_rule)
       foobar.process.should eq 1
     end
