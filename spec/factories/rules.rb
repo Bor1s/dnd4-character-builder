@@ -93,10 +93,19 @@ FactoryGirl.define do
   end
 
   factory :healing_surge_value_rule, parent: :rule do
-    name :healing_surges_rule
+    name :healing_surge_value_rule
     performs Hash[ 
       what: [:hit_points, 4],
-      how: :+
+      how: :/
+    ]
+    root true
+  end
+
+  factory :bloodied_rule, parent: :rule do
+    name :bloodied_rule
+    performs Hash[ 
+      what: [:hit_points, 2],
+      how: :/
     ]
     root true
   end
