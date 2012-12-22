@@ -19,6 +19,8 @@ class Rule < ActiveRecord::Base
       else
         parse_performs 
       end
+    else
+      puts "Rule #{self.name} does not satisfy conditions!"
     end
   end
 
@@ -64,7 +66,7 @@ class Rule < ActiveRecord::Base
   end
 
   def determine(value)
-    if [String, Symbol].include? value.class
+    if [Symbol].include? value.class
       if value.match(/.+_rule\z/)
         rule = Rule.where(name: value).first
         raise RuleNotFoundException, "Rule with name #{value} not found!" unless rule

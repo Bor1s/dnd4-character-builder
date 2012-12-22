@@ -1,18 +1,9 @@
-  #factory :healing_surge_value, parent: :rule do
-    #name :healing_surge_value
-    #formula "->(){ hit_points / 4 }"
-  #end
-
-  #factory :bloodied_value, parent: :rule do
-    #name :bloodied_value
-    #formula "->(){ hit_points / 2 }"
-  #end
-
 FactoryGirl.define do
   factory :rule do
   end
   
   #performs:
+    #Assums that character should respond_to :name_wirhout_RULE_suffics setter methods to store result
     #what: Array or symbol. #:method taken from character adapter that responds to this method.
       #if :symbol ends with _rule - lookup in rules table.   
     #how (optional) how to concat array (+, -, /, * etc.)
@@ -30,6 +21,10 @@ FactoryGirl.define do
     #level: { is: 20 }
     #level: { any_in: 20 }
     #level: { all_in: 20 }
+
+    #value types: String (plain value to match),
+    # Symbol (engage methods lookup in character class or rule lookup in _rule suffics present),
+    # Integer (plain value to match)
   
   # Abstract rules
   factory :foobar_rule, parent: :rule do
@@ -106,6 +101,31 @@ FactoryGirl.define do
     performs Hash[ 
       what: [:hit_points, 2],
       how: :/
+    ]
+    root true
+  end
+
+  # Dragonborn race
+  factory :strength_rule, parent: :rule do
+    name :strength_rule
+    performs Hash[
+      what: [:strength, 2],
+      how: :+
+    ]
+    as_soon_as [
+      race: { is: "dragonborn" } #Case sensitive!
+    ]
+    root true
+  end
+
+  factory :charisma_rule, parent: :rule do
+    name :charisma_rule
+    performs Hash[
+      what: [:charisma, 2],
+      how: :+
+    ]
+    as_soon_as [
+      race: { is: "dragonborn" } #Case sensitive!
     ]
     root true
   end

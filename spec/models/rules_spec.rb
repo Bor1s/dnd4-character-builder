@@ -23,8 +23,8 @@ describe Rule do
   end
 
   context "#process" do
-    specify { subject.should respond_to :parse_performs }
-    specify { subject.should respond_to :parse_as_soon_as }
+    specify { subject.protected_methods.grep /parse_performs/.should be }
+    specify { subject.protected_methods.grep /parse_as_soon_as/.should be }
 
     it 'should engage parse_performs properly' do
       subject.stub(:performs => { what: [1, 2], how: :+ })
