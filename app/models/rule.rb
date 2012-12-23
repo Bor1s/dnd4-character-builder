@@ -73,6 +73,7 @@ class Rule < ActiveRecord::Base
         rule.character = character
         rule.process
       else
+        raise NoCharacterFieldFound, "No field :#{value} in Character found! Define it to use in Rules." unless character.respond_to? value
         character.method(value).call
       end
     else
@@ -82,4 +83,5 @@ class Rule < ActiveRecord::Base
 
   class RuleNotFoundException < StandardError; end
   class NoStorageForRuleResultException < StandardError; end
+  class NoCharacterFieldFound < StandardError; end
 end

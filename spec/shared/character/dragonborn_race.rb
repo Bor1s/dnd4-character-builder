@@ -11,6 +11,10 @@ shared_context "dragonborn race" do
 	  		FactoryGirl.create(:intelligence, character: dr),
 	  		FactoryGirl.create(:charisma, character: dr)
 	  	]
+	  	c.skills = [
+	  		FactoryGirl.create(:history, characters: [dr]),
+	  		FactoryGirl.create(:intimidate, characters: [dr])
+	  	]
 		  end
 		end
 
@@ -25,6 +29,17 @@ shared_context "dragonborn race" do
 
 			subject.strength.should eq 2
 			subject.charisma.should eq 2
+		end
+
+		it "should have +2 History and +2 Intimidate skills bonuses" do
+			FactoryGirl.create(:trained_history_rule)
+			FactoryGirl.create(:trained_intimidate_rule)
+			FactoryGirl.create(:history_rule)
+			FactoryGirl.create(:intimidate_rule)
+			RuleProcessor.new(subject).process
+
+			subject.history.should eq 2
+			subject.intimidate.should eq 2
 		end
 	end
 end

@@ -113,7 +113,7 @@ FactoryGirl.define do
       how: :+
     ]
     as_soon_as [
-      race: { is: "dragonborn" } #Case sensitive!
+      race: { is: "dragonborn" }
     ]
     root true
   end
@@ -125,7 +125,53 @@ FactoryGirl.define do
       how: :+
     ]
     as_soon_as [
-      race: { is: "dragonborn" } #Case sensitive!
+      race: { is: "dragonborn" }
+    ]
+    root true
+  end
+
+  factory :trained_history_rule, parent: :rule do
+    name :trained_history_rule
+    performs Hash[
+      what: [:history, 5],
+      how: :+
+    ]
+    as_soon_as [
+      history_trained?: { is: true }
+    ]
+  end
+
+  factory :history_rule, parent: :rule do
+    name :history_rule
+    performs Hash[
+      what: [:history, 2, :trained_history_rule],
+      how: :+
+    ]
+    as_soon_as [
+      race: { is: "dragonborn" }
+    ]
+    root true
+  end
+
+  factory :trained_intimidate_rule, parent: :rule do
+    name :trained_intimidate_rule
+    performs Hash[
+      what: [:intimidate, 5],
+      how: :+
+    ]
+    as_soon_as [
+      intimidate_trained?: { is: true }
+    ]
+  end
+
+  factory :intimidate_rule, parent: :rule do
+    name :intimidate_rule
+    performs Hash[
+      what: [:intimidate, 2, :trained_intimidate_rule],
+      how: :+
+    ]
+    as_soon_as [
+      race: { is: "dragonborn" }
     ]
     root true
   end
