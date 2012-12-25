@@ -22,6 +22,10 @@ describe Rule do
     subject.should respond_to :root?
   end
 
+  it 'should respond_to :store_to' do
+    subject.should respond_to :store_to
+  end
+
   context "#process" do
     specify { subject.protected_methods.grep /parse_performs/.should be }
     specify { subject.protected_methods.grep /parse_as_soon_as/.should be }

@@ -106,6 +106,7 @@ FactoryGirl.define do
   end
 
   # Dragonborn race
+  # NOTE rename rules and add store_to
   factory :strength_rule, parent: :rule do
     name :strength_rule
     performs Hash[
@@ -168,6 +169,19 @@ FactoryGirl.define do
     name :intimidate_rule
     performs Hash[
       what: [:intimidate, 2, :trained_intimidate_rule],
+      how: :+
+    ]
+    as_soon_as [
+      race: { is: "dragonborn" }
+    ]
+    root true
+  end
+
+  factory :draconic_heritage_rule, parent: :rule do
+    name :draconic_heritage_rule
+    store_to :healing_surge_value
+    performs Hash[
+      what: [:healing_surge_value, :constitution_modifier],
       how: :+
     ]
     as_soon_as [

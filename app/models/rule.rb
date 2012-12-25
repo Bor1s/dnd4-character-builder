@@ -9,19 +9,17 @@ class Rule < ActiveRecord::Base
   attr_accessor :character
 
   def process
-    if parse_as_soon_as
-      if root?
-        name_without_rule_suffix = name.to_s.gsub(/_rule\z/, '')
-        unless character.respond_to? "#{name_without_rule_suffix}="
-          raise NoStorageForRuleResultException, "Accessor :#{name_without_rule_suffix} should be defined in character to store #{name} value!" 
-        end
-        character.method("#{name_without_rule_suffix}=").call(parse_performs)
-      else
-        parse_performs 
-      end
-    else
-      puts "Rule #{self.name} does not satisfy conditions!"
+    # TODO implements logger
+    #return "Rule #{self.name} does not satisfy conditions!" unless parse_as_soon_as
+
+    return unless parse_as_soon_as
+    return parse_performs unless root?
+    
+    result_storage = store_to || name.to_s.gsub(/_rule\z/, '')
+    unless character.respond_to? "#{result_storage}="
+      raise NoStorageForRuleResultException, "Accessor :#{result_storage} should be defined in character to store #{name} value!" 
     end
+    character.method("#{result_storage}=").call(parse_performs)
   end
 
   protected

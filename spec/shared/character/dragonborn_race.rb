@@ -41,5 +41,22 @@ shared_context "dragonborn race" do
 			subject.history.should eq 2
 			subject.intimidate.should eq 2
 		end
+
+    it "should have 'draconic_heritage' bonus to healing_surge_value" do
+      ability_scores = AbilityScoreGenerator.standard_array
+
+      subject.ability_scores.each do |s|
+        s.update_attributes(value: ability_scores.shift)
+      end
+
+      FactoryGirl.create(:hit_points_by_level_rule)
+      FactoryGirl.create(:start_hit_points_rule)
+      FactoryGirl.create(:hit_points_rule)
+      FactoryGirl.create(:healing_surge_value_rule)
+      FactoryGirl.create(:draconic_heritage_rule)
+
+      RuleProcessor.new(subject).process
+      subject.healing_surge_value.should eq subject.hit_points / 4 + subject.constitution_modifier
+    end
 	end
 end
