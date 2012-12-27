@@ -1,6 +1,9 @@
 class Character < ActiveRecord::Base
 
-  attr_accessor :hit_points, :healing_surges, :healing_surge_value, :bloodied
+  attr_accessor :hit_points, :healing_surges,
+    :healing_surge_value, :bloodied, :encounter_powers_known,
+    :expirience
+
   has_many :ability_scores, dependent: :destroy
 
   has_many :character_skills, dependent: :destroy
@@ -23,4 +26,5 @@ class Character < ActiveRecord::Base
   #NOTE Character Class delegation
   delegate :hit_points_at_first_level, to: :character_class
   delegate :healing_surges_per_day, to: :character_class
+
 end
