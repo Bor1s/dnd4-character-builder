@@ -3,7 +3,7 @@ class Rule < ActiveRecord::Base
 
   scope :roots, ->(){ where(root: true) }
 
-  attr_accessor :character
+  attr_accessor :character, :command
 
   def process
     #TODO refactor
@@ -27,14 +27,14 @@ class Rule < ActiveRecord::Base
 
     #TODO refactor. Add message if condition is not satisfied.
     begin 
-      result = rule_hash[:if] ? (eval(condition) ? eval(what) : 0) : eval(what)
+      result = rule_hash[:if] ? (eval(condition) ? eval(what) : raise(ConditionFailed, "")) : eval(what)
     rescue StandardError, SyntaxError => e
       raise UnexpectedException, e.message + "\nWhat: #{what}" + "\nCondition: #{condition}"
     end
 
     if store_as
       raise NoStorageForRuleResultException, "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
-      character.method("#{store_as}=").call(result)
+      command.add_to_queue( ()->{character.method("#{store_as}=").call(result)} )
     else
       result
     end
@@ -131,4 +131,5 @@ class Rule < ActiveRecord::Base
   class NoCharacterFieldFound < StandardError; end
   class NoCharacterProvidedException < StandardError; end
   class UnexpectedException < StandardError; end
+  class ConditionFailed < StandardError; end
 end
