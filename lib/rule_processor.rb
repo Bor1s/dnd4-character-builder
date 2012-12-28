@@ -7,14 +7,15 @@ class RuleProcessor
   end
 
   def process
+    #raise NoRootRulesException, "No root rules found to process." unless Rule.roots.exists?
     Rule.roots.each do |rule|
       rule.character = character
       rule.command = command
       begin
         rule.process
         command.execute
-      rescue => ConditionFailed
-        puts "Rule #{rule} failed to process with it's conditions!"
+      rescue Rule::ConditionFailed => e
+        puts "Rule #{rule.name} failed to process with conditions: #{rule.todo.inspect}"
       end
     end
   end
