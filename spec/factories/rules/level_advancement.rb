@@ -1,31 +1,27 @@
 FactoryGirl.define do
   factory :first_level_advancement_rule, parent: :rule do
     name :first_level_advancement_rule
-    performs [
+    todo [
       {
-        what: [:atwill_powers_known, 1],
-        how: :+,
-        keep_in: :atwill_powers_known
+        what: "{atwill_powers_known} + 1", 
+        store_as: :atwill_powers_known,
+        if: "{level} == 1"
       },
       {
-        what: [:encounter_powers_known, 1],
-        how: :+,
-        keep_in: :encounter_powers_known
+        what: "{encounter_powers_known} + 1", 
+        store_as: :encounter_powers_known,
+        if: "{level} == 1"
       },
       {
-        what: [:daily_powers_known, 1],
-        how: :+,
-        keep_in: :daily_powers_known
+        what: "{daily_powers_known} + 1", 
+        store_as: :daily_powers_known,
+        if: "{level} == 1"
       },
       {
-        what: [:feats_known, 1],
-        how: :+,
-        keep_in: :feats_known
+        what: "{feats_known} + 1", 
+        store_as: :feats_known,
+        if: "{level} == 1"
       }
-    ]
-
-    as_soon_as [
-      level: { is: 1 }
     ]
 
     root true

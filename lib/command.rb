@@ -9,6 +9,7 @@ class Command
     queue.each do |obj|
       obj.call
     end
+    @queue = []
   end
 
   def add_to_queue(proc_obj)

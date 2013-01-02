@@ -46,7 +46,7 @@ class Rule < ActiveRecord::Base
   end
 
   def normalize(str)
-    str.gsub(/{(\w+)}/) do |meth|
+    str.gsub(/{([^{}]+)}/) do |meth|
       meth = $1.to_sym
       if meth.match /_rule\z/
         rule = Rule.where(name: meth).first

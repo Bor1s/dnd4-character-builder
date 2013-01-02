@@ -1,7 +1,7 @@
 class AbilityScore < ActiveRecord::Base
 	module Extensions
 		def strength
-	    @_strength ||= ability_scores.where(name: "strength").first
+      @_strength ||= ability_scores.where(name: "strength").first
 	    @_strength.value
 	  end
 
