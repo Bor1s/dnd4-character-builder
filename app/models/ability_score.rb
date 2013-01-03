@@ -6,7 +6,7 @@ class AbilityScore < ActiveRecord::Base
 	  end
 
 	  def strength=(value)
-	    @_strength.value += value
+	    @_strength.value = value
 	  end
 
 	  def strength_modifier
@@ -28,7 +28,7 @@ class AbilityScore < ActiveRecord::Base
 	  end 
 
 	  def charisma=(value)
-	    @_charisma.value += value
+	    @_charisma.value = value
 	  end
 
 	  def charisma_modifier
@@ -56,7 +56,16 @@ class AbilityScore < ActiveRecord::Base
 	  def constitution
 	    @_constitution ||= ability_scores.where(name: "constitution").first
 	    @_constitution.value
-	  end 
+	  end
+
+	  def constitution=(value)
+	    @_constitution.value = value
+      @consitution_increased = true
+	  end
+
+    def constitution_increased?
+      @consitution_increased 
+    end
 
 	  def constitution_modifier
 	    AbilityScoreGenerator.modifier_of(constitution)

@@ -3,21 +3,10 @@ FactoryGirl.define do
   end
   
   # Hit points rules
-  factory :hit_points_at_first_level_rule, parent: :rule do
-    name :hit_points_at_first_level_rule
+  factory :hit_points_rule, parent: :rule do
+    name :hit_points_rule
     todo [
-      what: "{hit_points_at_first_level} + {constitution}",
-      store_as: :hit_points
-    ]
-
-    root true
-  end
-
-  factory :general_hit_points_rule, parent: :rule do
-    name :general_hit_points_rule
-    todo [
-      what: "{hit_points_per_level}",
-      if: "{level} > 1",
+      what: "{hit_points_at_first_level} + {constitution} + {hit_points_per_level} * {level_multiplier}",
       store_as: :hit_points
     ]
 

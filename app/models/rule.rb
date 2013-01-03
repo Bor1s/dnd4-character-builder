@@ -52,6 +52,7 @@ class Rule < ActiveRecord::Base
         rule = Rule.where(name: meth).first
         raise RuleNotFoundException, "Rule with name #{meth} not found!" unless rule
         rule.character = character
+        rule.command = command
         rule.process
       else
         raise NoCharacterFieldFound, "No field :#{meth} in Character found! Define it to use in Rules." unless character.respond_to? meth 

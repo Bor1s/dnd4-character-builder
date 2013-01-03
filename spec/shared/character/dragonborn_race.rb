@@ -49,8 +49,7 @@ shared_context "dragonborn race" do
         s.update_attributes(value: ability_scores.shift)
       end
 
-      FactoryGirl.create(:hit_points_at_first_level_rule)
-      FactoryGirl.create(:general_hit_points_rule)
+      FactoryGirl.create(:hit_points_rule)
       FactoryGirl.create(:healing_surge_value_rule)
       FactoryGirl.create(:draconic_heritage_rule)
 

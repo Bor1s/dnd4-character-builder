@@ -28,4 +28,8 @@ class Character < ActiveRecord::Base
   delegate :hit_points_per_level, to: :character_class
   delegate :healing_surges_per_day, to: :character_class
 
+  def level_multiplier
+    level == 1 ? 0 : level
+  end
+
 end
