@@ -1,19 +1,12 @@
 class Rule < ActiveRecord::Base
-  serialize :todo, Array
+  store :todo
 
   scope :roots, ->(){ where(root: true) }
 
   attr_accessor :character, :command
 
   def process
-    #TODO refactor
-    if todo.size > 1
-      todo.map do |rule|
-        parse(rule)
-      end
-    else
-      parse(todo.first)
-    end
+    parse(todo)
   end
 
   protected

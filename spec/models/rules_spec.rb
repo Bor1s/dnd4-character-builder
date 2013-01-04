@@ -44,14 +44,6 @@ describe Rule do
       result.should eq 1
     end
 
-    it "should be success for simple rule with multiple result values" do
-      rule = FactoryGirl.create(:muliple_result_rule)
-      rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)
-      rule.command = Command.new
-      result = rule.process
-      result.should eq [1,2]
-    end
-
     it "should fail if no storage provided in Character class" do
       rule = FactoryGirl.create(:with_store_rule)
       rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)

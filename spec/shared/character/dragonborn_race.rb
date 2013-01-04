@@ -58,7 +58,7 @@ shared_context "dragonborn race" do
     end
 
     it "should have 'Dragon Breath' power as additional encounter at first level" do
-      FactoryGirl.create(:first_level_advancement_rule)
+      FactoryGirl.create(:encounters_known_at_first_level_rule)
       FactoryGirl.create(:dragon_breath_rule)
       RuleProcessor.new(subject).process
 
