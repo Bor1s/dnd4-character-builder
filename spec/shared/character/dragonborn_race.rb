@@ -4,8 +4,6 @@ shared_context "dragonborn race" do
       FactoryGirl.build(:dragonborn_character)
 		end
 
-    include_context "hit points, healing surges and bloodied value"
-
     its(:vision) { should eq 'normal' }
     its(:speed) { should eq 6 }
     its(:size) { should eq 'medium' }
@@ -64,5 +62,7 @@ shared_context "dragonborn race" do
 
       subject.encounter_powers_known.should eq 2
     end
+
+    include_context "hit points, healing surges and bloodied value"
 	end
 end

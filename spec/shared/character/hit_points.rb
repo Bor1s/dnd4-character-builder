@@ -1,6 +1,6 @@
 shared_context "hit points, healing surges and bloodied value" do
   
-  context "foobar" do
+  context "calculation of" do
     before :each do
       ability_scores = AbilityScoreGenerator.standard_array
       subject.ability_scores.each do |s|
@@ -15,23 +15,23 @@ shared_context "hit points, healing surges and bloodied value" do
       RuleProcessor.new(subject).process
     end
 
-    it 'should calculate correct hit points' do
+    it 'hit points should be corect' do
       subject.hit_points.should eq(subject.hit_points_at_first_level + subject.constitution)
     end
 
-    it 'should calculate correct healing surges' do
+    it 'healing surges should be correct' do
       subject.healing_surges.should eq subject.healing_surges_per_day+AbilityScoreGenerator.modifier_of(subject.constitution)
     end
 
-    it 'should calculate correct healing surge value' do
+    it 'healing surge value should be correct' do
       subject.healing_surge_value.should eq(subject.hit_points / 4)
     end
 
-    it 'should calculate correct bloodied value' do
+    it 'bloodied value should be correct' do
       subject.bloodied.should eq(subject.hit_points / 2)
     end
 
-    it 'should increase hit points when constitution increased' do
+    it 'hit points should have increased value when constitution increased' do
       expected_result = subject.hit_points_per_level * 4 + 1
       expect do
         subject.level = 4
