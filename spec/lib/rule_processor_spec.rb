@@ -1,5 +1,4 @@
 require 'spec_helper'
-#require_relative "../shared/rules/hit_points_pool.rb"
 
 describe RuleProcessor do
 	subject do
@@ -16,8 +15,4 @@ describe RuleProcessor do
     subject.process
     subject.character.expirience.should eq 2
   end
-  
-  #context "performing rules for character" do
-    #include_context "hit points, healing surges and bloodied value"
-  #end
 end

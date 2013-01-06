@@ -15,7 +15,7 @@ class RuleProcessor
         rule.process
         command.execute
       rescue Rule::ConditionFailed => e
-        puts "Rule #{rule.name} failed to process with conditions: #{rule.todo.inspect}"
+        Rails.logger.warn "Rule #{rule.name} failed to process with conditions: #{rule.todo.inspect}"
       end
     end
   end

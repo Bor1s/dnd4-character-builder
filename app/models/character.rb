@@ -2,7 +2,7 @@ class Character < ActiveRecord::Base
   attr_accessor :hit_points, :healing_surges,
     :healing_surge_value, :bloodied, :atwill_powers_known,
     :encounter_powers_known, :daily_powers_known,
-    :expirience, :feats_known
+    :expirience, :feats_known, :utility_powers_known
 
   has_many :ability_scores, dependent: :destroy
 
@@ -24,6 +24,7 @@ class Character < ActiveRecord::Base
   include ::Skill::Extensions
 
   #NOTE Character Class delegation
+  include ::CharacterClass::Extensions
   delegate :hit_points_at_first_level, to: :character_class
   delegate :hit_points_per_level, to: :character_class
   delegate :healing_surges_per_day, to: :character_class

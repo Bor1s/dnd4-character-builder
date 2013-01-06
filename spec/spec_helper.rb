@@ -51,3 +51,46 @@ RSpec.configure do |config|
   end
  
 end
+
+def prepare_first_level_rules_set
+  #Hit points, healing surges, bloodied
+  FactoryGirl.create(:hit_points_rule)
+  FactoryGirl.create(:healing_surges_rule)
+  FactoryGirl.create(:healing_surge_value_rule)
+  FactoryGirl.create(:bloodied_rule)
+
+  #Dragonborn rules
+  FactoryGirl.create(:strength_rule)
+  FactoryGirl.create(:charisma_rule)
+  FactoryGirl.create(:common_language)
+  FactoryGirl.create(:draconic_language)
+  FactoryGirl.create(:dragonborn_languages_rule)
+  FactoryGirl.create(:history_rule)
+  FactoryGirl.create(:intimidate_rule)
+  FactoryGirl.create(:draconic_heritage_rule)
+  FactoryGirl.create(:dragon_breath_rule)
+
+  #Cleric rules
+  FactoryGirl.create(:cleric_encounter_powers_known)
+
+  #First level advancements rule
+  FactoryGirl.create(:encounters_known_at_first_level_rule)
+  FactoryGirl.create(:atwills_known_at_first_level_rule)
+  FactoryGirl.create(:dailies_known_at_first_level_rule)
+  FactoryGirl.create(:feats_known_at_first_level_rule)
+  FactoryGirl.create(:hit_points_increasing_rule)
+end
+
+def init_character_in_first_level(character_type = :dragonborn_character)
+  prepare_first_level_rules_set
+  character = FactoryGirl.build(character_type)
+  ability_scores = AbilityScoreGenerator.standard_array
+
+  character.ability_scores.each do |s|
+    s.update_attributes(value: ability_scores.shift)
+  end
+
+  RuleProcessor.new(character).process
+
+  character
+end

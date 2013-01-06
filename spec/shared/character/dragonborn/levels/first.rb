@@ -1,5 +1,5 @@
-shared_context "dragonborn race" do
-	context "Dragonborn race" do
+shared_context "1st level dragonborn" do
+	context "1st level dragonborn (cleric)" do
 		subject do
       FactoryGirl.build(:dragonborn_character)
 		end
@@ -55,12 +55,13 @@ shared_context "dragonborn race" do
       subject.healing_surge_value.should eq (subject.hit_points / 4 + subject.constitution_modifier)
     end
 
-    it "should have 'Dragon Breath' power as additional encounter at first level" do
+    it "should have 5 encounter power slots" do
       FactoryGirl.create(:encounters_known_at_first_level_rule)
       FactoryGirl.create(:dragon_breath_rule)
-      RuleProcessor.new(subject).process
+      FactoryGirl.create(:cleric_encounter_powers_known)
 
-      subject.encounter_powers_known.should eq 2
+      RuleProcessor.new(subject).process
+      subject.encounter_powers_known.should eq 5
     end
 
     include_context "hit points, healing surges and bloodied value"

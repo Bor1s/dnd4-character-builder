@@ -1,6 +1,6 @@
 require 'spec_helper'
-require_relative "../shared/character/dragonborn_race.rb"
-require_relative "../shared/character/hit_points.rb"
+require_relative "../shared/character/dragonborn/level_independent/hit_points.rb"
+require_relative "../shared/character/dragonborn/dragonborn_race.rb"
 
 describe Character do
   specify { subject.should respond_to :character_race }
