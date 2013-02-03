@@ -1,7 +1,7 @@
-shared_context "2nd level dragonborn" do
-	context "2nd level dragonborn (cleric)" do
+shared_context "3nd level dragonborn" do
+	context "3nd level dragonborn (cleric)" do
     subject do
-      build_character(race: :dragonborn_character, level: 2)
+      build_character(race: :dragonborn_character, level: 3)
     end
 
 		it "should have strength and charisma with ability scores modifiers" do
@@ -15,11 +15,11 @@ shared_context "2nd level dragonborn" do
 		end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value" do
-      subject.healing_surge_value.should eq 9
+      subject.healing_surge_value.should eq 11
     end
 
-    it "should have 5 encounter power slots" do
-      subject.encounter_powers_known.should eq 5
+    it "should have 6 (with Dragonbreath encounter power) encounter power slots" do
+      subject.encounter_powers_known.should eq 6
     end
 
     it "should have 1 utility power slot" do

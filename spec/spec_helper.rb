@@ -52,7 +52,7 @@ RSpec.configure do |config|
  
 end
 
-def prepare_first_level_rules_set
+def prepare_rules_set
   #Hit points, healing surges, bloodied
   FactoryGirl.create(:hit_points_rule)
   FactoryGirl.create(:healing_surges_rule)
@@ -79,18 +79,31 @@ def prepare_first_level_rules_set
   FactoryGirl.create(:dailies_known_at_first_level_rule)
   FactoryGirl.create(:feats_known_at_first_level_rule)
   FactoryGirl.create(:hit_points_increasing_rule)
+
+  #Second level advancements rule
+  FactoryGirl.create(:encounters_known_at_second_level_rule)
+  FactoryGirl.create(:atwills_known_at_second_level_rule)
+  FactoryGirl.create(:dailies_known_at_second_level_rule)
+  FactoryGirl.create(:feats_known_at_second_level_rule)
+  FactoryGirl.create(:utilities_known_at_second_level_rule)
+
+  #Third level advancements rule
+  FactoryGirl.create(:encounters_known_at_third_level_rule)
+  FactoryGirl.create(:atwills_known_at_third_level_rule)
+  FactoryGirl.create(:dailies_known_at_third_level_rule)
+  FactoryGirl.create(:feats_known_at_third_level_rule)
+  FactoryGirl.create(:utilities_known_at_third_level_rule)
 end
 
-def init_character_in_first_level(character_type = :dragonborn_character)
-  prepare_first_level_rules_set
-  character = FactoryGirl.build(character_type)
+def build_character(options = {})
+  prepare_rules_set
+
+  character = FactoryGirl.build(options[:race], level: options[:level])
   ability_scores = AbilityScoreGenerator.standard_array
 
   character.ability_scores.each do |s|
     s.update_attributes(value: ability_scores.shift)
   end
-
   RuleProcessor.new(character).process
-
   character
 end

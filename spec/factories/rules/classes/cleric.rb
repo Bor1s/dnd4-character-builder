@@ -3,7 +3,7 @@ FactoryGirl.define do
     name :cleric_encounter_powers_known
     todo Hash[
       what: "{encounter_powers_known} + 3",
-      if: "{cleric?} and {level} == 1",
+      if: "{cleric?}",
       store_as: :encounter_powers_known
     ]
 

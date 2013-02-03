@@ -3,7 +3,7 @@ FactoryGirl.define do
     name :strength_rule
     todo Hash[
       what: "{strength} + 2",
-      if: "{dragonborn?} and {level} == 1",
+      if: "{dragonborn?}",
       store_as: :strength
     ]
 
@@ -14,7 +14,7 @@ FactoryGirl.define do
     name :charisma_rule
     todo Hash[
       what: "{charisma} + 2",
-      if: "{dragonborn?} and {level} == 1",
+      if: "{dragonborn?}",
       store_as: :charisma
     ]
 
@@ -25,7 +25,7 @@ FactoryGirl.define do
     name :history_rule
     todo Hash[
       what: "{history} + 2",
-      if: "{dragonborn?} and {level} == 1",
+      if: "{dragonborn?}",
       store_as: :history
     ]
 
@@ -36,7 +36,7 @@ FactoryGirl.define do
     name :intimidate_rule
     todo Hash[
       what: "{intimidate} + 2",
-      if: "{dragonborn?} and {level} == 1",
+      if: "{dragonborn?}",
       store_as: :intimidate
     ]
 
@@ -58,7 +58,7 @@ FactoryGirl.define do
     name :dragon_breath_rule
     todo Hash[
       what: "{encounter_powers_known} + 1",
-      if: "{dragonborn?} and {level} == 1",
+      if: "{dragonborn?}",
       store_as: :encounter_powers_known
     ]
 
@@ -69,7 +69,7 @@ FactoryGirl.define do
     name :dragonborn_languages_rule
     todo Hash[
       what: "{set_dragonborn_languages}",
-      if: "{dragonborn?} and {level} == 1"
+      if: "{dragonborn?}"
     ]
 
     root true
