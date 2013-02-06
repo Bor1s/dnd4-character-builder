@@ -39,14 +39,4 @@ FactoryGirl.define do
     root true
   end
 
-  factory :hit_points_increasing_rule, parent: :rule do
-    name :hit_points_increasing_rule
-    todo Hash[
-      what: "{hit_points} + 1",
-      store_as: :hit_points,
-      if: "{level} > 1 and {constitution_increased?}"
-    ]
-
-    root true
-  end
 end

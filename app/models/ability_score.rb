@@ -1,4 +1,5 @@
 class AbilityScore < ActiveRecord::Base
+  #TODO make ability scores a simple store
 	module Extensions
 		def strength
       @_strength ||= ability_scores.where(name: "strength").first
@@ -65,6 +66,10 @@ class AbilityScore < ActiveRecord::Base
 
     def constitution_increased?
       @consitution_increased 
+    end
+
+    def constitution_increased_to_even?
+      constitution_increased? && constitution.even?
     end
 
 	  def constitution_modifier

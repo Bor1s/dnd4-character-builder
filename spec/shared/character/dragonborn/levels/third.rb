@@ -1,5 +1,5 @@
-shared_context "3nd level dragonborn" do
-	context "3nd level dragonborn (cleric)" do
+shared_context "3rd level dragonborn" do
+	context "3rd level dragonborn (cleric)" do
     subject do
       build_character(race: :dragonborn_character, level: 3)
     end

@@ -5,7 +5,8 @@ end
 shared_context "dragonborn race" do
   include_context "1st level dragonborn"
   include_context "2nd level dragonborn"
-  include_context "3nd level dragonborn"
-  include_context "4nd level dragonborn"
-  include_context "5nd level dragonborn"
+  include_context "3rd level dragonborn"
+  include_context "4th level dragonborn"
+  include_context "5th level dragonborn"
+  include_context "6th level dragonborn"
 end
