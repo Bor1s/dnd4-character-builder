@@ -93,6 +93,14 @@ def prepare_rules_set
   FactoryGirl.create(:dailies_known_at_third_level_rule)
   FactoryGirl.create(:feats_known_at_third_level_rule)
   FactoryGirl.create(:utilities_known_at_third_level_rule)
+
+  #Fourth level advancements rule
+  FactoryGirl.create(:encounters_known_at_fourth_level_rule)
+  FactoryGirl.create(:atwills_known_at_fourth_level_rule)
+  FactoryGirl.create(:dailies_known_at_fourth_level_rule)
+  FactoryGirl.create(:feats_known_at_fourth_level_rule)
+  FactoryGirl.create(:utilities_known_at_fourth_level_rule)
+  FactoryGirl.create(:ability_scores_upgrade_points_at_fourth_level_rule)
 end
 
 def build_character(options = {})

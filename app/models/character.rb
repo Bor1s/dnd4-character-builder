@@ -2,7 +2,8 @@ class Character < ActiveRecord::Base
   attr_accessor :hit_points, :healing_surges,
     :healing_surge_value, :bloodied, :atwill_powers_known,
     :encounter_powers_known, :daily_powers_known,
-    :expirience, :feats_known, :utility_powers_known
+    :expirience, :feats_known, :utility_powers_known,
+    :ability_scores_upgrade_points
 
   has_many :ability_scores, dependent: :destroy
 
