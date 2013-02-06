@@ -16,10 +16,11 @@ shared_context "ability scores" do
   specify { subject.should respond_to :constitution }
 
   it "should have appropriate ability scores modifiers" do
-    ability_scores = AbilityScoreGenerator.standard_array
+    pending "Rework"
 
-    subject.ability_scores.each do |s|
-      s.update_attributes(value: ability_scores.shift)
+    as = AbilityScoreGenerator.standard_array
+    as.each do |s|
+      subject.strength = as.pop
     end
 
     subject.strength_modifier.should eq AbilityScoreGenerator.modifier_of(subject.strength)

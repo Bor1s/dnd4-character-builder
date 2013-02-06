@@ -1,12 +1,8 @@
 shared_context "hit points, healing surges and bloodied value" do
 
-  subject do
-    build_character(race: :dragonborn_character, level: 1)
-  end
-  
   context "calculation of" do
     it 'hit points should be corect' do
-      subject.hit_points.should eq(subject.hit_points_at_first_level + subject.constitution)
+      subject.hit_points.should eq(subject.hit_points_at_first_level + subject.constitution + (subject.hit_points_per_level * subject.level_multiplier))
     end
 
     it 'healing surges should be correct' do

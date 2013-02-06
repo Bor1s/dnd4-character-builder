@@ -3,12 +3,15 @@ shared_context "4th level dragonborn" do
     subject do
       character = FactoryGirl.build(:dragonborn_character, level: 4)
       ability_scores = AbilityScoreGenerator.standard_array
+      character.strength = ability_scores.shift
+      character.dexterity = ability_scores.shift
+      character.constitution = ability_scores.shift
+      character.charisma = ability_scores.shift
+      character.intelligence = ability_scores.shift
+      character.wisdom = ability_scores.shift
+      character.stub(:constitution_increased? => true)
+      character.stub(:constitution_increased_to_even? => true)
 
-      character.ability_scores.each do |s|
-        s.update_attributes(value: ability_scores.shift)
-      end
-
-      character.constitution += 1
       RuleProcessor.new(character).process
       character
     end
@@ -18,7 +21,7 @@ shared_context "4th level dragonborn" do
     end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value (healing_surge_value + constitution_modifier)" do
-      subject.healing_surge_value.should eq 13 #Should be 12, but hit points increased by 1 (constitution increased)
+      subject.healing_surge_value.should eq 12 #Should be 11, but hit points increased by 1 (constitution increased)
     end
 
     it "should have 6 (with Dragonbreath encounter power) encounter power slots" do
@@ -42,12 +45,11 @@ shared_context "4th level dragonborn" do
     end
 
     it 'hit points should have increased value when constitution increased' do
-      expected_result = subject.constitution + subject.hit_points_at_first_level + (subject.hit_points_per_level * subject.level) + 1
-      subject.hit_points.should eq expected_result
+      subject.hit_points.should eq 46
     end
     
     it 'heling surges should have increased value when constitution increased' do
-      subject.healing_surges.should eq subject.healing_surges_per_day + subject.constitution_modifier + 1 # +1 for even number of constitution
+      subject.healing_surges.should eq 9 # +1 for even number of constitution (stubbed :constitution_increased_to_even? => true)
     end
 
 	end

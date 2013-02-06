@@ -14,7 +14,7 @@ shared_context "1st level dragonborn" do
 
     it "should have +2 Strength and +2 Charisma ability scores modifiers" do
       subject.strength.should eq 18
-      subject.charisma.should eq 12
+      subject.charisma.should eq 14
     end
 
     it "should have 'Common' and 'Draconic' languages" do

@@ -13,10 +13,15 @@ module RulePoolHelper
   def build_character(options = {})
     character = FactoryGirl.build(options[:race], level: options[:level])
     ability_scores = AbilityScoreGenerator.standard_array
+    character.strength = ability_scores.shift
+    character.dexterity = ability_scores.shift
+    character.constitution = ability_scores.shift
+    character.charisma = ability_scores.shift
+    character.intelligence = ability_scores.shift
+    character.wisdom = ability_scores.shift
+    character.stub(:constitution_increased? => false)
+    character.stub(:constitution_increased_to_even? => false)
 
-    character.ability_scores.each do |s|
-      s.update_attributes(value: ability_scores.shift)
-    end
     RuleProcessor.new(character).process
     character
   end

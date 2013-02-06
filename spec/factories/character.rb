@@ -1,14 +1,12 @@
 FactoryGirl.define do
   factory :character do
     after(:create, :build) do |char, evaluator|
-      char.ability_scores = [
-        FactoryGirl.create(:strength, character: char),
-	  		FactoryGirl.create(:dexterity, character: char),
-	  		FactoryGirl.create(:constitution, character: char),
-	  		FactoryGirl.create(:wisdom, character: char),
-	  		FactoryGirl.create(:intelligence, character: char),
-	  		FactoryGirl.create(:charisma, character: char)
-      ]
+      char.strength = 0
+      char.charisma = 0
+      char.dexterity = 0
+      char.wisdom = 0
+      char.intelligence = 0
+      char.constitution = 0
 
       char.skills = [
 	  		FactoryGirl.create(:history, characters: [char]),

@@ -49,7 +49,7 @@ FactoryGirl.define do
     todo Hash[
       what: "{hit_points} + 1",
       store_as: :hit_points,
-      if: "{level} > 1 and {constitution_increased?}"
+      if: "{constitution_increased?} == true"
     ]
 
     root true
@@ -60,7 +60,7 @@ FactoryGirl.define do
     todo Hash[
       what: "{healing_surges} + 1",
       store_as: :healing_surges,
-      if: "{level} > 1 and {constitution_increased_to_even?}"
+      if: "{constitution_increased_to_even?} == true"
     ]
 
     root true

@@ -28,5 +28,6 @@ shared_context "6th level dragonborn" do
       subject.feats_known.should eq 4
     end
 
+    include_context "hit points, healing surges and bloodied value"
 	end
 end

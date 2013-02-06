@@ -5,7 +5,7 @@ class Character < ActiveRecord::Base
     :expirience, :feats_known, :utility_powers_known,
     :ability_scores_upgrade_points
 
-  has_many :ability_scores, dependent: :destroy
+  store :ability_scores, accessors: [:strength, :dexterity, :constitution, :charisma, :intelligence, :wisdom]
 
   has_many :character_skills, dependent: :destroy
   has_many :skills, through: :character_skills
@@ -15,8 +15,38 @@ class Character < ActiveRecord::Base
   belongs_to :character_race
   belongs_to :character_class
 
-  #Ability scores accessors and modifiers getters
-  include ::AbilityScore::Extensions
+  #Ability scores
+  def strength_modifier
+    AbilityScoreGenerator.modifier_of(strength)
+  end
+
+  def dexterity_modifier
+    AbilityScoreGenerator.modifier_of(dexterity)
+  end
+
+  def constitution_modifier
+    AbilityScoreGenerator.modifier_of(constitution)
+  end
+
+  def constitution_increased?
+    #TODO implement
+  end
+
+  def constitution_increased_to_even?
+    #TODO implement
+  end
+
+  def charisma_modifier
+    AbilityScoreGenerator.modifier_of(charisma)
+  end
+
+  def intelligence_modifier
+    AbilityScoreGenerator.modifier_of(intelligence)
+  end
+
+  def wisdom_modifier
+    AbilityScoreGenerator.modifier_of(wisdom)
+  end
 
   #Character race
   include ::CharacterRace::Extensions
