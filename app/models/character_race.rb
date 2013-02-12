@@ -1,5 +1,13 @@
-class CharacterRace < ActiveRecord::Base
-  attr_accessor :size, :vision, :speed
+class CharacterRace
+  include Mongoid::Document
+
+  embedded_in :character
+
+  field :size, type: String
+  field :vision, type: String
+  field :speed, type: Integer
+  field :name, type: String
+  field :description, type: String
 
   module Extensions
     def vision

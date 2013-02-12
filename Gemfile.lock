@@ -76,9 +76,15 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.19)
+    mongoid (3.0.21)
+      activemodel (~> 3.1)
+      moped (~> 1.2)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.22)
+    moped (1.4.2)
     multi_json (1.5.0)
-    mysql2 (0.3.11)
     nokogiri (1.5.5)
+    origin (1.0.11)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -167,7 +173,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   jquery-rails
-  mysql2
+  mongoid (~> 3.0.0)
   pry-rails
   rails (= 3.2.11)
   rspec-rails (~> 2.4)

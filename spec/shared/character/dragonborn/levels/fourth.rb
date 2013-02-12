@@ -1,7 +1,7 @@
 shared_context "4th level dragonborn" do
 	context "4th level dragonborn (cleric)" do
     subject do
-      character = FactoryGirl.build(:dragonborn_character, level: 4)
+      character = FactoryGirl.create(:dragonborn_character, level: 4)
       ability_scores = AbilityScoreGenerator.standard_array
       character.strength = ability_scores.shift
       character.dexterity = ability_scores.shift

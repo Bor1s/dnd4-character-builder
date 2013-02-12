@@ -1,20 +1,36 @@
-class Character < ActiveRecord::Base
-  attr_accessor :hit_points, :healing_surges,
-    :healing_surge_value, :bloodied, :atwill_powers_known,
-    :encounter_powers_known, :daily_powers_known,
-    :expirience, :feats_known, :utility_powers_known,
-    :ability_scores_upgrade_points
+class Character
+  include Mongoid::Document
 
-  store :ability_scores, accessors: [:strength, :dexterity, :constitution, :charisma, :intelligence, :wisdom]
+  field :name, type: String
+  field :hit_points, type: Integer
+  field :healing_surges, type: Integer
+  field :healing_surge_value, type: Integer
+  field :bloodied, type: Integer
+  field :atwill_powers_known, type: Integer
+  field :encounter_powers_known, type: Integer
+  field :daily_powers_known, type: Integer
+  field :feats_known, type: Integer
+  field :utility_powers_known, type: Integer
+  field :expirience, type: Integer
+  field :ability_scores_upgrade_points, type: Integer
+  field :level, type: Integer
 
-  has_many :character_skills, dependent: :destroy
-  has_many :skills, through: :character_skills
+  field :strength, type: Integer
+  field :dexterity, type: Integer
+  field :constitution, type: Integer
+  field :charisma, type: Integer
+  field :intelligence, type: Integer
+  field :wisdom, type: Integer
+
+  field :history, type: Integer
+  field :intimidate, type: Integer
+
+  embeds_many :skills
+  embeds_many :languages
+  embeds_one :character_class
+  embeds_one :character_race
+  #embeds_many :languages
   
-  has_and_belongs_to_many :languages
-
-  belongs_to :character_race
-  belongs_to :character_class
-
   #Ability scores
   def strength_modifier
     AbilityScoreGenerator.modifier_of(strength)
@@ -52,7 +68,7 @@ class Character < ActiveRecord::Base
   include ::CharacterRace::Extensions
 
   #Character skills accessors
-  include ::Skill::Extensions
+  #include ::Skill::Extensions
 
   #NOTE Character Class delegation
   include ::CharacterClass::Extensions

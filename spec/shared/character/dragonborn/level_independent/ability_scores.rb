@@ -4,10 +4,6 @@ shared_context "ability scores" do
     FactoryGirl.build(:character)
   end
 
-  it 'has ability scores' do
-    subject.should respond_to :ability_scores
-  end
-
   specify { subject.should respond_to :strength }
   specify { subject.should respond_to :wisdom }
   specify { subject.should respond_to :charisma }

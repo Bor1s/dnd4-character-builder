@@ -1,6 +1,7 @@
-class Language < ActiveRecord::Base
-  attr_accessible :name, :script, :spoken_by
-  serialize :spoken_by, Array
+class Language
+  include Mongoid::Document
 
-  has_and_belongs_to_many :characters
+  field :name, type: String
+  field :script, type: String
+  field :spoken_by, type: Array
 end

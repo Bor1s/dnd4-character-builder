@@ -1,26 +1,31 @@
-class Rule < ActiveRecord::Base
-  store :todo
-
-  scope :roots, ->(){ where(root: true) }
-
+class Rule
+  include Mongoid::Document
   attr_accessor :character, :command
 
+  field :todo, type: Hash
+  field :name, type: String
+  field :root, type: Boolean
+
+  scope :roots, where(root: true)
+
   def process
-    parse(todo)
+    raise EmptyRuleException, "Rule #{self.inspect} has empty :todo field!" unless todo 
+    parse(todo) 
   end
 
   protected
 
   def parse(rule_hash)
+    hash = rule_hash.with_indifferent_access
     raise NoCharacterProvidedException, "No character instance provided!" unless character
 
-    what = normalize(rule_hash[:what])
-    store_as = rule_hash[:store_as]
+    what = normalize(hash[:what])
+    store_as = hash[:store_as]
 
     result = nil
 
-    if rule_hash[:if]
-      condition = normalize(rule_hash[:if])
+    if hash[:if].present?
+      condition = normalize(hash[:if]) #TODO rework normalize for :if (causing trobbles with name? style methods)
       if eval(condition)
         result = eval(what)
       else
@@ -59,4 +64,5 @@ class Rule < ActiveRecord::Base
   class NoCharacterFieldFound < StandardError; end
   class NoCharacterProvidedException < StandardError; end
   class ConditionFailed < StandardError; end
+  class EmptyRuleException < StandardError; end
 end

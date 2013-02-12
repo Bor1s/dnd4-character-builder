@@ -11,7 +11,7 @@ module RulePoolHelper
   end
 
   def build_character(options = {})
-    character = FactoryGirl.build(options[:race], level: options[:level])
+    character = FactoryGirl.create(options[:race], level: options[:level])
     ability_scores = AbilityScoreGenerator.standard_array
     character.strength = ability_scores.shift
     character.dexterity = ability_scores.shift

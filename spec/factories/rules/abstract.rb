@@ -6,16 +6,16 @@ FactoryGirl.define do
     ]
   end
 
-  factory :simple_rule_with_condition, parent: :rule do
-    name :simple_rule_with_condition
+  factory :simple_rule_with_condition_rule, parent: :rule do
+    name :simple_rule_with_condition_rule
     todo Hash[
       what: "1",
       if: "1 == 1"
     ]
   end
   
-  factory :simple_rule_with_bad_condition, parent: :rule do
-    name :simple_rule_with_bad_condition
+  factory :simple_rule_with_bad_condition_rule, parent: :rule do
+    name :simple_rule_with_bad_condition_rule
     todo Hash[
       what: "1",
       if: "2 == 1"
@@ -30,7 +30,7 @@ FactoryGirl.define do
   end
 
   factory :with_store_rule, parent: :rule do
-    name :incomplete_rule
+    name :with_store_rule
     todo Hash[
       what: "1 + 1",
       store_as: :foobar
