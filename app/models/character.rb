@@ -29,7 +29,6 @@ class Character
   embeds_many :languages
   embeds_one :character_class
   embeds_one :character_race
-  #embeds_many :languages
   
   #Ability scores
   def strength_modifier
@@ -45,11 +44,11 @@ class Character
   end
 
   def constitution_increased?
-    #TODO implement
+    constitution_changed? && constitution > constitution_was
   end
 
   def constitution_increased_to_even?
-    #TODO implement
+    constitution_increased? && constitution.even?
   end
 
   def charisma_modifier

@@ -1,15 +1,16 @@
 shared_context "4th level dragonborn" do
 	context "4th level dragonborn (cleric)" do
     subject do
-      character = FactoryGirl.create(:dragonborn_character, level: 4)
       ability_scores = AbilityScoreGenerator.standard_array
-      character.strength = ability_scores.shift
-      character.dexterity = ability_scores.shift
-      character.constitution = ability_scores.shift
-      character.charisma = ability_scores.shift
-      character.intelligence = ability_scores.shift
-      character.wisdom = ability_scores.shift
-      character.stub(:constitution_increased? => true)
+      character = FactoryGirl.create(:dragonborn_character, level: 4,
+                                     strength: ability_scores.shift,
+                                     dexterity: ability_scores.shift,
+                                     constitution: ability_scores.shift,
+                                     charisma: ability_scores.shift,
+                                     intelligence: ability_scores.shift,
+                                     wisdom: ability_scores.shift)
+
+      character.constitution += 1
       character.stub(:constitution_increased_to_even? => true)
 
       RuleProcessor.new(character).process
@@ -21,7 +22,7 @@ shared_context "4th level dragonborn" do
     end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value (healing_surge_value + constitution_modifier)" do
-      subject.healing_surge_value.should eq 12 #Should be 11, but hit points increased by 1 (constitution increased)
+      subject.healing_surge_value.should eq 13 #Should be 12, but hit points increased by 1 (constitution increased)
     end
 
     it "should have 6 (with Dragonbreath encounter power) encounter power slots" do
@@ -45,11 +46,11 @@ shared_context "4th level dragonborn" do
     end
 
     it 'hit points should have increased value when constitution increased' do
-      subject.hit_points.should eq 46
+      subject.hit_points.should eq 47
     end
     
-    it 'heling surges should have increased value when constitution increased' do
-      subject.healing_surges.should eq 9 # +1 for even number of constitution (stubbed :constitution_increased_to_even? => true)
+    it 'heling surges should have increased value when constitution increased to even' do
+      subject.healing_surges.should eq 10 # +1 for even number of constitution (stubbed :constitution_increased_to_even? => true)
     end
 
 	end
