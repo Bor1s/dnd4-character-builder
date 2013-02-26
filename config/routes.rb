@@ -1,4 +1,9 @@
 Dnd4CharacterBuilder::Application.routes.draw do
+
+  namespace :rest do
+    resources :characters
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
