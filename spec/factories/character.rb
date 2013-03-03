@@ -3,13 +3,13 @@ FactoryGirl.define do
   end
 
   factory :dragonborn_character, parent: :character do
-    after(:create) do |char, evaluator|
-      FactoryGirl.create(:dragonborn, character: char)
-      FactoryGirl.create(:cleric, character: char)
-      char.skills = [
-	  		FactoryGirl.create(:history),
-	  		FactoryGirl.create(:intimidate)
-      ]
+    before(:create) do |char, evaluator|
+      char.character_race = FactoryGirl.build(:dragonborn)
+      char.character_class = FactoryGirl.build(:cleric)
+      char.skills << FactoryGirl.build(:history)
+      char.skills << FactoryGirl.build(:intimidate)
+      char.languages << FactoryGirl.build(:common_language)
+      char.languages << FactoryGirl.build(:draconic_language)
     end
 
     name 'Trall'

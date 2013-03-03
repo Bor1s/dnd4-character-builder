@@ -10,6 +10,15 @@ module RulePoolHelper
     end
   end
 
+  def prepare_character_races
+    FactoryGirl.create(:dragonborn_template)
+  end
+
+  def prepare_languages
+    FactoryGirl.create(:common_language_template)
+    FactoryGirl.create(:draconic_language_template)
+  end
+
   def build_character(options = {})
     character = FactoryGirl.create(options[:race], level: options[:level])
     ability_scores = AbilityScoreGenerator.standard_array

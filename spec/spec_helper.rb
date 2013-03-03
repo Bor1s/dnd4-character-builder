@@ -43,6 +43,8 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
     prepare_rules_set
+    prepare_character_races
+    prepare_languages
   end
 
   config.after(:suite) do

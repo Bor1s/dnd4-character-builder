@@ -4,14 +4,14 @@ describe AbilityScoreGenerator do
   subject { AbilityScoreGenerator }
 
   it "calculates correct modifiers" do 
-    subject.send(:modifier_of, 20).should eq(5)
-    subject.send(:modifier_of, 21).should eq(5) 
-    subject.send(:modifier_of, 22).should eq(6)
-    subject.send(:modifier_of, 23).should eq(6)
-    subject.send(:modifier_of, 24).should eq(7)
-    subject.send(:modifier_of, 25).should eq(7)
-    subject.send(:modifier_of, 1).should eq(-5)
-    lambda { subject.send(:modifier_of, -1) }.should raise_exception 
+    subject.modifier_of(20).should eq 5
+    subject.modifier_of(21).should eq 5
+    subject.modifier_of(22).should eq 6
+    subject.modifier_of(23).should eq 6
+    subject.modifier_of(24).should eq 7
+    subject.modifier_of(25).should eq 7
+    subject.modifier_of(1).should eq -5
+    subject.modifier_of(-1).should < 0
   end
 
   describe ".standard_array" do
@@ -31,18 +31,18 @@ describe AbilityScoreGenerator do
     end
 
     it "gets proper score costs" do
-      subject.send(:score_up_cost, 8).should eq 1
-      subject.send(:score_up_cost, 9).should eq 1
-      subject.send(:score_up_cost, 10).should eq 1
-      subject.send(:score_up_cost, 11).should eq 1
-      subject.send(:score_up_cost, 12).should eq 2
-      subject.send(:score_up_cost, 13).should eq 3
-      subject.send(:score_up_cost, 14).should eq 5
-      subject.send(:score_up_cost, 15).should eq 7
-      subject.send(:score_up_cost, 16).should eq 9
-      subject.send(:score_up_cost, 17).should eq 12
-      subject.send(:score_up_cost, 18).should eq 16
-      lambda { subject.send(:score_up_cost, 100500) }.should raise_exception 
+      subject.score_up_cost(8).should eq 1
+      subject.score_up_cost(9).should eq 1
+      subject.score_up_cost(10).should eq 1
+      subject.score_up_cost(11).should eq 1
+      subject.score_up_cost(12).should eq 2
+      subject.score_up_cost(13).should eq 3
+      subject.score_up_cost(14).should eq 5
+      subject.score_up_cost(15).should eq 7
+      subject.score_up_cost(16).should eq 9
+      subject.score_up_cost(17).should eq 12
+      subject.score_up_cost(18).should eq 16
+      lambda { subject.score_up_cost(100500) }.should raise_exception 
     end
   end
 
@@ -50,7 +50,7 @@ describe AbilityScoreGenerator do
     specify { subject.should respond_to :roll_ability_scores }
 
     it "should provide 6 ability scores with modifiers in 4..8 range" do
-      modifiers_sum = subject.roll_ability_scores.map { |as| subject.send(:modifier_of, as) }.sum
+      modifiers_sum = subject.roll_ability_scores.map { |as| subject.modifier_of(as) }.sum
 
       (4..8).should cover(modifiers_sum)
     end

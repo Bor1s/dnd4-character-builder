@@ -29,11 +29,5 @@ class CharacterRace
     def dragonborn?
       race == 'dragonborn'
     end
-
-    def set_dragonborn_languages
-      common = Language.where(name: "Common")
-      draconic = Language.where(name: "Draconic")
-      languages << [common, draconic] and false #NOTE need to explicitly return simple result for eval
-    end
   end
 end

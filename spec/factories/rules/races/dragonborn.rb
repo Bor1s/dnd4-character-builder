@@ -65,14 +65,14 @@ FactoryGirl.define do
     root true
   end
 
-  factory :dragonborn_languages_rule, parent: :rule do
-    name :dragonborn_languages_rule
-    todo Hash[
-      what: "{set_dragonborn_languages}",
-      if: "{dragonborn?} == true"
-    ]
+  #factory :dragonborn_languages_rule, parent: :rule do
+    #name :dragonborn_languages_rule
+    #todo Hash[
+      #what: "{set_dragonborn_languages}",
+      #if: "{dragonborn?} == true"
+    #]
 
-    root true
-  end
+    #root true
+  #end
   
 end

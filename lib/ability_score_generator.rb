@@ -30,7 +30,9 @@ class AbilityScoreGenerator
     # @param [Integer(1..30)] Ability score to calculate it's modifier.
     # @return [Integer] Positive or negative modifier.
     def modifier_of(ability_score)
-      raise "Ability score must be > 0" if ability_score < 1
+      return 0 unless ability_score
+      #TODO implement logger with warnings
+      #raise "Ability score must be > 0" if ability_score.nil? || ability_score < 1
       level_difference = 5
       balancer = ability_score.odd? ? 1 : 0
       ability_score - (ability_score / 2) - level_difference - balancer
