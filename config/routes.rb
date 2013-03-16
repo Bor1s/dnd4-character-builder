@@ -6,6 +6,10 @@ Dnd4CharacterBuilder::Application.routes.draw do
       resources :races
       resources :languages
       resources :classes
+
+      get 'ability_scores/standard_array'
+      get 'ability_scores/custom_ability_scores'
+      get 'ability_scores/roll_ability_scores'
     end
   end
 

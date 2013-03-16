@@ -47,7 +47,7 @@ class Character
   end
 
   def constitution_increased?
-    constitution_changed? && constitution > constitution_was
+    constitution_changed? && constitution > (constitution_was || 0) #For pure character
   end
 
   def constitution_increased_to_even?

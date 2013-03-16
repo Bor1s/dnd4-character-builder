@@ -22,8 +22,15 @@ describe Rest::CharactersController do
     let(:character) { Character.create! }
     let(:character_params) do
       {
+        level: 1,
         character_race_attributes: FactoryGirl.attributes_for(:dragonborn_template),
-        character_class_attributes: FactoryGirl.attributes_for(:cleric_template)
+        character_class_attributes: FactoryGirl.attributes_for(:cleric_template),
+        strength: 13,
+        dexterity: 14,
+        constitution: 15,
+        charisma: 13,
+        intelligence: 12,
+        wisdom: 10
       }
     end
 
@@ -31,6 +38,8 @@ describe Rest::CharactersController do
       put :update, { id: character.id, character: character_params }
       body = JSON.parse(response.body)
       body.should include("success", "character")
+      body["success"].should be_true
+      body["character"].should be
     end
   end
 end

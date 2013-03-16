@@ -17,6 +17,7 @@ class Rest::CharactersController < Rest::BaseController
       begin
         RuleProcessor.new(character).process
         character.save!
+        #TODO implements some convinient way to handle such kind of exceptions
         result = { success: true, character: character }
       rescue => e
         result = { success: false, error: e.message }
