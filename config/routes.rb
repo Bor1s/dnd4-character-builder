@@ -1,9 +1,12 @@
 Dnd4CharacterBuilder::Application.routes.draw do
 
   namespace :rest do
-    resources :characters
-    resources :races
-    resources :languages
+    constraints format: :json do
+      resources :characters
+      resources :races
+      resources :languages
+      resources :classes
+    end
   end
 
   # The priority is based upon order of creation:

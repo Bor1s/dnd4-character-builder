@@ -31,6 +31,7 @@ class Character
   embeds_one  :character_race
 
   accepts_nested_attributes_for :character_race
+  accepts_nested_attributes_for :character_class
   
   #Ability scores
   def strength_modifier

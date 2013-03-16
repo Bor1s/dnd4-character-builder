@@ -20,15 +20,14 @@ describe Rest::CharactersController do
 
   context "#update" do
     let(:character) { Character.create! }
+    let(:character_params) do
+      {
+        character_race_attributes: FactoryGirl.attributes_for(:dragonborn_template),
+        character_class_attributes: FactoryGirl.attributes_for(:cleric_template)
+      }
+    end
 
     it "returns success" do
-      character_params = { character_race_attributes:
-                           { name: "Dragonborn",
-                             description: "Proud, honorable warriors, born from the blood of an ancient dragon god",
-                             size: "medium",
-                             vision: "normal",
-                             speed: 6 }
-      }
       put :update, { id: character.id, character: character_params }
       body = JSON.parse(response.body)
       body.should include("success", "character")
