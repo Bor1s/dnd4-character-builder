@@ -8,5 +8,6 @@ FactoryGirl.define do
     hit_points_per_level 5
     healing_surges_per_day 7
     trained_skills_count 4
+    mandatory_trained_skills [:religion]
   end
 end

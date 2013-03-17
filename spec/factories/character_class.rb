@@ -8,6 +8,7 @@ FactoryGirl.define do
     hit_points_per_level 5
     healing_surges_per_day 7
     trained_skills_count 4
+    mandatory_trained_skills [:religion]
     #type "CharacterClass::Cleric"
     #role "Leader. You lead by shielding allies with your prayers, healing, and using powers that improve your allies' attacks."
     #power_source "Divine. You have been invested with the authority to wield divine power on behalf of a deity, faith, or philosophy."

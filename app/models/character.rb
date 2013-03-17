@@ -22,9 +22,6 @@ class Character
   field :intelligence, type: Integer
   field :wisdom, type: Integer
 
-  field :history, type: Integer
-  field :intimidate, type: Integer
-
   embeds_many :skills
   embeds_many :languages
   embeds_one  :character_class, class_name: "CharacterClass"
@@ -32,6 +29,7 @@ class Character
 
   accepts_nested_attributes_for :character_race
   accepts_nested_attributes_for :character_class
+  accepts_nested_attributes_for :skills
   
   #Ability scores
   def strength_modifier
@@ -75,4 +73,7 @@ class Character
 
   #Character Class delegation
   include ::CharacterClass::Extensions
+
+  #Character Class delegation
+  include ::Skill::Extensions
 end

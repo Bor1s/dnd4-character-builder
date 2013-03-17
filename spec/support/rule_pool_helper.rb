@@ -14,6 +14,30 @@ module RulePoolHelper
     FactoryGirl.create(:dragonborn_template)
   end
 
+  def prepare_character_classes
+    FactoryGirl.create(:cleric_template)
+  end
+
+  def prepare_skills
+    FactoryGirl.create(:acrobatics_template)
+    FactoryGirl.create(:arcana_template)
+    FactoryGirl.create(:athletics_template)
+    FactoryGirl.create(:bluff_template)
+    FactoryGirl.create(:diplomacy_template)
+    FactoryGirl.create(:dungeoneering_template)
+    FactoryGirl.create(:endurance_template)
+    FactoryGirl.create(:heal_template)
+    FactoryGirl.create(:history_template)
+    FactoryGirl.create(:insight_template)
+    FactoryGirl.create(:intimidate_template)
+    FactoryGirl.create(:nature_template)
+    FactoryGirl.create(:perception_template)
+    FactoryGirl.create(:religion_template)
+    FactoryGirl.create(:stealth_template)
+    FactoryGirl.create(:streetwise_template)
+    FactoryGirl.create(:thievery_template)
+  end
+
   def prepare_languages
     FactoryGirl.create(:common_language_template)
     FactoryGirl.create(:draconic_language_template)

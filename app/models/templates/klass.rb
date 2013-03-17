@@ -7,4 +7,5 @@ class Templates::Klass
   field :hit_points_per_level, type: Integer
   field :healing_surges_per_day, type: Integer
   field :trained_skills_count, type: Integer
+  field :mandatory_trained_skills, type: Array
 end

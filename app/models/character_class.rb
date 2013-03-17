@@ -9,6 +9,7 @@ class CharacterClass
   field :hit_points_per_level, type: Integer
   field :healing_surges_per_day, type: Integer
   field :trained_skills_count, type: Integer
+  field :mandatory_trained_skills, type: Array
 
   module Extensions
     def cleric?
@@ -27,5 +28,9 @@ class CharacterClass
     def healing_surges_per_day
       character_class.try(:healing_surges_per_day)
     end
+  end
+
+  def mandatory_skills
+    Templates::Skill.in(keyword: mandatory_trained_skills).to_a
   end
 end
