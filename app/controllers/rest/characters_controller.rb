@@ -1,5 +1,13 @@
 class Rest::CharactersController < Rest::BaseController
 
+  def index
+    #TODO implement
+  end
+
+  def show
+    #TODO implement
+  end
+
   def create
     begin
       character = Character.create!

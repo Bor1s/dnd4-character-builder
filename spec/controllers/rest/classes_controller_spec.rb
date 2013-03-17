@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Rest::ClassesController do
   context "#index" do
     it "returns list of available character classes" do
-      FactoryGirl.create(:cleric_template)
       get :index, format: :json 
 
       body = JSON.parse(response.body)
