@@ -1,11 +1,23 @@
 class Rest::CharactersController < Rest::BaseController
 
   def index
-    #TODO implement
+    characters = Character.all
+    unless characters.empty?
+      result = { success: true, characters: characters }
+    else
+      result = { success: false, error: "No characters found!" }
+    end
+    render json: result
   end
 
   def show
-    #TODO implement
+    character = Character.where(id: params[:id]).first
+    if character
+      result = { success: true, character: character }
+    else
+      result = { success: false, error: "No character with #{params[:id]} found!" }
+    end
+    render json: result
   end
 
   def create

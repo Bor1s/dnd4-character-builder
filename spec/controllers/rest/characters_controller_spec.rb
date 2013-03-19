@@ -2,11 +2,39 @@ require 'spec_helper'
 
 describe Rest::CharactersController do
   context "#index" do
-    pending "Implement"
+    it "returns list of all characters" do
+      Character.stub(:all).and_return([Character.new])
+      get :index, format: :json
+      body = JSON.parse(response.body)
+      body.should include("success", "characters")
+      body["characters"].should_not be_empty
+    end
+
+    it "returns success: false if no characters found" do
+      Character.stub(:all).and_return([])
+      get :index, format: :json
+      body = JSON.parse(response.body)
+      body.should include("success", "error")
+      body["success"].should be_false
+    end
   end
 
   context "#show" do
-    pending "Implement"
+    it "returns character" do
+      character = build_character(race: :dragonborn_character, level: 1)
+      Character.should_receive(:where).and_return([character])
+      get :show, { id: character.id, format: :json }
+      body = JSON.parse(response.body)
+      body.should include("success", "character")
+      body["character"].should be
+    end
+
+    it "returns success: false if no characters found" do
+      get :show, { id: "unexisting-id", format: :json }
+      body = JSON.parse(response.body)
+      body.should include("success", "error")
+      body["success"].should be_false
+    end
   end
 
   context "#create" do
