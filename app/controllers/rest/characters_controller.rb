@@ -23,7 +23,7 @@ class Rest::CharactersController < Rest::BaseController
   def create
     begin
       character = Character.create!
-      result = { success: true, id: character.id }
+      result = { success: true, character: character }
     rescue => e
       result = { success: false, error: "Cannot create character!" }
     end

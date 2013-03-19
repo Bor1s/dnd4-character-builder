@@ -41,8 +41,9 @@ describe Rest::CharactersController do
     it "blank character for further processing" do
       post :create, { format: :json }
       body = JSON.parse(response.body)
-      body.should include("success", "id")
+      body.should include("success", "character")
       body["success"].should be_true
+      body["character"].should be
     end
 
     it "returns error if something went wrong" do
