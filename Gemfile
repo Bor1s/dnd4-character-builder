@@ -30,6 +30,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'pry-rails'
+  gem 'pry-debugger'
 end
 
 group :test do
