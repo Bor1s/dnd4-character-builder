@@ -12,11 +12,12 @@ class CharacterClass
   field :mandatory_trained_skills, type: Array
 
   module Extensions
-    def cleric?
-      character_class.try(:name).try(:downcase) == "cleric"
+    [:cleric, :human].each do |race_name|
+      define_method("#{race_name}?") do
+        character_class.try(:name).try(:downcase) == race_name.to_s
+      end
     end
 
-    #TODO could be replaced with .delegate
     def hit_points_at_first_level
       character_class.try(:hit_points_at_first_level)
     end
