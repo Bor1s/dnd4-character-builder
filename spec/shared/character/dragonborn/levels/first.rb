@@ -26,10 +26,6 @@ shared_context "1st level dragonborn" do
       subject.intimidate.should eq 2
     end
 
-    it "should have 'Draconic Heritage' bonus to healing_surge_value" do
-      subject.healing_surge_value.should eq (subject.hit_points / 4 + subject.constitution_modifier)
-    end
-
     it "should have 5 encounter power slots" do
       subject.encounter_powers_known.should eq 5
     end

@@ -25,8 +25,8 @@ class Rule
     result = nil
 
     if hash[:if].present?
-      condition = normalize(hash[:if]) #TODO rework normalize for :if (causing trobbles with name? style methods)
-      if eval(condition)
+      condition = normalize(hash[:if])
+      if !!eval(condition)
         result = eval(what)
       else
         raise ConditionFailed
@@ -37,7 +37,7 @@ class Rule
 
     if store_as
       raise NoStorageForRuleResultException, "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
-      command.add_to_queue( lambda {character.method("#{store_as}=").call(result)} )
+      command.add_to_queue( ->{character.method("#{store_as}=").call(result)} )
     else
       result
     end
@@ -54,7 +54,11 @@ class Rule
         rule.process
       else
         raise NoCharacterFieldFound, "No field :#{meth} in Character found! Define it to use in Rules." unless character.respond_to? meth 
-        character.method(meth).call || 0
+        if meth.to_s.ends_with?("?") #Check for boolean method (to return explicit true/false)
+          character.method(meth).call
+        else
+          character.method(meth).call || 0
+        end
       end
     end
   end

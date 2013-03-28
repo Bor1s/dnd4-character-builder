@@ -13,7 +13,7 @@ class CharacterClass
 
   module Extensions
     def cleric?
-      character_class.try(:name) == "cleric"
+      character_class.try(:name).try(:downcase) == "cleric"
     end
 
     #TODO could be replaced with .delegate

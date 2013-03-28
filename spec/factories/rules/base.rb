@@ -27,7 +27,7 @@ FactoryGirl.define do
   factory :healing_surge_value_rule, parent: :rule do
     name :healing_surge_value_rule
     todo Hash[
-      what: "{hit_points} / 4",
+      what: "{healing_surge_value} + {hit_points} / 4",
       store_as: :healing_surge_value
     ]
 
@@ -49,7 +49,7 @@ FactoryGirl.define do
     todo Hash[
       what: "{hit_points} + 1",
       store_as: :hit_points,
-      if: "{constitution_increased?} == true"
+      if: "{constitution_increased?}"
     ]
 
     root true
@@ -60,7 +60,7 @@ FactoryGirl.define do
     todo Hash[
       what: "{healing_surges} + 1",
       store_as: :healing_surges,
-      if: "{constitution_increased_to_even?} == true"
+      if: "{constitution_increased_to_even?}"
     ]
 
     root true
