@@ -12,6 +12,7 @@ class CharacterClass
   field :mandatory_trained_skills, type: Array
 
   module Extensions
+    #TODO CHECK!!!!
     [:cleric, :human].each do |race_name|
       define_method("#{race_name}?") do
         character_class.try(:name).try(:downcase) == race_name.to_s

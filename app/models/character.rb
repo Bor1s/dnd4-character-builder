@@ -24,12 +24,18 @@ class Character
 
   embeds_many :skills
   embeds_many :languages
+  embeds_many :feats
   embeds_one  :character_class, class_name: "CharacterClass"
   embeds_one  :character_race
 
   accepts_nested_attributes_for :character_race
   accepts_nested_attributes_for :character_class
   accepts_nested_attributes_for :skills
+  accepts_nested_attributes_for :feats
+
+  after_initialize do |char|
+    char.feats_attributes = Templates::Feat.all.map { |f| f.attributes.except("_id") } if char.new_record?
+  end
   
   #Ability scores
   def strength_modifier
@@ -71,9 +77,18 @@ class Character
   #Character race extensions
   include ::CharacterRace::Extensions
 
-  #Character Class delegation
+  #Character Class extensions
   include ::CharacterClass::Extensions
 
-  #Character Class delegation
+  #Character Class extensions
   include ::Skill::Extensions
+
+  #Character Feat extensions
+  extend ::Templates::Feat::ClassMethods
+
+  feat_names.each do |fn|
+    define_method("grant_#{fn}_feat") do
+      feats.where(name: fn).first.update_attributes(available: true)
+    end
+  end
 end

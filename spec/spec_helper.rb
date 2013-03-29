@@ -40,16 +40,17 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean_with(:truncation)
+    [Character, Rule, Language, Templates::Skill,
+     Templates::Klass, Templates::Language,
+     Templates::Race, Templates::Feat].each do |klass|
+      klass.delete_all
+    end
+
     prepare_rules_set
     prepare_character_races
     prepare_character_classes
     prepare_skills
     prepare_languages
-  end
-
-  config.after(:suite) do
-    DatabaseCleaner.clean
+    prepare_feats
   end
 end

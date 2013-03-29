@@ -2,12 +2,19 @@
 #used on character sheet. But for other feats I have to create some custom rules.
 
 FactoryGirl.define do
-  #factory :action_surge_availablity_rule, parent: :rule do
-    #name :action_surge_availablity_rule
-    #todo Hash[
-      #what: "{grant_access_to_action_surge_feat}",
-      #if: "{human?}"
-    #]
-    #root true
-  #end
+  factory :alterness_availability_rule, parent: :rule do
+    name :alterness_availability_rule
+    todo Hash[
+      what: "{grant_alterness_feat}"
+    ]
+    root true
+  end
+
+  factory :chainmail_armor_proficiency_rule, parent: :rule do
+    name :chainmail_armor_proficiency
+    todo Hash[
+      what: "{grant_chainmail_armor_proficiency_feat}"
+    ]
+    root true
+  end
 end

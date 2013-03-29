@@ -43,6 +43,14 @@ module RulePoolHelper
     FactoryGirl.create(:draconic_language_template)
   end
 
+  def prepare_feats
+    FactoryGirl.create(:action_surge_template)
+    FactoryGirl.create(:agile_hunter_template)
+    FactoryGirl.create(:alterness_template)
+    FactoryGirl.create(:armor_of_bahamut_template)
+    FactoryGirl.create(:chainmail_armor_proficiency_template)
+  end
+
   def build_character(options = {})
     character = FactoryGirl.create(options[:race], level: options[:level])
     ability_scores = AbilityScoreGenerator.standard_array
