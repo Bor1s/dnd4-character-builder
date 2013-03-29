@@ -75,16 +75,16 @@ class Character
   end
 
   #Character race extensions
-  include ::CharacterRace::Extensions
+  include ::Templates::Race::Extensions
 
   #Character Class extensions
-  include ::CharacterClass::Extensions
+  include ::Templates::Klass::Extensions
 
   #Character Class extensions
-  include ::Skill::Extensions
+  include ::Templates::Skill::Extensions
 
   #Character Feat extensions
-  extend ::Templates::Feat::ClassMethods
+  include ::Templates::Feat::Extensions
 
   feat_names.each do |fn|
     define_method("grant_#{fn}_feat") do
