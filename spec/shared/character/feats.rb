@@ -6,8 +6,8 @@ shared_context "feats" do
       char = build_character(race: :dragonborn_character, level: 1)
       char.feats.should_not be_empty
       char.feats.count.should eq Templates::Feat.count
-      char.feats.all? { |f| f.available }.should be_false
-      char.feats.all? { |f| f.used }.should be_false
+      char.feats.map(&:available).all?.should be_false
+      char.feats.map(&:used).all?.should be_false
     end
 
     it "are available for character (feature needed only to select wich feats are will be used (processed by RuleProcessor))" do

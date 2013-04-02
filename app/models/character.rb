@@ -80,7 +80,7 @@ class Character
   #Character Class extensions
   include ::Templates::Klass::Extensions
 
-  #Character Class extensions
+  #Character Skill extensions
   include ::Templates::Skill::Extensions
 
   #Character Feat extensions

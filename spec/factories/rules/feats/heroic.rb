@@ -14,6 +14,7 @@ FactoryGirl.define do
     name :chainmail_armor_proficiency
     todo Hash[
       what: "{grant_chainmail_armor_proficiency_feat}"
+      #TODO implement :if
     ]
     root true
   end
