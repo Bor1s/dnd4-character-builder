@@ -6,7 +6,6 @@ FactoryGirl.define do
       store_as: :utility_powers_known,
       if: "{level} == 2"
     ]
-    root true
   end
 
   factory :feats_known_at_second_level_rule, parent: :rule do
@@ -16,7 +15,6 @@ FactoryGirl.define do
       store_as: :feats_known,
       if: "{level} == 2"
     ]
-    root true
   end
 
   factory :atwills_known_at_second_level_rule, parent: :rule do
@@ -26,7 +24,6 @@ FactoryGirl.define do
       store_as: :atwill_powers_known,
       if: "{level} == 2"
     ]
-    root true
   end
   
   factory :encounters_known_at_second_level_rule, parent: :rule do
@@ -36,7 +33,6 @@ FactoryGirl.define do
       store_as: :encounter_powers_known,
       if: "{level} == 2"
     ]
-    root true
   end
   
   factory :dailies_known_at_second_level_rule, parent: :rule do
@@ -46,7 +42,6 @@ FactoryGirl.define do
       store_as: :daily_powers_known,
       if: "{level} == 2"
     ]
-    root true
   end
 
 end

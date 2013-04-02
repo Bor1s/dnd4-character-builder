@@ -14,7 +14,7 @@ class RuleProcessor
     logger.info "#{'='*10} Starting at: #{Time.now} #{'='*10} \n Character initial state: #{character.attributes.to_yaml} \n #{'-'*20}"
     File.open(@df1, "w") { |f| f.write character.attributes.to_yaml }
 
-    Rule.roots.each do |rule|
+    Rule.all.each do |rule|
       rule.character = character
       rule.command = command
       begin

@@ -4,9 +4,6 @@ class Rule
 
   field :todo, type: Hash
   field :name, type: String
-  field :root, type: Boolean
-
-  scope :roots, where(root: true)
 
   def process
     raise EmptyRuleException, "Rule #{self.inspect} has empty :todo field!" unless todo 

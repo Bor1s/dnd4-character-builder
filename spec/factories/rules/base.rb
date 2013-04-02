@@ -9,8 +9,6 @@ FactoryGirl.define do
       what: "{hit_points_at_first_level} + {constitution} + {hit_points_per_level} * {level_multiplier}",
       store_as: :hit_points
     ]
-
-    root true
   end
 
   # Healing surges rules
@@ -20,8 +18,6 @@ FactoryGirl.define do
       what: "{healing_surges_per_day} + {constitution_modifier}",
       store_as: :healing_surges
     ]
-
-    root true
   end
 
   factory :healing_surge_value_rule, parent: :rule do
@@ -30,8 +26,6 @@ FactoryGirl.define do
       what: "{healing_surge_value} + {hit_points} / 4",
       store_as: :healing_surge_value
     ]
-
-    root true
   end
 
   factory :bloodied_rule, parent: :rule do
@@ -40,8 +34,6 @@ FactoryGirl.define do
       what: "{hit_points} / 2",
       store_as: :bloodied
     ]
-
-    root true
   end
 
   factory :hit_points_increasing_rule, parent: :rule do
@@ -51,8 +43,6 @@ FactoryGirl.define do
       store_as: :hit_points,
       if: "{constitution_increased?}"
     ]
-
-    root true
   end
 
   factory :healing_surges_increasing_rule, parent: :rule do
@@ -62,8 +52,6 @@ FactoryGirl.define do
       store_as: :healing_surges,
       if: "{constitution_increased_to_even?}"
     ]
-
-    root true
   end
 
 end

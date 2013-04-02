@@ -6,7 +6,6 @@ FactoryGirl.define do
       store_as: :utility_powers_known,
       if: "{level} == 8"
     ]
-    root true
   end
 
   factory :feats_known_at_eighth_level_rule, parent: :rule do
@@ -16,7 +15,6 @@ FactoryGirl.define do
       store_as: :feats_known,
       if: "{level} == 8"
     ]
-    root true
   end
 
   factory :atwills_known_at_eighth_level_rule, parent: :rule do
@@ -26,7 +24,6 @@ FactoryGirl.define do
       store_as: :atwill_powers_known,
       if: "{level} == 8"
     ]
-    root true
   end
   
   factory :encounters_known_at_eighth_level_rule, parent: :rule do
@@ -36,7 +33,6 @@ FactoryGirl.define do
       store_as: :encounter_powers_known,
       if: "{level} == 8"
     ]
-    root true
   end
   
   factory :dailies_known_at_eighth_level_rule, parent: :rule do
@@ -46,8 +42,8 @@ FactoryGirl.define do
       store_as: :daily_powers_known,
       if: "{level} == 8"
     ]
-    root true
   end
+
   factory :ability_scores_upgrade_points_at_eighth_level_rule, parent: :rule do
     name :ability_scores_upgrade_points_at_eighth_level_rule
     todo Hash[
@@ -55,7 +51,6 @@ FactoryGirl.define do
       store_as: :ability_scores_upgrade_points,
       if: "{level} == 8"
     ]
-    root true
   end
 
 end

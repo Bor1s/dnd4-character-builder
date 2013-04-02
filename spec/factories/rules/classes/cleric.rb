@@ -6,7 +6,5 @@ FactoryGirl.define do
       if: "{cleric?}",
       store_as: :encounter_powers_known
     ]
-
-    root true
   end
 end

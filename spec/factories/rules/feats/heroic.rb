@@ -7,7 +7,6 @@ FactoryGirl.define do
     todo Hash[
       what: "{grant_alterness_feat}"
     ]
-    root true
   end
 
   factory :chainmail_armor_proficiency_rule, parent: :rule do
@@ -16,6 +15,5 @@ FactoryGirl.define do
       what: "{grant_chainmail_armor_proficiency_feat}"
       #TODO implement :if
     ]
-    root true
   end
 end
