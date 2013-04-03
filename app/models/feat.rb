@@ -7,4 +7,6 @@ class Feat
   field :benefit, type: String
   field :available, type: Boolean, default: false
   field :used, type: Boolean, default: false
+
+  scope :available, where(available: true)
 end

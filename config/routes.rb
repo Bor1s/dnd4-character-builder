@@ -14,6 +14,10 @@ Dnd4CharacterBuilder::Application.routes.draw do
       resources :skills do
         get "trained/:character_id" => "skills#trained", on: :collection
       end
+
+      resources :feats do
+        get "available/:character_id" => "feats#available", on: :collection
+      end
     end
   end
 
