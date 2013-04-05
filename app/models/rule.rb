@@ -1,6 +1,6 @@
 class Rule
   include Mongoid::Document
-  attr_accessor :character, :command
+  attr_accessor :character
 
   field :todo, type: Hash
   field :name, type: String
@@ -34,7 +34,8 @@ class Rule
 
     if store_as
       raise NoStorageForRuleResultException, "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
-      command.add_to_queue( ->{character.method("#{store_as}=").call(result)} )
+      character.method("#{store_as}=").call(result)
+      recalc_related_rules(store_as)
     else
       result
     end
@@ -58,6 +59,21 @@ class Rule
         end
       end
     end
+  end
+
+  private
+
+  def recalc_related_rules(store_as)
+    #TODO refactor
+    _rules = Rule.all.to_a.select do |r|
+      r.todo["what"].match(/{#{store_as}}|{#{store_as}_modifier}/) && 
+        r.name != name &&
+          r.todo["store_as"] != store_as
+    end
+    _rules.each do |r|
+      r.character = character
+      r.process
+    end unless _rules.empty?
   end
 
   class RuleNotFoundException < StandardError; end

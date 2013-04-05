@@ -36,7 +36,6 @@ describe Rule do
     it "should be success for simple rule" do
       rule = Rule.where(name: "simple_rule_abstract").first
       rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)
-      rule.command = Command.new
       result = rule.process
       result.should eq 1
     end
@@ -44,7 +43,6 @@ describe Rule do
     it "should be success for simple rule with condition" do
       rule = Rule.where(name: "simple_rule_with_condition_rule_abstract").first
       rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)
-      rule.command = Command.new
       result = rule.process
       result.should eq 1
     end
@@ -52,19 +50,16 @@ describe Rule do
     it "should fail for simple rule if condition failed" do
       rule = Rule.where(name: "simple_rule_with_bad_condition_rule_abstract").first
       rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)
-      rule.command = Command.new
       expect { rule.process }.to raise_exception(Rule::ConditionFailed)
     end
 
     it "should be success for simple rule with storage" do
       rule = Rule.where(name: "test_character_expirience_rule_abstract").first
       rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)
-      rule.command = Command.new
 
       exp_was = rule.character.expirience
 
       rule.process
-      rule.command.execute
 
       rule.character.expirience.should eq 3
     end

@@ -22,6 +22,11 @@ class Character
   field :intelligence, type: Integer
   field :wisdom, type: Integer
 
+  field :fortitude, type: Integer
+  field :will, type: Integer
+  field :armor_class, type: Integer
+  field :reflex, type: Integer
+
   embeds_many :skills
   embeds_many :languages
   embeds_many :feats
@@ -72,6 +77,12 @@ class Character
 
   def level_multiplier
     level == 1 ? 0 : level
+  end
+
+  #Armor and weapon
+  def has_lightweight_armor?
+    #TODO check for this type of armor
+    true
   end
 
   #Character race extensions

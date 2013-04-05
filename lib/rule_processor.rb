@@ -1,9 +1,8 @@
 class RuleProcessor
-  attr_reader :character, :command, :logger
+  attr_reader :character, :logger
 
   def initialize(character)
     @character = character
-    @command = Command.new
     @logger = Logger.new(Rails.root.join("log", "rules.log"))
     @df1 = Rails.root.join("log", "df1.txt")
     @df2 = Rails.root.join("log", "df2.txt")
@@ -16,13 +15,10 @@ class RuleProcessor
 
     Rule.all.each do |rule|
       rule.character = character
-      rule.command = command
       begin
         rule.process
-        command.execute
         logger.info "Rule #{rule.name}: #{rule.attributes.to_yaml} \n #{'-'*20}"
       rescue Rule::ConditionFailed => e
-        #logger.info "Rule #{rule.name} failed to process with conditions: #{rule.todo.inspect}"
       end
     end
 

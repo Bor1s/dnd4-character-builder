@@ -8,6 +8,10 @@ class Templates::Klass
   field :healing_surges_per_day, type: Integer
   field :trained_skills_count, type: Integer
   field :mandatory_trained_skills, type: Array
+  field :armor_proficiencies, type: Array
+  field :weapon_proficiencies, type: Array
+  field :implement, type: String
+  field :features, type: Array
 
   module Extensions
     [:cleric, :human].each do |race_name|

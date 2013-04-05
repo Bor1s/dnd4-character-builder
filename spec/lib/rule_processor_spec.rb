@@ -7,6 +7,4 @@ describe RuleProcessor do
  	end
 
   specify { subject.should respond_to :character }
-  specify { subject.should respond_to :command }
-
 end
