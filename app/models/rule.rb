@@ -6,7 +6,8 @@ class Rule
   field :name, type: String
 
   def process
-    raise EmptyRuleException, "Rule #{self.inspect} has empty :todo field!" unless todo 
+    raise EmptyRuleException, "Rule #{self.inspect} has empty :todo field!" unless todo
+    RuleMapper.store(self)
     parse(todo) 
   end
 
@@ -48,7 +49,6 @@ class Rule
         rule = Rule.where(name: meth).first
         raise RuleNotFoundException, "Rule with name #{meth} not found!" unless rule
         rule.character = character
-        rule.command = command
         rule.process
       else
         raise NoCharacterFieldFound, "No field :#{meth} in Character found! Define it to use in Rules." unless character.respond_to? meth 
@@ -64,12 +64,10 @@ class Rule
   private
 
   def recalc_related_rules(store_as)
-    #TODO refactor
-    _rules = Rule.all.to_a.select do |r|
-      r.todo["what"].match(/{#{store_as}}|{#{store_as}_modifier}/) && 
-        r.name != name &&
-          r.todo["store_as"] != store_as
-    end
+    #Reprocess for rules that depends on stored value
+    _mappings = RuleMapper.where(:name.ne => name, :store_as.ne => store_as, :method_list.in => [store_as, "#{store_as}_modifier".to_sym])
+    names = _mappings.to_a.map(&:name)
+    _rules = Rule.in(name: names).all
     _rules.each do |r|
       r.character = character
       r.process
