@@ -54,8 +54,15 @@ module RulePoolHelper
     FactoryGirl.create(:chainmail_armor_proficiency_template)
   end
 
+  def prepare_powers
+    #Prepares all 'powers'
+    FactoryGirl.factories.map do |fc|
+      FactoryGirl.create(fc.name) if fc.name.match(/_power\z/)
+    end
+  end
+
   def build_character(options = {})
-    character = FactoryGirl.create(options[:race], level: options[:level])
+    character = FactoryGirl.create(options[:type], level: options[:level])
     ability_scores = AbilityScoreGenerator.standard_array
     character.strength = ability_scores.shift
     character.dexterity = ability_scores.shift

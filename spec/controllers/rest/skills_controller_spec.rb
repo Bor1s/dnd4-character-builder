@@ -9,7 +9,7 @@ describe Rest::SkillsController do
   end
 
   it "#trained_skills defines wich skill is mandatory trained for character" do
-    character = build_character(race: :dragonborn_character, level: 1)
+    character = build_character(type: :dragonborn_cleric, level: 1)
 
     get :trained, { format: :json, character_id: character.id }
     body = JSON.parse(response.body)

@@ -2,7 +2,7 @@ shared_context "hit points, healing surges and bloodied value" do
 
   context "calculation of" do
     before :all do
-      @char = build_character(race: :dragonborn_character, level: 1)
+      @char = build_character(type: :dragonborn_cleric, level: 1)
     end
 
     it 'hit points should be corect' do

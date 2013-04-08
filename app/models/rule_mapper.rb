@@ -10,7 +10,7 @@ class RuleMapper
       mapper = RuleMapper.new
       mapper.name = rule.name
       mapper.store_as = rule.todo["store_as"]
-      mapper.method_list = extract_methods_from(rule.todo["what"])
+      mapper.method_list = extract_methods_from(rule.todo.with_indifferent_access["what"])
       mapper.save!
     end
   end

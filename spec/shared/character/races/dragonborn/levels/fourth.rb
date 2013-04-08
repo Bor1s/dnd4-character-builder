@@ -2,7 +2,7 @@ shared_context "4th level dragonborn" do
 	context "4th level dragonborn (cleric)" do
     before :all do
       ability_scores = AbilityScoreGenerator.standard_array
-      @char = FactoryGirl.create(:dragonborn_character, level: 4,
+      @char = FactoryGirl.create(:dragonborn_cleric, level: 4,
                                      strength: ability_scores.shift,
                                      dexterity: ability_scores.shift,
                                      constitution: ability_scores.shift,

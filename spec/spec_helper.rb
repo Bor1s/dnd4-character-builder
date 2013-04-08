@@ -52,5 +52,6 @@ RSpec.configure do |config|
     prepare_skills
     prepare_languages
     prepare_feats
+    prepare_powers
   end
 end

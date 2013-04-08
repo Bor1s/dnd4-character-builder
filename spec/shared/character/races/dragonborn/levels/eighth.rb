@@ -1,7 +1,7 @@
 shared_context "8th level dragonborn" do
 	context "8th level dragonborn (cleric)" do
     before :all do
-      @char = build_character(race: :dragonborn_character, level: 8)
+      @char = build_character(type: :dragonborn_cleric, level: 8)
     end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value (healing_surge_value + constitution_modifier)" do

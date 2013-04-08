@@ -20,7 +20,7 @@ describe Rest::FeatsController do
 
   context "#available" do
     it "returns only available feats" do
-      character = build_character(race: :dragonborn_character, level: 8)
+      character = build_character(type: :dragonborn_cleric, level: 8)
       get :available, { format: :json, character_id: character.id }
       result = JSON.parse response.body
       result["success"].should be_true

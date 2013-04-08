@@ -1,14 +1,14 @@
 shared_context "1st level dragonborn" do
   context "1st level dragonborn (cleric)" do
     before :all do
-      @char = build_character(race: :dragonborn_character, level: 1)
+      @char = build_character(type: :dragonborn_cleric, level: 1)
     end
 
     specify { @char.vision.should eq 'normal' }
     specify { @char.speed.should eq 6 }
     specify { @char.size.should eq 'medium' }
 
-    it "should have appropriate class" do
+    it "should have appropriate race" do
       @char.character_race.name.should eq "Dragonborn"
     end
 

@@ -21,7 +21,7 @@ describe Rest::CharactersController do
 
   context "#show" do
     it "returns character" do
-      character = build_character(race: :dragonborn_character, level: 1)
+      character = build_character(type: :dragonborn_cleric, level: 1)
       Character.should_receive(:where).and_return([character])
       get :show, { id: character.id, format: :json }
       body = JSON.parse(response.body)

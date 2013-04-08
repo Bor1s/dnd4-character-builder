@@ -27,19 +27,26 @@ class Character
   field :armor_class, type: Integer
   field :reflex, type: Integer
 
+  #Misc
+  field :healing_keyword_bonus, type: Integer
+
   embeds_many :skills
   embeds_many :languages
   embeds_many :feats
-  embeds_one  :character_class, class_name: "CharacterClass"
+  embeds_many :powers
+  embeds_one  :character_class, class_name: "CharacterClass" #Avoid CharacterClas bug
   embeds_one  :character_race
 
   accepts_nested_attributes_for :character_race
   accepts_nested_attributes_for :character_class
   accepts_nested_attributes_for :skills
   accepts_nested_attributes_for :feats
+  accepts_nested_attributes_for :powers
 
+  #Grant all feats and powers in system to character
   after_initialize do |char|
     char.feats_attributes = Templates::Feat.all.map { |f| f.attributes.except("_id") } if char.new_record?
+    char.powers_attributes = Templates::Power.all.map { |f| f.attributes.except("_id") } if char.new_record?
   end
   
   #Ability scores
@@ -97,9 +104,13 @@ class Character
   #Character Feat extensions
   include ::Templates::Feat::Extensions
 
+  #Available feats allows character to use it later (check in dropdown list on UI)
   feat_names.each do |fn|
     define_method("grant_#{fn}_feat") do
       feats.where(name: fn).first.update_attributes(available: true)
     end
   end
+
+  #Character Power extensions
+  include ::Templates::Power::Extensions
 end

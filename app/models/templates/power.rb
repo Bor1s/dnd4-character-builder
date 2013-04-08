@@ -1,4 +1,4 @@
-class Power
+class Templates::Power
   include Mongoid::Document
 
   field :name, type: String
@@ -22,4 +22,17 @@ class Power
   field :effect, type: String
 
   field :used, type: Boolean
+
+  module Extensions
+    def self.included(base)
+      base.extend(Extensions::ClassMethods)
+    end
+
+    module ClassMethods
+      def power_names
+        Templates::Power.all.map(&:name)
+      end
+    end
+  end
+
 end

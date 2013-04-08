@@ -1,7 +1,7 @@
 shared_context "3rd level dragonborn" do
 	context "3rd level dragonborn (cleric)" do
     before :all do
-      @char = build_character(race: :dragonborn_character, level: 3)
+      @char = build_character(type: :dragonborn_cleric, level: 3)
     end
 
 		it "should have strength and charisma with ability scores modifiers" do

@@ -1,7 +1,7 @@
 shared_context "defences" do
   context "defence of" do
     before :all do
-      @char = build_character(race: :dragonborn_character, level: 1)
+      @char = build_character(type: :dragonborn_cleric, level: 1)
     end
 
     it "#fortitude has proper value" do
