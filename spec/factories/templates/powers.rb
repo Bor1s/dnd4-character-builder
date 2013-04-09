@@ -49,8 +49,19 @@ FactoryGirl.define do
     used true
   end
 
-  factory :healing_word, parent: :encounter do
-    #CONTINUE
+  factory :healing_word_power, parent: :encounter do
+    name :healing_word
+    description "You whisper a brief prayer as divine light washes over your target, helping to mend its wounds"
+    keywords [:divine, :healing]
+    action_type :minor_action
+    attack_type_and_range "close burst {healing_word_burst_squares} (10 at 11th level, 15 at 21st level)"
+    power_target "You or one ally"
+    effect "The target can spend a healing surge and regain an additional 1d6 + {healing_keyword_bonus} hit points"
+    #TODO implement rules for:
+    # 1. attack_type_and_range
+    # 2. Add healing_keyword_bonus to effect 1d6
+    # Increase the amount of additional hit points regained to 2d6 at 6th level, 3d6 at 11th level, 4d6 at 16th level, 5d6 at 21st level, and 6d6 at 26th level.
+    used true
   end
 
   #factory :dragon_breath, parent: :encounter do
