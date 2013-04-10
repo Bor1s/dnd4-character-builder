@@ -27,8 +27,14 @@ class Character
   field :armor_class, type: Integer
   field :reflex, type: Integer
 
+  #TODO implement :general_storage, power_storage etc. Hash to store values.
+  # Improve Rule to search in storages instead of character.defined?(:store_method)
+
   #Misc
+  field :turn_undead_burst_squares, type: Integer
   field :healing_keyword_bonus, type: Integer
+  field :turn_undead_dice_amount, type: Integer
+
 
   embeds_many :skills
   embeds_many :languages

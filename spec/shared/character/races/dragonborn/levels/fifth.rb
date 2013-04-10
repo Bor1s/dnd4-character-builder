@@ -27,5 +27,10 @@ shared_context "5th level dragonborn" do
     it "should have 3 feat slots" do
       @char.feats_known.should eq 3
     end
+
+    #Turn Undead power
+    it "has turn_undead_dice_amount equal to 2" do
+      @char.turn_undead_dice_amount.should eq 2
+    end
 	end
 end

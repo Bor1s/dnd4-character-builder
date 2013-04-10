@@ -41,10 +41,7 @@ FactoryGirl.define do
     attack_type_and_range "close burst {turn_undead_burst_squares} (2 at 1st, 5 at 11th level, 8 at 21st level)"
     power_target "Each undead creature in burst"
     attack "Wisdom vs. Will"
-    hit "{turn_undead_dice_amount}d{turn_undead_dice_side} + {wisdom_modifier} radiant damage, and you push the target a number of squares equal to 3 + your {charisma_modifier}. The target is immobilized until the end of your next turn."
-    #TODO implement rules for:
-    # 1. attack_type_and_range
-    # 2. Increase damage to 2d10 + Wisdom modifier at 5th level, 3d10 + Wisdom modifier at 11th level, 4d10 + Wisdom modifier at 15th level, 5d10 + Wisdom modifier at 21st level, and 6d10 + Wisdom modifier at 25th level
+    hit "{turn_undead_dice_amount}d10 + {wisdom_modifier} radiant damage, and you push the target a number of squares equal to 3 + your {charisma_modifier}. The target is immobilized until the end of your next turn."
     miss "Half damage, and the target is not pushed or immobilized."
     used true
   end
@@ -56,45 +53,12 @@ FactoryGirl.define do
     action_type :minor_action
     attack_type_and_range "close burst {healing_word_burst_squares} (10 at 11th level, 15 at 21st level)"
     power_target "You or one ally"
-    effect "The target can spend a healing surge and regain an additional 1d6 + {healing_keyword_bonus} hit points"
+    effect "The target can spend a healing surge and regain an additional {healing_word_regain_dice} (1d6) + {healing_keyword_bonus} hit points"
     #TODO implement rules for:
     # 1. attack_type_and_range
     # 2. Add healing_keyword_bonus to effect 1d6
     # Increase the amount of additional hit points regained to 2d6 at 6th level, 3d6 at 11th level, 4d6 at 16th level, 5d6 at 21st level, and 6d6 at 26th level.
     used true
   end
-
-  #factory :dragon_breath, parent: :encounter do
-    #power_type :attack
-    #name "Dragon Breath"
-    #description "As you open your mouth with a roar, the deadly power of your draconic kin blasts forth to engulf your foes."
-    #keywords ['Acid', "Cold", 'Fire', 'Lightning', 'Poison']
-    #damage_type "acid, cold, fire, lightning, or poison"
-    #effect_type ""
-    #accessories []
-    #action_type 'minor'
-    #trigger ""
-    #attack_type "close"
-    #range "blast 3"
-    #targets "All creatures in area"
-    #attack Hash.new({ 
-      #ability: "()->{ [character.ability_scores.strength_modifier,
-        #character.ability_scores.constitution_modifier,
-        #character.ability_scores.dexterity_modifier].max + 2 }",
-      #vs: "Reflex"
-    #})
-    #hit "()->{
-      #case level
-        #when 11
-          #DiceRoller.2d6 + 4 + (level / 2) + ability_scores.constitution_modifier
-        #when 21
-          #DiceRoller.3d6 + 6 + (level / 2) + ability_scores.constitution_modifier
-      #end
-     #}"
-    #miss ""
-    #effect ""
-    #sustain ""
-    #special "When you create your character, choose Strength, Constitution, or Dexterity as the ability score you use when making attack rolls with this power. You also choose the power's damage type: acid, cold, fire, lightning, or poison. These two choices remain throughout your character's life and do not change the power's other effects."
-  #end
 
 end

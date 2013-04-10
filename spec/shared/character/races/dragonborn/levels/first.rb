@@ -29,5 +29,9 @@ shared_context "1st level dragonborn" do
     it "should have 5 encounter power slots" do
       @char.encounter_powers_known.should eq 5
     end
+
+    it "has turn_undead_burst_squares equal to 2" do
+      @char.turn_undead_burst_squares.should eq 2 #2 squares for 1st level
+    end
   end
 end
