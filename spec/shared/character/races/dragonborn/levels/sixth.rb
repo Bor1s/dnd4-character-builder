@@ -28,5 +28,9 @@ shared_context "6th level dragonborn" do
       @char.feats_known.should eq 4
     end
 
+    #Healing Word
+    it "has healing_word_regain_dice equal to 2" do
+      @char.healing_word_regain_dice.should eq 2
+    end
 	end
 end

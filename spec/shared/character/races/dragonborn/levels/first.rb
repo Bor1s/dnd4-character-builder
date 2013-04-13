@@ -31,7 +31,16 @@ shared_context "1st level dragonborn" do
     end
 
     it "has turn_undead_burst_squares equal to 2" do
-      @char.turn_undead_burst_squares.should eq 2 #2 squares for 1st level
+      @char.turn_undead_burst_squares.should eq 2
     end
+
+    it "has healing_word_burst_squares equal to 5" do
+      @char.healing_word_burst_squares.should eq 5
+    end
+
+    it "has healing_word_regain_dice equal to 1" do
+      @char.healing_word_regain_dice.should eq 1
+    end
+
   end
 end

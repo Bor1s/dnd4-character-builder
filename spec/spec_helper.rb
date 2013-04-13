@@ -40,9 +40,9 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.before(:suite) do
-    [Character, Rule, Language, Templates::Skill,
+    [Character, Rule, Power, Feat, Language, Templates::Skill,
      Templates::Klass, Templates::Language,
-     Templates::Race, Templates::Feat].each do |klass|
+     Templates::Race, Templates::Feat, Templates::Power].each do |klass|
       klass.delete_all
     end
 

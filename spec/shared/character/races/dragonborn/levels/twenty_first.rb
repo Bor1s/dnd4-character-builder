@@ -42,5 +42,14 @@ shared_context "21th level dragonborn" do
     it "has turn_undead_dice_amount equal to 5" do
       @char.turn_undead_dice_amount.should eq 5
     end
+
+    #Healing Word
+    it "has healing_word_burst_squares equal to 15" do
+      @char.healing_word_burst_squares.should eq 15
+    end
+
+    it "has healing_word_regain_dice equal to 5" do
+      @char.healing_word_regain_dice.should eq 5
+    end
 	end
 end

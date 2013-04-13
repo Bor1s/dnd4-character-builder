@@ -53,11 +53,7 @@ FactoryGirl.define do
     action_type :minor_action
     attack_type_and_range "close burst {healing_word_burst_squares} (10 at 11th level, 15 at 21st level)"
     power_target "You or one ally"
-    effect "The target can spend a healing surge and regain an additional {healing_word_regain_dice} (1d6) + {healing_keyword_bonus} hit points"
-    #TODO implement rules for:
-    # 1. attack_type_and_range
-    # 2. Add healing_keyword_bonus to effect 1d6
-    # Increase the amount of additional hit points regained to 2d6 at 6th level, 3d6 at 11th level, 4d6 at 16th level, 5d6 at 21st level, and 6d6 at 26th level.
+    effect "The target can spend a healing surge and regain an additional {healing_word_regain_dice}d6 + {healing_keyword_bonus} hit points"
     used true
   end
 

@@ -15,8 +15,10 @@ shared_context "dragonborn race" do
   include_context "11th level dragonborn"
 
   include_context "15th level dragonborn"
+  include_context "16th level dragonborn"
 
   include_context "21th level dragonborn"
 
   include_context "25th level dragonborn"
+  include_context "26th level dragonborn"
 end
