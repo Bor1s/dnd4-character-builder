@@ -51,5 +51,10 @@ shared_context "21th level dragonborn" do
     it "has healing_word_regain_dice equal to 5" do
       @char.healing_word_regain_dice.should eq 5
     end
+
+    #Lance of faith power
+    it "has lance_of_faith_hit_dice equal to 2" do
+      @char.lance_of_faith_hit_dice.should eq 2
+    end
 	end
 end

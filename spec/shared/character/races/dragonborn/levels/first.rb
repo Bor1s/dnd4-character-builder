@@ -42,5 +42,10 @@ shared_context "1st level dragonborn" do
       @char.healing_word_regain_dice.should eq 1
     end
 
+    #Lance of faith power
+    it "has lance_of_faith_hit_dice equal to 1" do
+      @char.lance_of_faith_hit_dice.should eq 1
+    end
+
   end
 end

@@ -179,4 +179,22 @@ FactoryGirl.define do
       store_as: :healing_word_regain_dice
     ]
   end
+
+  factory :lance_of_faith_hit_dice_fst_lvl_rule, parent: :rule do
+    name :lance_of_faith_hit_dice_fst_lvl
+    todo Hash[
+      what: "1",
+      if: "{cleric?} and (1...21) === {level}",
+      store_as: :lance_of_faith_hit_dice
+    ]
+  end
+
+  factory :lance_of_faith_hit_dice_twfst_lvl_rule, parent: :rule do
+    name :lance_of_faith_hit_dice_twfst_lvl
+    todo Hash[
+      what: "2",
+      if: "{cleric?} and {level} >= 21",
+      store_as: :lance_of_faith_hit_dice
+    ]
+  end
 end

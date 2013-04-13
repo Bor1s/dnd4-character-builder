@@ -21,7 +21,9 @@ class Templates::Power
   field :hit, type: String
   field :effect, type: String
 
-  field :used, type: Boolean
+  field :used, type: Boolean, default: false #need to show currently used powers on UI
+  field :available, type: Boolean, default: false #need to show all available powers for current character on UI
+  field :available_from_level, type: Integer
 
   module Extensions
     def self.included(base)

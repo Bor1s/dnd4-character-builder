@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :power, class: Templates::Power do
-    used false
 
     factory :at_will do
       power_type :at_will
@@ -31,6 +30,7 @@ FactoryGirl.define do
     attack_type_and_range :personal
     effect "You gain a +1 bonus to your next attack roll or saving throw before the end of your next turn"
     used true
+    available true
   end
 
   factory :turn_undead_power, parent: :encounter do
@@ -44,6 +44,7 @@ FactoryGirl.define do
     hit "{turn_undead_dice_amount}d10 + {wisdom_modifier} radiant damage, and you push the target a number of squares equal to 3 + your {charisma_modifier}. The target is immobilized until the end of your next turn."
     miss "Half damage, and the target is not pushed or immobilized."
     used true
+    available true
   end
 
   factory :healing_word_power, parent: :encounter do
@@ -55,6 +56,22 @@ FactoryGirl.define do
     power_target "You or one ally"
     effect "The target can spend a healing surge and regain an additional {healing_word_regain_dice}d6 + {healing_keyword_bonus} hit points"
     used true
+    available true
+  end
+
+  # Cleric class powers:
+  # Level 1
+
+  factory :lance_of_faith, parent: :at_will do
+    name :lance_of_faith
+    description "A brilliant ray of light sears your foe with golden radiance. Sparkles of light linger around the target, guiding your ally's attack"
+    keywords [:divine, :implement, :radiant]
+    action_type :standard_action
+    attack_type_and_range "ranged 5"
+    power_target "One creature"
+    attack "Wisdom vs. Reflex"
+    hit "{lance_of_faith_hit_dice}d8 + {wisdom_modifier} radiant damage, and one ally you can see gains a +2 power bonus to his or her next attack roll against the target"
+    available_from_level 1
   end
 
 end
