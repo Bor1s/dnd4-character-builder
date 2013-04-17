@@ -37,6 +37,7 @@ class Character
   field :healing_word_burst_squares, type: Integer
   field :healing_word_regain_dice, type: Integer
   field :lance_of_faith_hit_dice, type: Integer
+  field :priests_shield_hit_dice, type: Integer
 
   embeds_many :skills
   embeds_many :languages

@@ -23,7 +23,7 @@ class Templates::Power
 
   field :used, type: Boolean, default: false #need to show currently used powers on UI
   field :available, type: Boolean, default: false #need to show all available powers for current character on UI
-  field :available_from_level, type: Integer
+  field :available_from_level, type: Integer # Need to use in 'decider' which will diced what powers are available to user
 
   module Extensions
     def self.included(base)

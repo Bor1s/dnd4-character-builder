@@ -180,6 +180,8 @@ FactoryGirl.define do
     ]
   end
 
+  # Lance of faith
+
   factory :lance_of_faith_hit_dice_fst_lvl_rule, parent: :rule do
     name :lance_of_faith_hit_dice_fst_lvl
     todo Hash[
@@ -195,6 +197,26 @@ FactoryGirl.define do
       what: "2",
       if: "{cleric?} and {level} >= 21",
       store_as: :lance_of_faith_hit_dice
+    ]
+  end
+
+  # Priests shield
+
+  factory :priests_shield_fst_lvl_rule, parent: :rule do
+    name :priests_shield_fst_lvl_rule
+    todo Hash[
+      what: "1",
+      if: "{cleric?} and (1...21) === {level}",
+      store_as: :priests_shield_hit_dice
+    ]
+  end
+
+  factory :priests_shield_twfst_lvl_rule, parent: :rule do
+    name :priests_shield_twfst_lvl_rule
+    todo Hash[
+      what: "2",
+      if: "{cleric?} and {level} >= 21",
+      store_as: :priests_shield_hit_dice
     ]
   end
 end

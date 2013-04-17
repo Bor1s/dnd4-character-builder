@@ -47,5 +47,10 @@ shared_context "1st level dragonborn" do
       @char.lance_of_faith_hit_dice.should eq 1
     end
 
+    #Priests shield power
+    it "has priests_shield_hit_dice equal to 1" do
+      @char.priests_shield_hit_dice.should eq 1
+    end
+
   end
 end

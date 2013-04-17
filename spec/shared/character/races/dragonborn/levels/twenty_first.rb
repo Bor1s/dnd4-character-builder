@@ -56,5 +56,11 @@ shared_context "21th level dragonborn" do
     it "has lance_of_faith_hit_dice equal to 2" do
       @char.lance_of_faith_hit_dice.should eq 2
     end
+
+    #Priests shield power
+    it "has priests_shield_hit_dice equal to 2" do
+      @char.priests_shield_hit_dice.should eq 2
+      binding.pry
+    end
 	end
 end

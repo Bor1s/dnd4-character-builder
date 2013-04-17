@@ -62,7 +62,7 @@ FactoryGirl.define do
   # Cleric class powers:
   # Level 1
 
-  factory :lance_of_faith, parent: :at_will do
+  factory :lance_of_faith_power, parent: :at_will do
     name :lance_of_faith
     description "A brilliant ray of light sears your foe with golden radiance. Sparkles of light linger around the target, guiding your ally's attack"
     keywords [:divine, :implement, :radiant]
@@ -71,6 +71,18 @@ FactoryGirl.define do
     power_target "One creature"
     attack "Wisdom vs. Reflex"
     hit "{lance_of_faith_hit_dice}d8 + {wisdom_modifier} radiant damage, and one ally you can see gains a +2 power bonus to his or her next attack roll against the target"
+    available_from_level 1
+  end
+
+  factory :priests_shield_power, parent: :at_will do
+    name :priests_shield
+    description "You utter a minor defensive prayer as you attack with your weapon."
+    keywords [:divine, :weapon]
+    action_type :standard_action
+    attack_type_and_range "melee weapon"
+    power_target "One creature"
+    attack "Strength vs. AC"
+    hit "{priests_shield_hit_dice}[W] + Strength modifier damage, and you and one adjacent ally gain a +1 power bonus to AC until the end of your next turn"
     available_from_level 1
   end
 
