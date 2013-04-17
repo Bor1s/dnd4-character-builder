@@ -27,7 +27,7 @@ describe Rest::FeatsController do
       result["feats"].should have(2).items
     end
 
-    it "returns only available feats" do
+    it "returns error if no character found" do
       get :available, { format: :json, character_id: "unexisting ID" }
       result = JSON.parse response.body
       result["success"].should be_false

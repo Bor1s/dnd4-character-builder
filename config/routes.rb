@@ -18,6 +18,10 @@ Dnd4CharacterBuilder::Application.routes.draw do
       resources :feats do
         get "available/:character_id" => "feats#available", on: :collection
       end
+
+      resources :powers do
+        get "available/:character_id" => "powers#available", on: :collection
+      end
     end
   end
 
