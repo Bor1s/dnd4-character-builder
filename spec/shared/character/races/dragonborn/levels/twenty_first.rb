@@ -60,7 +60,6 @@ shared_context "21th level dragonborn" do
     #Priests shield power
     it "has priests_shield_hit_dice equal to 2" do
       @char.priests_shield_hit_dice.should eq 2
-      binding.pry
     end
 	end
 end
