@@ -8,7 +8,6 @@ module RulePoolHelper
     FactoryGirl.factories.map do |fc|
      if fc.name.match(/_rule\z/)
       rule = FactoryGirl.create(fc.name)
-      RuleMapper.store(rule) #caching rules
      end
     end
   end
