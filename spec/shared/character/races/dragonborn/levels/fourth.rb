@@ -17,7 +17,7 @@ shared_context "4th level dragonborn" do
       @char
     end
 
-    it "should have 1 points for upgrading 2 different ability scores" do
+    it "should have 2 points for upgrading different ability scores" do
       @char.ability_scores_upgrade_points.should eq 2
     end
 

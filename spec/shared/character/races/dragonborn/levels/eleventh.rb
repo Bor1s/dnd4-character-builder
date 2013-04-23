@@ -5,7 +5,7 @@ shared_context "11th level dragonborn" do
     end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value (healing_surge_value + constitution_modifier)" do
-      @char.healing_surge_value.should eq 21
+      @char.healing_surge_value.should eq 24
     end
 
     it "should have 8 (included 1 Dragonbreath encounter power and 3 cleric powers) encounter power slots" do
@@ -44,6 +44,30 @@ shared_context "11th level dragonborn" do
 
     it "has healing_word_regain_dice equal to 3" do
       @char.healing_word_regain_dice.should eq 3
+    end
+
+    it "has +1 to strength" do
+      @char.strength.should eq 19
+    end
+
+    it "has +1 to constitution" do
+      @char.constitution.should eq 14
+    end
+
+    it "has +1 to wisdom" do
+      @char.wisdom.should eq 11
+    end
+
+    it "has +1 to charisma" do
+      @char.charisma.should eq 15
+    end
+
+    it "has +1 to dexterity" do
+      @char.dexterity.should eq 15
+    end
+
+    it "has +1 to intelligence" do
+      @char.intelligence.should eq 12
     end
 	end
 end

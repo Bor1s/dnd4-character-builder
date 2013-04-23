@@ -44,7 +44,58 @@ FactoryGirl.define do
     ]
   end
 
-  # +1 to all
-  
+  factory :strength_increasing_eleventhh_level_rule, parent: :rule do
+    name :strength_increasing_eleventhh_level_rule
+    todo Hash[
+      what: "{strength} + 1",
+      store_as: :strength,
+      if: "{level} == 11"
+    ]
+  end
+
+  factory :dexterity_increasing_eleventhh_level_rule, parent: :rule do
+    name :dexterity_increasing_eleventhh_level_rule
+    todo Hash[
+      what: "{dexterity} + 1",
+      store_as: :dexterity,
+      if: "{level} == 11"
+    ]
+  end
+
+  factory :charisma_increasing_eleventhh_level_rule, parent: :rule do
+    name :charisma_increasing_eleventhh_level_rule
+    todo Hash[
+      what: "{charisma} + 1",
+      store_as: :charisma,
+      if: "{level} == 11"
+    ]
+  end
+
+  factory :constitution_increasing_eleventhh_level_rule, parent: :rule do
+    name :constitution_increasing_eleventhh_level_rule
+    todo Hash[
+      what: "{constitution} + 1",
+      store_as: :constitution,
+      if: "{level} == 11"
+    ]
+  end
+
+  factory :wisdom_increasing_eleventhh_level_rule, parent: :rule do
+    name :wisdom_increasing_eleventhh_level_rule
+    todo Hash[
+      what: "{wisdom} + 1",
+      store_as: :wisdom,
+      if: "{level} == 11"
+    ]
+  end
+
+  factory :intelligence_increasing_eleventhh_level_rule, parent: :rule do
+    name :intelligence_increasing_eleventhh_level_rule
+    todo Hash[
+      what: "{intelligence} + 1",
+      store_as: :intelligence,
+      if: "{level} == 11"
+    ]
+  end
 
 end

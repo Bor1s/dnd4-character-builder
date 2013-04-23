@@ -26,6 +26,10 @@ shared_context "1st level dragonborn" do
       @char.intimidate.should eq 2
     end
 
+    it "should have 2 at-will power slots" do
+      @char.atwill_powers_known.should eq 2
+    end
+
     it "should have 5 encounter power slots" do
       @char.encounter_powers_known.should eq 5
     end

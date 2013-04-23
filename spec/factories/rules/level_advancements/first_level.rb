@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :atwills_known_at_first_level_rule, parent: :rule do
     name :atwills_known_at_first_level_rule
     todo Hash[
-      what: "{atwill_powers_known} + 1", 
+      what: "{atwill_powers_known} + 2",
       store_as: :atwill_powers_known,
       if: "{level} == 1"
     ]
