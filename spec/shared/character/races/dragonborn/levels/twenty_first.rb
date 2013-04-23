@@ -5,33 +5,27 @@ shared_context "21th level dragonborn" do
     end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value (healing_surge_value + constitution_modifier)" do
-      pending "Implement"
-      @char.healing_surge_value.should eq 17
+      @char.healing_surge_value.should eq 36
     end
 
-    it "should have 7 (with Dragonbreath encounter power) encounter power slots" do
-      pending "Implement"
-      @char.encounter_powers_known.should eq 7
+    it "should have 8 (with Dragonbreath encounter power) encounter power slots" do
+      @char.encounter_powers_known.should eq 8
     end
 
-    it "should have 2 utility power slot" do
-      pending "Implement"
-      @char.utility_powers_known.should eq 2
+    it "should have 5 utility power slot" do
+      @char.utility_powers_known.should eq 5
     end
 
     it "should have 2 atwill power slots" do
-      pending "Implement"
       @char.atwill_powers_known.should eq 2
     end
 
-    it "should have 2 daily power slot" do
-      pending "Implement"
-      @char.daily_powers_known.should eq 2
+    it "should have 4 daily power slot" do
+      @char.daily_powers_known.should eq 4
     end
 
-    it "should have 5 feat slots" do
-      pending "Implement"
-      @char.feats_known.should eq 5
+    it "should have 13 feat slots" do
+      @char.feats_known.should eq 13
     end
 
     it "has turn_undead_burst_squares equal to 8" do
@@ -60,6 +54,31 @@ shared_context "21th level dragonborn" do
     #Priests shield power
     it "has priests_shield_hit_dice equal to 2" do
       @char.priests_shield_hit_dice.should eq 2
+    end
+
+    #TODO MUST include lower level advancements if character creates higher level from scratch
+    it "has +1 to strength" do
+      @char.strength.should eq 19
+    end
+
+    it "has +1 to constitution" do
+      @char.constitution.should eq 14
+    end
+
+    it "has +1 to wisdom" do
+      @char.wisdom.should eq 11
+    end
+
+    it "has +1 to charisma" do
+      @char.charisma.should eq 15
+    end
+
+    it "has +1 to dexterity" do
+      @char.dexterity.should eq 15
+    end
+
+    it "has +1 to intelligence" do
+      @char.intelligence.should eq 12
     end
 	end
 end
