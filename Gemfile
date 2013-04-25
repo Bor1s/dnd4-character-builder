@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -27,7 +27,7 @@ gem 'therubyracer'
 
 group :test, :development do
   gem 'thin'
-  gem "rspec-rails", "~> 2.4"
+  gem "rspec-rails", "~> 2.12"
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'pry-rails'
