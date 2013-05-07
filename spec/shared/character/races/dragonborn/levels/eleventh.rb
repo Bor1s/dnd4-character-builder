@@ -5,7 +5,7 @@ shared_context "11th level dragonborn" do
     end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value (healing_surge_value + constitution_modifier)" do
-      @char.healing_surge_value.should eq 24
+      @char.healing_surge_value.should eq 22
     end
 
     it "should have 8 (included 1 Dragonbreath encounter power and 3 cleric powers) encounter power slots" do

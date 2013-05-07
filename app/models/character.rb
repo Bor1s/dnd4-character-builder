@@ -56,6 +56,7 @@ class Character
   after_initialize do |char|
     char.feats_attributes = Templates::Feat.all.map { |f| f.attributes.except("_id") } if char.new_record?
     char.powers_attributes = Templates::Power.all.map { |f| f.attributes.except("_id") } if char.new_record?
+    char.skills_attributes = Templates::Skill.all.map { |f| f.attributes.except("_id") } if char.new_record?
   end
   
   #Ability scores

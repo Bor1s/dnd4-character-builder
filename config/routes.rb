@@ -1,5 +1,7 @@
 Dnd4CharacterBuilder::Application.routes.draw do
 
+  root to: "application#index"
+
   namespace :rest do
     constraints format: :json do
       resources :characters

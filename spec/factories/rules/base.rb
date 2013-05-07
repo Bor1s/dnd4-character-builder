@@ -22,7 +22,7 @@ FactoryGirl.define do
     factory :healing_surge_value_rule do
       name :healing_surge_value_rule
       todo Hash[
-        what: "{hit_points} / 4",
+        what: "{hit_points} / 4 + {draconic_heritage_rule}",
         store_as: :healing_surge_value
       ]
     end

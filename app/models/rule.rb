@@ -64,10 +64,11 @@ class Rule
   private
 
   def recalc_related_rules(store_as)
-    #Reprocess for rules that depends on stored value
+    #Reprocess rules that depends on stored value
     _mappings = RuleMapper.where(:name.ne => name, :store_as.ne => store_as, :method_list.in => [store_as, "#{store_as}_modifier".to_sym])
     names = _mappings.to_a.map(&:name)
     _rules = Rule.in(name: names).all
+
     _rules.each do |r|
       r.character = character
       r.process

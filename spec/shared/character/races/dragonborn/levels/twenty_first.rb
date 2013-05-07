@@ -5,7 +5,7 @@ shared_context "21th level dragonborn" do
     end
 
     it "should have 'Draconic Heritage' bonus to healing_surge_value (healing_surge_value + constitution_modifier)" do
-      @char.healing_surge_value.should eq 36
+      @char.healing_surge_value.should eq 34
     end
 
     it "should have 8 (with Dragonbreath encounter power) encounter power slots" do

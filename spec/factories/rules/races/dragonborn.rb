@@ -38,9 +38,8 @@ FactoryGirl.define do
   factory :draconic_heritage_rule, parent: :rule do
     name :draconic_heritage_rule
     todo Hash[
-      what: "{healing_surge_value} + {constitution_modifier}",
-      if: "{dragonborn?}",
-      store_as: :healing_surge_value
+      what: "{constitution_modifier}",
+      if: "{dragonborn?}"
     ]
   end
   

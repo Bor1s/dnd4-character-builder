@@ -8,13 +8,13 @@ FactoryGirl.define do
 
     factory :agile_hunter_template do
       name :agile_hunter
-      prerequisite "Ranger, Dex 15, Hunter’s Quarry class feature"
-      benefit "When you score a critical hit with a melee attack against the target of your Hunter’s Quarry, you can shift as a free action, and the enemy takes a –2 penalty on attack rolls against you until the end of your next turn"
+      prerequisite "Ranger, Dex 15, Hunter's Quarry class feature"
+      benefit "When you score a critical hit with a melee attack against the target of your Hunter's Quarry, you can shift as a free action, and the enemy takes a -2 penalty on attack rolls against you until the end of your next turn"
     end
 
     factory :alterness_template do
       name :alterness
-      benefit "You don’t grant enemies combat advantage during surprise rounds. You also gain a +2 feat bonus to Perception checks"
+      benefit "You don't grant enemies combat advantage during surprise rounds. You also gain a +2 feat bonus to Perception checks"
     end
 
     factory :armor_of_bahamut_template do
