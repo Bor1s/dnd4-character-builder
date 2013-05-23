@@ -29,80 +29,15 @@
         $scope.scoreArray  = data.ability_scores.scores
       $scope._setAbilityScoresValues($scope.scoreArray)
 
-  $scope.changeStr = (value)->
-    _from = parseInt($scope.str)
-    _to   = parseInt($scope.str) + value
+  $scope.changeAs = (value, ng_model)->
+    _from = parseInt($scope[ng_model])
+    _to   = parseInt($scope[ng_model]) + value
     $http.get("rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
       unless data.error
         if value == -1
           $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)
-          $scope.str = $scope.str + value
+          $scope[ng_model] = $scope[ng_model] + value
         else
           unless data.cost > $scope.spendPoints
             $scope.spendPoints = $scope.spendPoints - parseInt(data.cost)
-            $scope.str = $scope.str + value
-  
-  $scope.changeCon = (value)->
-    _from = parseInt($scope.con)
-    _to   = parseInt($scope.con) + value
-    $http.get("rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
-      unless data.error
-        if value == -1
-          $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)
-          $scope.con = $scope.con + value
-        else
-          unless data.cost > $scope.spendPoints
-            $scope.spendPoints = $scope.spendPoints - parseInt(data.cost)
-            $scope.con = $scope.con + value
-
-  $scope.changeDex = (value)->
-    _from = parseInt($scope.dex)
-    _to   = parseInt($scope.dex) + value
-    $http.get("rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
-      unless data.error
-        if value == -1
-          $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)
-          $scope.dex = $scope.dex + value
-        else
-          unless data.cost > $scope.spendPoints
-            $scope.spendPoints = $scope.spendPoints - parseInt(data.cost)
-            $scope.dex = $scope.dex + value
-
-  $scope.changeInt = (value)->
-    _from = parseInt($scope.int)
-    _to   = parseInt($scope.int) + value
-    $http.get("rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
-      unless data.error
-        if value == -1
-          $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)
-          $scope.int = $scope.int + value
-        else
-          unless data.cost > $scope.spendPoints
-            $scope.spendPoints = $scope.spendPoints - parseInt(data.cost)
-            $scope.int = $scope.int + value
-
-  $scope.changeWis = (value)->
-    _from = parseInt($scope.wis)
-    _to   = parseInt($scope.wis) + value
-    $http.get("rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
-      unless data.error
-        if value == -1
-          $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)
-          $scope.wis = $scope.wis + value
-        else
-          unless data.cost > $scope.spendPoints
-            $scope.spendPoints = $scope.spendPoints - parseInt(data.cost)
-            $scope.wis = $scope.wis + value
-
-  $scope.changeCha = (value)->
-    _from = parseInt($scope.cha)
-    _to   = parseInt($scope.cha) + value
-    $http.get("rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
-      unless data.error
-        if value == -1
-          $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)
-          $scope.cha = $scope.cha + value
-        else
-          unless data.cost > $scope.spendPoints
-            $scope.spendPoints = $scope.spendPoints - parseInt(data.cost)
-            $scope.cha = $scope.cha + value
+            $scope[ng_model] = $scope[ng_model] + value

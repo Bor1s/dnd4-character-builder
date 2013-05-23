@@ -4,38 +4,38 @@
 
 <div ng-show="scoreType == 3">
   <div class='box'>
-    <button ng-click='changeStr(1)'>&#x25B2</button>
-    <button ng-click='changeStr(-1)'>&#x25BC</button>
+    <button ng-click='changeAs(1, "str")'>&#x25B2</button>
+    <button ng-click='changeAs(-1, "str")'>&#x25BC</button>
     {{str}} {{abilityScoresNames[0]}}
   </div>
 
   <div class='box'>
-    <button ng-click='changeCon(1)'>&#x25B2</button>
-    <button ng-click='changeCon(-1)'>&#x25BC</button>
+    <button ng-click='changeAs(1, "con")'>&#x25B2</button>
+    <button ng-click='changeAs(-1, "con")'>&#x25BC</button>
     {{con}} {{abilityScoresNames[1]}}
   </div>
 
   <div class='box'>
-    <button ng-click='changeDex(1)'>&#x25B2</button>
-    <button ng-click='changeDex(-1)'>&#x25BC</button>
+    <button ng-click='changeAs(1, "dex")'>&#x25B2</button>
+    <button ng-click='changeAs(-1, "dex")'>&#x25BC</button>
     {{dex}} {{abilityScoresNames[2]}}
   </div>
 
   <div class='box'>
-    <button ng-click='changeInt(1)'>&#x25B2</button>
-    <button ng-click='changeInt(-1)'>&#x25BC</button>
+    <button ng-click='changeAs(1, "int")'>&#x25B2</button>
+    <button ng-click='changeAs(-1, "int")'>&#x25BC</button>
     {{int}} {{abilityScoresNames[3]}}
   </div>
 
   <div class='box'>
-    <button ng-click='changeWis(1)'>&#x25B2</button>
-    <button ng-click='changeWis(-1)'>&#x25BC</button>
+    <button ng-click='changeAs(1, "wis")'>&#x25B2</button>
+    <button ng-click='changeAs(-1, "wis")'>&#x25BC</button>
     {{wis}} {{abilityScoresNames[4]}}
   </div>
 
   <div class='box'>
-    <button ng-click='changeCha(1)'>&#x25B2</button>
-    <button ng-click='changeCha(-1)'>&#x25BC</button>
+    <button ng-click='changeAs(1, "cha")'>&#x25B2</button>
+    <button ng-click='changeAs(-1, "cha")'>&#x25BC</button>
     {{cha}} {{abilityScoresNames[5]}}
   </div>
 
