@@ -1,0 +1,43 @@
+<select ng-model='scoreType' ng-change='generateScores()'>
+  <option ng-repeat='gtype in gtypes' value='{{gtype.id}}'>{{gtype.name}}</option>
+</select>
+
+<div ng-show="scoreType == 3">
+  <div class='box'>
+    <button ng-click='changeStr(1)'>&#x25B2</button>
+    <button ng-click='changeStr(-1)'>&#x25BC</button>
+    {{str}} {{abilityScoresNames[0]}}
+  </div>
+
+  <div class='box'>
+    <button ng-click='changeCon(1)'>&#x25B2</button>
+    <button ng-click='changeCon(-1)'>&#x25BC</button>
+    {{con}} {{abilityScoresNames[1]}}
+  </div>
+
+  <div class='box'>
+    <button ng-click='changeDex(1)'>&#x25B2</button>
+    <button ng-click='changeDex(-1)'>&#x25BC</button>
+    {{dex}} {{abilityScoresNames[2]}}
+  </div>
+
+  <div class='box'>
+    <button ng-click='changeInt(1)'>&#x25B2</button>
+    <button ng-click='changeInt(-1)'>&#x25BC</button>
+    {{int}} {{abilityScoresNames[3]}}
+  </div>
+
+  <div class='box'>
+    <button ng-click='changeWis(1)'>&#x25B2</button>
+    <button ng-click='changeWis(-1)'>&#x25BC</button>
+    {{wis}} {{abilityScoresNames[4]}}
+  </div>
+
+  <div class='box'>
+    <button ng-click='changeCha(1)'>&#x25B2</button>
+    <button ng-click='changeCha(-1)'>&#x25BC</button>
+    {{cha}} {{abilityScoresNames[5]}}
+  </div>
+
+  <div class='circle' ng-show='spendPoints != undefined'><p>{{spendPoints}}</p></div>
+</div>

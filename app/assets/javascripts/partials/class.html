@@ -1,0 +1,6 @@
+<select ng-model='classSelect' ng-change='updateClass()'>
+  <option value=''>-- Select class --</option>
+  <option ng-repeat='class in classes' value='{{class._id}}'>{{class.name}}</option>
+</select>
+
+<a href="#/new_character/ability_scores">Next</a>

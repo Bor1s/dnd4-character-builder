@@ -1,0 +1,6 @@
+<select ng-model='raceSelect' ng-change='updateRace()'>
+  <option value=''>-- Select race --</option>
+  <option ng-repeat='race in races' value='{{race._id}}'>{{race.name}}</option>
+</select>
+
+<a href="#/new_character/class">Next</a>

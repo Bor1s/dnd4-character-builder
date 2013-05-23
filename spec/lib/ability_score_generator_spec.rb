@@ -35,13 +35,13 @@ describe AbilityScoreGenerator do
       subject.score_up_cost(9).should eq 1
       subject.score_up_cost(10).should eq 1
       subject.score_up_cost(11).should eq 1
-      subject.score_up_cost(12).should eq 2
-      subject.score_up_cost(13).should eq 3
-      subject.score_up_cost(14).should eq 5
-      subject.score_up_cost(15).should eq 7
-      subject.score_up_cost(16).should eq 9
-      subject.score_up_cost(17).should eq 12
-      subject.score_up_cost(18).should eq 16
+      subject.score_up_cost(12).should eq 1
+      subject.score_up_cost(13).should eq 1
+      subject.score_up_cost(14).should eq 2
+      subject.score_up_cost(15).should eq 2
+      subject.score_up_cost(16).should eq 2
+      subject.score_up_cost(17).should eq 3
+      subject.score_up_cost(18).should eq 4
       lambda { subject.score_up_cost(100500) }.should raise_exception 
     end
   end

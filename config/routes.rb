@@ -12,6 +12,8 @@ Dnd4CharacterBuilder::Application.routes.draw do
       get 'ability_scores/standard_array'
       get 'ability_scores/custom_ability_scores'
       get 'ability_scores/roll_ability_scores'
+      get 'ability_scores/score_cost/:from/:to' => 'ability_scores#score_cost'
+      get 'ability_scores/names' => 'ability_scores#names'
 
       resources :skills do
         get "trained/:character_id" => "skills#trained", on: :collection

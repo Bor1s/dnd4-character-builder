@@ -42,19 +42,31 @@ class AbilityScoreGenerator
     # @params [Integer] Score value to get it's upgrading cost.
     # @return [Integer] Score cost value
     def score_up_cost(score)
+      #NOTE numbers were taken from Character Build Desktop
       case score
-        when (8..11) then 1
-        when 12 then 2
-        when 13 then 3
-        when 14 then 5
-        when 15 then 7
-        when 16 then 9
-        when 17 then 12
-        when 18 then 16
+        when (8..13) then 1
+        when (14..16) then 2
+        when 17 then 3
+        when 18 then 4
         else
-          raise "No such score in table!"
+          raise ScoreValueError, "No such score in table!"
+      end
+    end
+
+    def spend_points_transition_calc(from_score, to_score)
+      if to_score > from_score
+        #Increasing score
+        raise ScoreValueError, "No such score in table!" if to_score > 18
+        score_up_cost(to_score)
+      else
+        #Decreasing score
+        raise ScoreValueError, "No such score in table!" if to_score < 8
+        score_up_cost(from_score)
       end
     end
 
   end
+
+
+  class ScoreValueError < StandardError; end
 end
