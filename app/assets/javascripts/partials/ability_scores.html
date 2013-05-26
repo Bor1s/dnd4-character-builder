@@ -1,43 +1,97 @@
-<select ng-model='scoreType' ng-change='generateScores()'>
-  <option ng-repeat='gtype in gtypes' value='{{gtype.id}}'>{{gtype.name}}</option>
-</select>
-
-<div ng-show="scoreType == 3">
-  <div class='box'>
-    <button ng-click='changeAs(1, "str")'>&#x25B2</button>
-    <button ng-click='changeAs(-1, "str")'>&#x25BC</button>
-    {{str}} {{abilityScoresNames[0]}}
-  </div>
-
-  <div class='box'>
-    <button ng-click='changeAs(1, "con")'>&#x25B2</button>
-    <button ng-click='changeAs(-1, "con")'>&#x25BC</button>
-    {{con}} {{abilityScoresNames[1]}}
-  </div>
-
-  <div class='box'>
-    <button ng-click='changeAs(1, "dex")'>&#x25B2</button>
-    <button ng-click='changeAs(-1, "dex")'>&#x25BC</button>
-    {{dex}} {{abilityScoresNames[2]}}
-  </div>
-
-  <div class='box'>
-    <button ng-click='changeAs(1, "int")'>&#x25B2</button>
-    <button ng-click='changeAs(-1, "int")'>&#x25BC</button>
-    {{int}} {{abilityScoresNames[3]}}
-  </div>
-
-  <div class='box'>
-    <button ng-click='changeAs(1, "wis")'>&#x25B2</button>
-    <button ng-click='changeAs(-1, "wis")'>&#x25BC</button>
-    {{wis}} {{abilityScoresNames[4]}}
-  </div>
-
-  <div class='box'>
-    <button ng-click='changeAs(1, "cha")'>&#x25B2</button>
-    <button ng-click='changeAs(-1, "cha")'>&#x25BC</button>
-    {{cha}} {{abilityScoresNames[5]}}
-  </div>
-
-  <div class='circle' ng-show='spendPoints != undefined'><p>{{spendPoints}}</p></div>
+<div class='select-ability-scores'>
+  <select ng-model='scoreType' ng-change='generateScores()'>
+    <option ng-repeat='gtype in gtypes' value='{{gtype.id}}'>{{gtype.name}}</option>
+  </select>
 </div>
+
+<div class='ability-score-names'>
+  <div>
+    {{abilityScoresNames[0]}}
+  </div>
+
+  <div>
+    {{abilityScoresNames[1]}}
+  </div>
+
+  <div>
+    {{abilityScoresNames[2]}}
+  </div>
+
+  <div>
+    {{abilityScoresNames[3]}}
+  </div>
+
+  <div>
+    {{abilityScoresNames[4]}}
+  </div>
+
+  <div>
+    {{abilityScoresNames[5]}}
+  </div>
+</div>
+
+<div class='current-ability-scores'>
+  <div>
+    {{str}}
+  </div>
+
+  <div>
+    {{con}}
+  </div>
+
+  <div>
+    {{dex}}
+  </div>
+
+  <div>
+    {{int}}
+  </div>
+
+  <div>
+    {{wis}}
+  </div>
+
+  <div>
+    {{cha}}
+  </div>
+</div>
+
+<div class='inc-dec' ng-show="scoreType == 3">
+  <div>
+    <div ng-click='changeAs(1, "str")'>+</div>
+    <div ng-click='changeAs(-1, "str")'>-</div>
+  </div>
+
+  <div>
+    <div ng-click='changeAs(1, "con")'>+</div>
+    <div ng-click='changeAs(-1, "con")'>-</div>
+  </div>
+
+  <div>
+    <div ng-click='changeAs(1, "dex")'>+</div>
+    <div ng-click='changeAs(-1, "dex")'>-</div>
+  </div>
+
+  <div>
+    <div ng-click='changeAs(1, "int")'>+</div>
+    <div ng-click='changeAs(-1, "int")'>-</div>
+  </div>
+
+  <div>
+    <div ng-click='changeAs(1, "wis")'>+</div>
+    <div ng-click='changeAs(-1, "wis")'>-</div>
+  </div>
+
+  <div>
+    <div ng-click='changeAs(1, "cha")'>+</div>
+    <div ng-click='changeAs(-1, "cha")'>-</div>
+  </div>
+</div>
+
+<div class='points-left' ng-show='spendPoints != undefined && scoreType == 3'>{{spendPoints}}</div>
+
+<button ng-click='updateAbilityScores()'>Save ability scores</button>
+
+<hr/ >
+<a href="#/new_character/class">Next</a>
+

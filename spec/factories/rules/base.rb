@@ -68,6 +68,7 @@ FactoryGirl.define do
         store_as: :armor_class,
         if: "{has_lightweight_armor?}"
       ]
+      one_off true
     end
 
     #factory :heavy_ac_rule do

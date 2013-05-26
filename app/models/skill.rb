@@ -3,7 +3,7 @@ class Skill
   embedded_in :character
 
   field :name, type: String
-  field :value, type: Integer, default: 0
+  field :value, type: Integer
   field :trained, type: Boolean, default: false
   field :keyword, type: String
 

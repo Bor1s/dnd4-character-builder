@@ -30,4 +30,11 @@ FactoryGirl.define do
       if: "{level} == 1"
     ]
   end
+
+  factory :faulty_rule, parent: :rule do
+    name :faulty_rule
+    todo Hash[
+      what: "nil + 2"
+    ]
+  end
 end

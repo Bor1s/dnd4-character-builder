@@ -1,26 +1,35 @@
-.box {
-  display: block;
-  font-size: 1.5em;
-  span {
-    font-size: 0.5em;
+@mixin box {
+  border: 1px solid black;
+}
+
+.select-ability-scores {
+  height: 50px;
+}
+
+.current-ability-scores, .ability-score-names {
+  display: inline-block;
+  div {
+    @include box;
+  }
+}
+
+.inc-dec {
+  display: inline-block;
+  div {
+    div {
+      @include box;
+      display: inline-block;
+    }
   }
 }
 
 .box-inline {
   display: inline-block;
-  font-size: 1.5em;
 }
 
-.circle {
-  display: block;
-  width: 5em;
-  height: 5em;
-  border: 2px solid black;
-  -webkit-border-radius: 4.5em;
-
-  p {
-    text-align: center;
-    font-size: 1.5em;
-    margin-top: 1.1em;
-  }
+.points-left {
+  margin-top: 10px;
+  border: 1px solid red;
+  width: 3em;
+  text-align: center;
 }

@@ -44,7 +44,7 @@ RSpec.configure do |config|
      Language, Templates::Skill,
      Templates::Klass, Templates::Language,
      Templates::Race, Templates::Feat,
-     Templates::Power].each do |klass|
+     Templates::Power, OneOffRulesFlag].each do |klass|
       klass.delete_all
     end
 

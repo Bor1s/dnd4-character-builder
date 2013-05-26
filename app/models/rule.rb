@@ -4,11 +4,12 @@ class Rule
 
   field :todo, type: Hash
   field :name, type: String
+  field :one_off, type: Boolean, default: false
 
   def process
     raise EmptyRuleException, "Rule #{self.inspect} has empty :todo field!" unless todo
     RuleMapper.store(self)
-    parse(todo) 
+    parse(todo)
   end
 
   protected
@@ -20,21 +21,20 @@ class Rule
     what = normalize(hash[:what])
     store_as = hash[:store_as]
 
-    result = nil
-
     if hash[:if].present?
       condition = normalize(hash[:if])
-      if !!eval(condition)
-        result = eval(what)
-      else
-        raise ConditionFailed
-      end
-    else
+      raise ConditionFailed unless !!eval(condition)
+    end
+    
+    begin
       result = eval(what)
+    rescue SyntaxError, StandardError => e
+      raise FaultyRule
     end
 
     if store_as
       raise NoStorageForRuleResultException, "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
+      handle_one_offs
       character.method("#{store_as}=").call(result)
       recalc_related_rules(store_as)
     else
@@ -55,7 +55,7 @@ class Rule
         if meth.to_s.ends_with?("?") #Check for boolean method (to return explicit true/false)
           character.method(meth).call
         else
-          character.method(meth).call || 0
+          character.method(meth).call || 'foobar'
         end
       end
     end
@@ -75,10 +75,25 @@ class Rule
     end unless _rules.empty?
   end
 
+  def handle_one_offs
+    if self.one_off?
+      if character.one_off_rules_flags.where(rule_id: self.id, level: character.level).exists?
+        raise OneOffRepeatCall, "Attempt to call '#{self.name}' more then once!"
+      else
+        #TODO add :stage field to know on which stage rule hah been added and then easily remove it
+        #from OneOffRulesFlags if user wants to recreate race, class, ability scores etc.
+        character.one_off_rules_flags.create(rule_id: self.id, level: character.level)
+      end
+    end
+  end
+
+
   class RuleNotFoundException < StandardError; end
   class NoStorageForRuleResultException < StandardError; end
   class NoCharacterFieldFound < StandardError; end
   class NoCharacterProvidedException < StandardError; end
   class ConditionFailed < StandardError; end
   class EmptyRuleException < StandardError; end
+  class OneOffRepeatCall < StandardError; end
+  class FaultyRule < StandardError; end
 end

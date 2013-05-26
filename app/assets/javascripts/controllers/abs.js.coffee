@@ -41,3 +41,15 @@
           unless data.cost > $scope.spendPoints
             $scope.spendPoints = $scope.spendPoints - parseInt(data.cost)
             $scope[ng_model] = $scope[ng_model] + value
+
+  $scope.updateAbilityScores = ()->
+    Character.update(
+      id: currentCharacter._id
+      character:
+        strength: $scope.str
+        dexterity: $scope.dex
+        constitution: $scope.con
+        charisma: $scope.cha
+        intelligence: $scope.int
+        wisdom: $scope.wis
+    )

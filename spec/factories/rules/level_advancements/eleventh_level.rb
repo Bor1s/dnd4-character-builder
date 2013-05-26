@@ -2,46 +2,51 @@ FactoryGirl.define do
   factory :utilities_known_at_eleventh_level_rule, parent: :rule do
     name :utilities_known_at_eleventh_level_rule
     todo Hash[
-      what: "{utility_powers_known} + 3", 
+      what: "3",
       store_as: :utility_powers_known,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :feats_known_at_eleventh_level_rule, parent: :rule do
     name :feats_known_at_eleventh_level_rule
     todo Hash[
-      what: "{feats_known} + 7", 
+      what: "7",
       store_as: :feats_known,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :atwills_known_at_eleventh_level_rule, parent: :rule do
     name :atwills_known_at_eleventh_level_rule
     todo Hash[
-      what: "{atwill_powers_known} + 2", 
+      what: "2",
       store_as: :atwill_powers_known,
       if: "{level} == 11"
     ]
+    one_off true
   end
   
   factory :encounters_known_at_eleventh_level_rule, parent: :rule do
     name :encounters_known_at_eleventh_level_rule
     todo Hash[
-      what: "{encounter_powers_known} + 4", 
+      what: "{cleric_encounter_powers_known_rule} + {dragon_breath_rule} + 4",
       store_as: :encounter_powers_known,
       if: "{level} == 11"
     ]
+    one_off true
   end
   
   factory :dailies_known_at_eleventh_level_rule, parent: :rule do
     name :dailies_known_at_eleventh_level_rule
     todo Hash[
-      what: "{daily_powers_known} + 3", 
+      what: "3",
       store_as: :daily_powers_known,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :strength_increasing_eleventhh_level_rule, parent: :rule do
@@ -51,6 +56,7 @@ FactoryGirl.define do
       store_as: :strength,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :dexterity_increasing_eleventhh_level_rule, parent: :rule do
@@ -60,6 +66,7 @@ FactoryGirl.define do
       store_as: :dexterity,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :charisma_increasing_eleventhh_level_rule, parent: :rule do
@@ -69,6 +76,7 @@ FactoryGirl.define do
       store_as: :charisma,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :constitution_increasing_eleventhh_level_rule, parent: :rule do
@@ -78,6 +86,7 @@ FactoryGirl.define do
       store_as: :constitution,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :wisdom_increasing_eleventhh_level_rule, parent: :rule do
@@ -87,6 +96,7 @@ FactoryGirl.define do
       store_as: :wisdom,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
   factory :intelligence_increasing_eleventhh_level_rule, parent: :rule do
@@ -96,6 +106,7 @@ FactoryGirl.define do
       store_as: :intelligence,
       if: "{level} == 11"
     ]
+    one_off true
   end
 
 end

@@ -33,6 +33,12 @@ describe Rule do
       expect { rule.process }.to raise_exception(Rule::NoCharacterProvidedException)
     end
 
+    it 'should raise FaultyRule if :what fails to be evaled' do
+      rule = Rule.where(name: "faulty_rule").first
+      rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)
+      expect { rule.process }.to raise_exception(Rule::FaultyRule)
+    end
+
     it "should be success for simple rule" do
       rule = Rule.where(name: "simple_rule_abstract").first
       rule.character = FactoryGirl.create(:character, level: 1, expirience: 1)

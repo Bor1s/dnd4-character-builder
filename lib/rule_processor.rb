@@ -18,7 +18,7 @@ class RuleProcessor
       begin
         rule.process
         logger.info "Rule #{rule.name}: #{rule.attributes.to_yaml} \n #{'-'*20}"
-      rescue Rule::ConditionFailed => e
+      rescue Rule::FaultyRule, Rule::ConditionFailed, Rule::OneOffRepeatCall, StandardError => e
       end
     end
 

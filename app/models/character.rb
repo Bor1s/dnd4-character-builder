@@ -45,6 +45,7 @@ class Character
   embeds_many :powers
   embeds_one  :character_class, class_name: "CharacterClass" #Avoid CharacterClas bug
   embeds_one  :character_race
+  has_many :one_off_rules_flags, dependent: :destroy
 
   accepts_nested_attributes_for :character_race
   accepts_nested_attributes_for :character_class
