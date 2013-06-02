@@ -81,7 +81,7 @@ class Rule
         raise OneOffRepeatCall, "Attempt to call '#{self.name}' more then once!"
       else
         #TODO add :stage field to know on which stage rule hah been added and then easily remove it
-        #from OneOffRulesFlags if user wants to recreate race, class, ability scores etc.
+        #from OneOffRulesFlags if user wants to recreate race, class, ability scores etc. Write specs!!!
         character.one_off_rules_flags.create(rule_id: self.id, level: character.level)
       end
     end

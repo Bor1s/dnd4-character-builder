@@ -17,6 +17,7 @@ class Rest::AbilityScoresController < ApplicationController
   end
 
   def score_cost
+    #TODO write specs
     from_score = params[:from].to_i
     to_score = params[:to].to_i
     begin

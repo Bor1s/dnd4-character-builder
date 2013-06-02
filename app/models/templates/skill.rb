@@ -4,6 +4,7 @@ class Templates::Skill
   field :name, type: String
   field :description, type: String
   field :keyword, type: String
+  field :value, type: Integer
 
   module Extensions
     [:acrobatics, :arcana, :athletics, :bluff,

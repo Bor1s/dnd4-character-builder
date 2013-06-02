@@ -45,6 +45,7 @@ FactoryGirl.define do
     factory :history_template do
       name "History"
       keyword :history
+      value 0
     end
 
     factory :insight_template do
@@ -55,6 +56,7 @@ FactoryGirl.define do
     factory :intimidate_template do
       name "Intimidate"
       keyword :intimidate
+      value 0
     end
 
     factory :nature_template do
