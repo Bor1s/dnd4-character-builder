@@ -1,7 +1,7 @@
 # --- Character powers: at_will, encounter, daily (utilities and attacks)
 
 FactoryGirl.define do
-  factory :power, class: Templates::Power do
+  factory :power do
 
     factory :at_will do
       power_type :at_will

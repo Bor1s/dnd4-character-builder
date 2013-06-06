@@ -1,7 +1,7 @@
-class CharacterRace
+class Race
   include Mongoid::Document
 
-  embedded_in :character
+  has_many :characters
 
   field :size, type: String
   field :vision, type: String

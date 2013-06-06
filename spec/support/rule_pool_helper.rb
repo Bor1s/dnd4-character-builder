@@ -11,44 +11,44 @@ module RulePoolHelper
   end
 
   def prepare_character_races
-    FactoryGirl.create(:dragonborn_template)
+    FactoryGirl.create(:dragonborn)
   end
 
   def prepare_character_classes
-    FactoryGirl.create(:cleric_template)
+    FactoryGirl.create(:cleric)
   end
 
   def prepare_skills
-    FactoryGirl.create(:acrobatics_template)
-    FactoryGirl.create(:arcana_template)
-    FactoryGirl.create(:athletics_template)
-    FactoryGirl.create(:bluff_template)
-    FactoryGirl.create(:diplomacy_template)
-    FactoryGirl.create(:dungeoneering_template)
-    FactoryGirl.create(:endurance_template)
-    FactoryGirl.create(:heal_template)
-    FactoryGirl.create(:history_template)
-    FactoryGirl.create(:insight_template)
-    FactoryGirl.create(:intimidate_template)
-    FactoryGirl.create(:nature_template)
-    FactoryGirl.create(:perception_template)
-    FactoryGirl.create(:religion_template)
-    FactoryGirl.create(:stealth_template)
-    FactoryGirl.create(:streetwise_template)
-    FactoryGirl.create(:thievery_template)
+    FactoryGirl.create(:acrobatics)
+    FactoryGirl.create(:arcana)
+    FactoryGirl.create(:athletics)
+    FactoryGirl.create(:bluff)
+    FactoryGirl.create(:diplomacy)
+    FactoryGirl.create(:dungeoneering)
+    FactoryGirl.create(:endurance)
+    FactoryGirl.create(:heal)
+    FactoryGirl.create(:history)
+    FactoryGirl.create(:insight)
+    FactoryGirl.create(:intimidate)
+    FactoryGirl.create(:nature)
+    FactoryGirl.create(:perception)
+    FactoryGirl.create(:religion)
+    FactoryGirl.create(:stealth)
+    FactoryGirl.create(:streetwise)
+    FactoryGirl.create(:thievery)
   end
 
   def prepare_languages
-    FactoryGirl.create(:common_language_template)
-    FactoryGirl.create(:draconic_language_template)
+    FactoryGirl.create(:common_language)
+    FactoryGirl.create(:draconic_language)
   end
 
   def prepare_feats
-    FactoryGirl.create(:action_surge_template)
-    FactoryGirl.create(:agile_hunter_template)
-    FactoryGirl.create(:alterness_template)
-    FactoryGirl.create(:armor_of_bahamut_template)
-    FactoryGirl.create(:chainmail_armor_proficiency_template)
+    FactoryGirl.create(:action_surge)
+    FactoryGirl.create(:agile_hunter)
+    FactoryGirl.create(:alterness)
+    FactoryGirl.create(:armor_of_bahamut)
+    FactoryGirl.create(:chainmail_armor_proficiency)
   end
 
   def prepare_powers

@@ -25,9 +25,19 @@ class Power
   field :available, type: Boolean, default: false #need to show all available powers for current character on UI
   field :available_from_level, type: Integer # Need to use in 'decider' which will diced what powers are available to user
 
-  embedded_in :character
-
   scope :available, ->(lvl) do
     any_of({available: true}, {:available_from_level.gte => lvl})
+  end
+
+  module Extensions
+    def self.included(base)
+      base.extend(Extensions::ClassMethods)
+    end
+
+    module ClassMethods
+      def power_names
+        Power.all.map(&:name)
+      end
+    end
   end
 end

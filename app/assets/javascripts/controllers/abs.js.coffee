@@ -1,12 +1,12 @@
 @AbsCtrl = ($scope, $http, Character) ->
-  $http.get('rest/ability_scores/names').success (data)->
+  $http.get('/rest/ability_scores/names').success (data)->
     $scope.abilityScoresNames = data
 
   $scope.gtypes =
     [
-      { id: 1, name: "Standard Array", url: "rest/ability_scores/standard_array" },
-      { id: 2, name: "Random", url: "rest/ability_scores/roll_ability_scores" },
-      { id: 3, name: "Custom", url: "rest/ability_scores/custom_ability_scores" }
+      { id: 1, name: "Standard Array", url: "/rest/ability_scores/standard_array" },
+      { id: 2, name: "Random", url: "/rest/ability_scores/roll_ability_scores" },
+      { id: 3, name: "Custom", url: "/rest/ability_scores/custom_ability_scores" }
     ]
 
   $scope._setAbilityScoresValues = (scores)->
@@ -32,7 +32,7 @@
   $scope.changeAs = (value, ng_model)->
     _from = parseInt($scope[ng_model])
     _to   = parseInt($scope[ng_model]) + value
-    $http.get("rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
+    $http.get("/rest/ability_scores/score_cost/" + _from + "/" + _to).success (data) ->
       unless data.error
         if value == -1
           $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)

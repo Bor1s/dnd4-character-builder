@@ -57,12 +57,12 @@ describe Rest::CharactersController do
 
   context "#update" do
     let(:character) { Character.create! }
-    #All skills MUST be always present in JSON 
+    #NOTE All skills MUST be always present in JSON 
     let(:character_params) do
       {
         level: 1,
-        character_race_attributes: FactoryGirl.attributes_for(:dragonborn_template),
-        character_class_attributes: FactoryGirl.attributes_for(:cleric_template),
+        character_race_attributes: FactoryGirl.attributes_for(:dragonborn),
+        character_class_attributes: FactoryGirl.attributes_for(:cleric),
         skills_attributes: [
           {name: "Religion", keyword: "religion", trained: true, value: 7},
           {name: "Acrobatics", keyword: "acrobatics", value: 0},
@@ -93,6 +93,14 @@ describe Rest::CharactersController do
 
     it "returns success" do
       put :update, { id: character.id, character: character_params }
+      body = JSON.parse(response.body)
+      body.should include("success", "character")
+      body["success"].should be_true
+      body["character"].should be
+    end
+    
+    it "returns success and rules marked by current stage" do
+      put :update, { id: character.id, character: character_params, metadata: { stage: 1 } }
       body = JSON.parse(response.body)
       body.should include("success", "character")
       body["success"].should be_true

@@ -1,7 +1,7 @@
 class Rest::ClassesController < Rest::BaseController
 
   def index
-    klasses = Templates::Klass.all   
-    render json: klasses
+    classes = CharacterClass.all   
+    render json: classes
   end
 end

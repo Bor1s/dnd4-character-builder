@@ -41,10 +41,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     [Character, Rule, RuleMapper, Power, Feat,
-     Language, Templates::Skill,
-     Templates::Klass, Templates::Language,
-     Templates::Race, Templates::Feat,
-     Templates::Power, OneOffRulesFlag].each do |klass|
+     Language, OneOffRulesFlag].each do |klass|
       klass.delete_all
     end
 

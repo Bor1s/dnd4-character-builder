@@ -1,8 +1,6 @@
 class CharacterClass
   include Mongoid::Document
 
-  embedded_in :character
-
   field :name, type: String
   field :healing_surge_value, type: Integer
   field :hit_points_at_first_level, type: Integer
@@ -14,8 +12,4 @@ class CharacterClass
   field :weapon_proficiencies, type: Array
   field :implement, type: String
   field :features, type: Array
-
-  def mandatory_skills
-    Templates::Skill.in(keyword: mandatory_trained_skills).to_a
-  end
 end

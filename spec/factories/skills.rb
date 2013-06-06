@@ -1,7 +1,7 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :skill do
+    #TODO add description
+
     factory :acrobatics do
       name "Acrobatics"
       keyword :acrobatics
@@ -45,6 +45,7 @@ FactoryGirl.define do
     factory :history do
       name "History"
       keyword :history
+      value 0
     end
 
     factory :insight do
@@ -55,6 +56,7 @@ FactoryGirl.define do
     factory :intimidate do
       name "Intimidate"
       keyword :intimidate
+      value 0
     end
 
     factory :nature do

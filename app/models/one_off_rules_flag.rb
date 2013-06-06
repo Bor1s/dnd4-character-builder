@@ -6,4 +6,5 @@ class OneOffRulesFlag
   field :character_id
   field :rule_id
   field :level, type: Integer
+  field :stage, type: Integer
 end
