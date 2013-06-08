@@ -6,17 +6,17 @@ FactoryGirl.define do
       store_as: :atwill_powers_known,
       if: "{level} == 1"
     ]
-    one_off true
+    stage 1
   end
   
   factory :encounters_known_at_first_level_rule, parent: :rule do
     name :encounters_known_at_first_level_rule
     todo Hash[
-      what: "1 + {cleric_encounter_powers_known_rule} + {dragon_breath_rule}",
+      what: "1",
       store_as: :encounter_powers_known,
       if: "{level} == 1"
     ]
-    one_off true
+    stage 1
   end
   
   factory :dailies_known_at_first_level_rule, parent: :rule do
@@ -26,7 +26,7 @@ FactoryGirl.define do
       store_as: :daily_powers_known,
       if: "{level} == 1"
     ]
-    one_off true
+    stage 1
   end
 
   factory :feats_known_at_first_level_rule, parent: :rule do
@@ -36,7 +36,7 @@ FactoryGirl.define do
       store_as: :feats_known,
       if: "{level} == 1"
     ]
-    one_off true
+    stage 1
   end
 
 end

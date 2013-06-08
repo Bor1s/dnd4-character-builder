@@ -1,7 +1,7 @@
 class Rest::LanguagesController < Rest::BaseController
 
   def index
-    langs = Templates::Language.all
+    langs = Language.all
     unless langs.empty?
       result = { success: true, languages: langs }
     else

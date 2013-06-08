@@ -5,41 +5,30 @@ class Rule
   field :todo, type: Hash
   field :name, type: String
   field :one_off, type: Boolean, default: false
+  field :stage, type: Integer
+
+  scope :staged, ->(_stage) { where(stage: _stage) }
 
   def process
+    raise NoCharacterProvidedException, "No character instance provided!" unless character
     raise EmptyRuleException, "Rule #{self.inspect} has empty :todo field!" unless todo
     RuleMapper.store(self)
-    parse(todo)
+    parse(todo.with_indifferent_access, revert_mode: false)
   end
 
-  protected
+  def revert
+    parse(todo.with_indifferent_access, revert_mode: true)
+  end
 
-  def parse(rule_hash)
-    hash = rule_hash.with_indifferent_access
-    raise NoCharacterProvidedException, "No character instance provided!" unless character
+  private
 
-    what = normalize(hash[:what])
-    store_as = hash[:store_as]
+  def parse(rule_hash, revert_mode: false)
+    handle_rule_condition(rule_hash)
+    handle_rule_storage(rule_hash, revert_mode: revert_mode)
+  end
 
-    if hash[:if].present?
-      condition = normalize(hash[:if])
-      raise ConditionFailed unless !!eval(condition)
-    end
-    
-    begin
-      result = eval(what)
-    rescue SyntaxError, StandardError => e
-      raise FaultyRule
-    end
-
-    if store_as
-      raise NoStorageForRuleResultException, "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
-      handle_one_offs
-      character.method("#{store_as}=").call(result)
-      recalc_related_rules(store_as)
-    else
-      result
-    end
+  def foobar
+    raise 'foobar'
   end
 
   def normalize(str)
@@ -52,7 +41,8 @@ class Rule
         rule.process
       else
         raise NoCharacterFieldFound, "No field :#{meth} in Character found! Define it to use in Rules." unless character.respond_to? meth 
-        if meth.to_s.ends_with?("?") #Check for boolean method (to return explicit true/false)
+        #Check for boolean method (to return explicit true/false)
+        if meth.to_s.ends_with?("?")
           character.method(meth).call
         else
           character.method(meth).call || 'foobar'
@@ -61,35 +51,47 @@ class Rule
     end
   end
 
-  private
+  def handle_rule_condition(rule_hash)
+    if rule_hash[:if].present?
+      raise ConditionFailed unless !!eval(normalize(rule_hash[:if]))
+    end
+  end
+
+  def handle_rule_body(rule_hash)
+    begin
+      eval(normalize(rule_hash[:what]))
+    rescue SyntaxError, StandardError => e
+      raise FaultyRule
+    end
+  end
+
+  def handle_rule_storage(rule_hash, revert_mode: false)
+    core = handle_rule_body(rule_hash)
+    store_as = rule_hash[:store_as]
+    if store_as
+      raise NoStorageException , "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
+      return character.method("#{store_as}=").call(character.send(store_as.to_sym) - core) if revert_mode
+      character.method("#{store_as}=").call(core)
+      recalc_related_rules(store_as)
+    else
+      core
+    end
+  end
 
   def recalc_related_rules(store_as)
     #Reprocess rules that depends on stored value
-    _mappings = RuleMapper.where(:name.ne => name, :store_as.ne => store_as, :method_list.in => [store_as, "#{store_as}_modifier".to_sym])
+    _mappings = RuleMapper.where(:name.ne => name, :store_as.ne => store_as,
+                                 :method_list.in => [store_as, "#{store_as}_modifier".to_sym])
     names = _mappings.to_a.map(&:name)
     _rules = Rule.in(name: names).all
-
     _rules.each do |r|
       r.character = character
       r.process
     end unless _rules.empty?
   end
 
-  def handle_one_offs
-    if self.one_off?
-      if character.one_off_rules_flags.where(rule_id: self.id, level: character.level).exists?
-        raise OneOffRepeatCall, "Attempt to call '#{self.name}' more then once!"
-      else
-        #TODO add :stage field to know on which stage rule hah been added and then easily remove it
-        #from OneOffRulesFlags if user wants to recreate race, class, ability scores etc. Write specs!!!
-        character.one_off_rules_flags.create(rule_id: self.id, level: character.level)
-      end
-    end
-  end
-
-
   class RuleNotFoundException < StandardError; end
-  class NoStorageForRuleResultException < StandardError; end
+  class NoStorageException < StandardError; end
   class NoCharacterFieldFound < StandardError; end
   class NoCharacterProvidedException < StandardError; end
   class ConditionFailed < StandardError; end

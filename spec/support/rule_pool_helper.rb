@@ -58,8 +58,13 @@ module RulePoolHelper
     end
   end
 
-  def build_character(options = {})
-    character = FactoryGirl.create(options[:type], level: options[:level])
+  def build_character(type: nil, level: 1, stage: :all)
+    if type
+      character = FactoryGirl.create(type, level: level)
+    else
+      character = Character.new(level: level)
+    end
+
     ability_scores = AbilityScoreGenerator.standard_array
     character.strength = ability_scores.shift
     character.dexterity = ability_scores.shift
@@ -67,10 +72,8 @@ module RulePoolHelper
     character.charisma = ability_scores.shift
     character.intelligence = ability_scores.shift
     character.wisdom = ability_scores.shift
-    character.stub(:constitution_increased? => false)
-    character.stub(:constitution_increased_to_even? => false)
 
-    RuleProcessor.new(character).process
+    RuleProcessor.new(character).process(stage)
     character
   end
 end

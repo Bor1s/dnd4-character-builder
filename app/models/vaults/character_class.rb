@@ -1,6 +1,6 @@
 module Vaults::CharacterClass
-  def self.included?(base)
-    base.class.class_exec do
+  def self.included(base)
+    base.class_exec do
       [:cleric, :human].each do |race_name|
         define_method("#{race_name}?") do
           character_class.try(:name).try(:downcase) == race_name.to_s

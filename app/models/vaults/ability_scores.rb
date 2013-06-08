@@ -1,6 +1,6 @@
 module Vaults::AbilityScores
-  def self.included?(base)
-    base.class.class_exec do
+  def self.included(base)
+    base.class_exec do
       field :strength, type: Integer
       field :dexterity, type: Integer
       field :constitution, type: Integer
