@@ -1,8 +1,5 @@
 FactoryGirl.define do
-  factory :race do
-  end
-
-  factory :dragonborn, parent: :race do
+  factory :dragonborn_race, class: Race  do
     name "Dragonborn"
     description "Proud, honorable warriors, born from the blood of an ancient dragon god"
     size "medium"
@@ -10,7 +7,7 @@ FactoryGirl.define do
     speed 6
   end
 
-  factory :dwarf, parent: :race do
+  factory :dwarf_race, class: Race do
     name "Dwarf"
     description "Masters of stone and iron, dauntless and unyielding in the face of adversity"
     size "medium"

@@ -35,15 +35,15 @@ class Rest::CharactersController < Rest::BaseController
     if character
       character.attributes = params[:character]
       begin
-        RuleProcessor.new(character).process
+        RuleProcessor.new(character).revert(params[:stage])
+        RuleProcessor.new(character).process(params[:stage])
         character.save!
-        #TODO implements some convinient way to handle such kind of exceptions
         result = { success: true, character: character }
       rescue => e
         result = { success: false, error: e.message }
       end
     else
-      result = { success: false, error: "No character with id = #{params[:id]} found!" }
+      result = { success: false, error: "No character with ID=#{params[:id]} found!" }
     end
 
     render json: result

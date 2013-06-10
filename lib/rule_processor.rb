@@ -50,7 +50,9 @@ class RuleProcessor
         end
         logger.info "Rule #{rule.name}: #{rule.attributes.to_yaml} \n #{'-'*20}"
       rescue Rule::FaultyRule, Rule::ConditionFailed, StandardError => e
-        puts e.message, e.backtrace
+        Rails.logger.warn '=== '
+        Rails.logger.warn e.message
+        Rails.logger.warn e.backtrace.first
       end
     end
   end

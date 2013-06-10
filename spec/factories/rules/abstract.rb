@@ -25,7 +25,7 @@ FactoryGirl.define do
   factory :test_character_expirience_rule_abstract, parent: :rule do
     name :test_character_expirience_rule_abstract
     todo Hash[
-      what: "{expirience} + 2",
+      what: "2",
       store_as: :expirience,
       if: "{level} == 1"
     ]

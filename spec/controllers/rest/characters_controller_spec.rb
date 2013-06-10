@@ -57,31 +57,29 @@ describe Rest::CharactersController do
 
   context "#update" do
     let(:character) { Character.create! }
-    #NOTE All skills MUST be always present in JSON 
+    #NOTE All skills MUST be always present in JSON
     let(:character_params) do
       {
         level: 1,
-        character_race_attributes: FactoryGirl.attributes_for(:dragonborn),
-        character_class_attributes: FactoryGirl.attributes_for(:cleric),
-        skills_attributes: [
-          {name: "Religion", keyword: "religion", trained: true, value: 7},
-          {name: "Acrobatics", keyword: "acrobatics", value: 0},
-          {name: "Arcana", keyword: "arcana", trained: true, value: 5},
-          {name: "Athletics", keyword: "athletics", value: 0},
-          {name: "Bluff", keyword: "bluff", value: 0},
-          {name: "Diplomacy", keyword: "diplomacy", trained: true, value: 8},
-          {name: "Dungeoneering", keyword: "dungeoneering", value: 0},
-          {name: "Endurance", keyword: "endurance", value: 0},
-          {name: "Heal", keyword: "heal", value: 0},
-          {name: "History", keyword: "history", value: 0},
-          {name: "Insight", keyword: "insight", value: 0},
-          {name: "Intimidate", keyword: "intimidate", value: 0},
-          {name: "Nature", keyword: "nature", value: 0},
-          {name: "Perception", keyword: "perception", value: 0},
-          {name: "Stealth", keyword: "stealth", value: 0},
-          {name: "Streetwise", keyword: "streetwise", value: 0},
-          {name: "Thievery", keyword: "thievery", value: 0}
-        ],
+        character_race_id: FactoryGirl.create(:dragonborn).id,
+        character_class_id: FactoryGirl.create(:cleric).id,
+        religion: 7,
+        acrobatics: 0,
+        arcana: 5,
+        athletics: 0,
+        bluff: 0,
+        diplomacy: 8,
+        dungeoneering: 0,
+        endurance: 0,
+        heal: 0,
+        history: 0,
+        insight: 0,
+        intimidate: 0,
+        nature: 0,
+        perception: 0,
+        stealth: 0,
+        streetwise: 0,
+        thievery: 0,
         strength: 13,
         dexterity: 14,
         constitution: 15,
@@ -91,16 +89,18 @@ describe Rest::CharactersController do
       }
     end
 
+    #TODO think how to organize specs for different stages
     it "returns success" do
-      put :update, { id: character.id, character: character_params }
+      put :update, { id: character.id, character: character_params, stage: 1 }
       body = JSON.parse(response.body)
       body.should include("success", "character")
       body["success"].should be_true
       body["character"].should be
+      p body["character"]
     end
     
     it "returns success and rules marked by current stage" do
-      put :update, { id: character.id, character: character_params, metadata: { stage: 1 } }
+      put :update, { id: character.id, character: character_params, stage: 1 }
       body = JSON.parse(response.body)
       body.should include("success", "character")
       body["success"].should be_true

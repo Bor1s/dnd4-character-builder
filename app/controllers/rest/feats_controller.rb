@@ -1,6 +1,6 @@
 class Rest::FeatsController < Rest::BaseController
   def index
-    feats = Templates::Feat.all   
+    feats = Feat.all
     unless feats.empty?
       result = { success: true, feats: feats}
     else

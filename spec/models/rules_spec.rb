@@ -21,10 +21,6 @@ describe Rule do
     subject.should respond_to :character
   end
 
-  it 'should respond_to :parse' do
-    subject.protected_methods.grep(/parse/).should_not be_empty
-  end
-
   context "#process" do
 
     it 'should raise exception if no character provided' do

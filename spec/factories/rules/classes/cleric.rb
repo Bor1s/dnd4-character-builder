@@ -4,9 +4,10 @@ FactoryGirl.define do
     name :cleric_encounter_powers_known_rule
     todo Hash[
       what: "3",
-      if: "{cleric?}"
+      if: "{cleric?}",
+      store_as: :encounter_powers_known
     ]
-    one_off true
+    stage 3
   end
 
   factory :healers_lore_rule, parent: :rule do
@@ -16,6 +17,7 @@ FactoryGirl.define do
       if: "{cleric?}",
       store_as: :healing_keyword_bonus
     ]
+    stage 3
   end
 
   factory :turn_undead_burst_squares_first_lvl_rule, parent: :rule do
@@ -25,6 +27,7 @@ FactoryGirl.define do
       if: "{cleric?} and (1...11) === {level}",
       store_as: :turn_undead_burst_squares
     ]
+    stage 3
   end
 
   factory :turn_undead_burst_squares_eleven_lvl_rule, parent: :rule do
@@ -34,6 +37,7 @@ FactoryGirl.define do
       if: "{cleric?} and (11...21) === {level}",
       store_as: :turn_undead_burst_squares
     ]
+    stage 3
   end
 
   factory :turn_undead_burst_squares_twfirst_lvl_rule, parent: :rule do
@@ -43,6 +47,7 @@ FactoryGirl.define do
       if: "{cleric?} and {level} >= 21",
       store_as: :turn_undead_burst_squares
     ]
+    stage 3
   end
 
   factory :turn_undead_dice_amount_first_lvl_rule, parent: :rule do
@@ -52,6 +57,7 @@ FactoryGirl.define do
       if: "{cleric?} and (1...5) === {level}",
       store_as: :turn_undead_dice_amount
     ]
+    stage 3
   end
 
   factory :turn_undead_dice_amount_fifth_lvl_rule, parent: :rule do
@@ -61,6 +67,7 @@ FactoryGirl.define do
       if: "{cleric?} and (5...11) === {level}",
       store_as: :turn_undead_dice_amount
     ]
+    stage 3
   end
 
   factory :turn_undead_dice_amount_eleventh_lvl_rule, parent: :rule do
@@ -70,6 +77,7 @@ FactoryGirl.define do
       if: "{cleric?} and (11...15) === {level}",
       store_as: :turn_undead_dice_amount
     ]
+    stage 3
   end
 
   factory :turn_undead_dice_amount_fifteenth_lvl_rule, parent: :rule do
@@ -79,6 +87,7 @@ FactoryGirl.define do
       if: "{cleric?} and (15...21) === {level}",
       store_as: :turn_undead_dice_amount
     ]
+    stage 3
   end
 
   factory :turn_undead_dice_amount_twfirst_lvl_rule, parent: :rule do
@@ -88,6 +97,7 @@ FactoryGirl.define do
       if: "{cleric?} and (21...25) === {level}",
       store_as: :turn_undead_dice_amount
     ]
+    stage 3
   end
 
   factory :turn_undead_dice_amount_twfifth_lvl_rule, parent: :rule do
@@ -97,6 +107,7 @@ FactoryGirl.define do
       if: "{cleric?} and {level} >= 25",
       store_as: :turn_undead_dice_amount
     ]
+    stage 3
   end
 
   factory :healing_word_burst_squares_first_lvl_rule, parent: :rule do
@@ -106,6 +117,7 @@ FactoryGirl.define do
       if: "{cleric?} and (1...11) === {level}",
       store_as: :healing_word_burst_squares
     ]
+    stage 3
   end
 
   factory :healing_word_burst_squares_el_lvl_rule, parent: :rule do
@@ -115,6 +127,7 @@ FactoryGirl.define do
       if: "{cleric?} and (11...15) === {level}",
       store_as: :healing_word_burst_squares
     ]
+    stage 3
   end
 
   factory :healing_word_burst_squares_fift_lvl_rule, parent: :rule do
@@ -124,6 +137,7 @@ FactoryGirl.define do
       if: "{cleric?} and {level} >= 15",
       store_as: :healing_word_burst_squares
     ]
+    stage 3
   end
 
   factory :healing_word_regain_dice_fst_lvl_rule, parent: :rule do
@@ -133,6 +147,7 @@ FactoryGirl.define do
       if: "{cleric?} and (1...6) === {level}",
       store_as: :healing_word_regain_dice
     ]
+    stage 3
   end
 
   factory :healing_word_regain_dice_six_lvl_rule, parent: :rule do
@@ -142,6 +157,7 @@ FactoryGirl.define do
       if: "{cleric?} and (6...11) === {level}",
       store_as: :healing_word_regain_dice
     ]
+    stage 3
   end
 
   factory :healing_word_regain_dice_el_lvl_rule, parent: :rule do
@@ -151,6 +167,7 @@ FactoryGirl.define do
       if: "{cleric?} and (11...16) === {level}",
       store_as: :healing_word_regain_dice
     ]
+    stage 3
   end
 
   factory :healing_word_regain_dice_sixt_lvl_rule, parent: :rule do
@@ -160,6 +177,7 @@ FactoryGirl.define do
       if: "{cleric?} and (16...21) === {level}",
       store_as: :healing_word_regain_dice
     ]
+    stage 3
   end
 
   factory :healing_word_regain_dice_tw_lvl_rule, parent: :rule do
@@ -169,6 +187,7 @@ FactoryGirl.define do
       if: "{cleric?} and (21...26) === {level}",
       store_as: :healing_word_regain_dice
     ]
+    stage 3
   end
 
   factory :healing_word_regain_dice_tws_lvl_rule, parent: :rule do
@@ -178,6 +197,7 @@ FactoryGirl.define do
       if: "{cleric?} and {level} >= 26",
       store_as: :healing_word_regain_dice
     ]
+    stage 3
   end
 
   # Lance of faith
@@ -189,6 +209,7 @@ FactoryGirl.define do
       if: "{cleric?} and (1...21) === {level}",
       store_as: :lance_of_faith_hit_dice
     ]
+    stage 3
   end
 
   factory :lance_of_faith_hit_dice_twfst_lvl_rule, parent: :rule do
@@ -198,6 +219,7 @@ FactoryGirl.define do
       if: "{cleric?} and {level} >= 21",
       store_as: :lance_of_faith_hit_dice
     ]
+    stage 3
   end
 
   # Priests shield
@@ -209,6 +231,7 @@ FactoryGirl.define do
       if: "{cleric?} and (1...21) === {level}",
       store_as: :priests_shield_hit_dice
     ]
+    stage 3
   end
 
   factory :priests_shield_twfst_lvl_rule, parent: :rule do
@@ -218,5 +241,6 @@ FactoryGirl.define do
       if: "{cleric?} and {level} >= 21",
       store_as: :priests_shield_hit_dice
     ]
+    stage 3
   end
 end

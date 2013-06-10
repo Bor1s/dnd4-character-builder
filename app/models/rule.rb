@@ -12,7 +12,7 @@ class Rule
   def process
     raise NoCharacterProvidedException, "No character instance provided!" unless character
     raise EmptyRuleException, "Rule #{self.inspect} has empty :todo field!" unless todo
-    RuleMapper.store(self)
+    #RuleMapper.store(self)
     parse(todo.with_indifferent_access, revert_mode: false)
   end
 
@@ -65,17 +65,21 @@ class Rule
     end
   end
 
+  def accumulate_values(store_as, value, revert_mode)
+    if store_as
+      raise NoStorageException , "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
+      return character.method("#{store_as}=").call(character.send(store_as.to_sym) - value) if revert_mode
+      character.method("#{store_as}=").call(character.send(store_as.to_sym).to_i + value)
+      #recalc_related_rules(store_as)
+    else
+      value
+    end
+  end
+
   def handle_rule_storage(rule_hash, revert_mode: false)
     core = handle_rule_body(rule_hash)
     store_as = rule_hash[:store_as]
-    if store_as
-      raise NoStorageException , "Define #{store_as} in character to store #{name} value!" unless character.respond_to? "#{store_as}="
-      return character.method("#{store_as}=").call(character.send(store_as.to_sym) - core) if revert_mode
-      character.method("#{store_as}=").call(core)
-      recalc_related_rules(store_as)
-    else
-      core
-    end
+    accumulate_values(store_as, core, revert_mode)
   end
 
   def recalc_related_rules(store_as)

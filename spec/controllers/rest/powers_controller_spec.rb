@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Rest::PowersController do
   context "#available" do
     it "returns only available powers" do
+      pending 'Implement powers'
       character = build_character(type: :dragonborn_cleric, level: 1)
       get :available, { format: :json, character_id: character.id }
       result = JSON.parse response.body
@@ -11,6 +12,7 @@ describe Rest::PowersController do
     end
 
     it "returns error if no character found" do
+      pending 'Implement powers'
       get :available, { format: :json, character_id: "unexisting ID" }
       result = JSON.parse response.body
       result["success"].should be_false
