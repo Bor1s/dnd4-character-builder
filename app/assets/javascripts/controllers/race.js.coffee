@@ -1,21 +1,22 @@
-@RaceCtrl = ($scope, Race, Character) ->
-  unless window.currentCharacter
-    Character.save({}, (data)->
-      window.currentCharacter = data.character
-    )
-  $scope.races = Race.query()
+@RaceCtrl = ($scope, Race, Character, $location, $rootScope) ->
+  $scope.races = Race.query(
+    {}
+    ()->
+      $scope.raceId = $rootScope.currentCharacter.race_id
+  )
 
   $scope.updateRace = ()->
-    for r in $scope.races
-      _r = r if r._id == $scope.raceSelect
     Character.update(
-      id: currentCharacter._id
+      stage: 2
+      id: $rootScope.currentCharacter._id
       character:
-        level: 1
-        character_race_attributes:
-          description: _r.description
-          size: _r.size
-          speed: _r.speed
-          vision: _r.vision
-          name: _r.name
+        race_id: $scope.raceId
+      (data) ->
+        $rootScope.currentCharacter = data.character
+        $location.path('/new_character/class')
+      () ->
+        alert 'Fail :('
     )
+
+  $scope.backToLevel = ()->
+    $location.path('/new_character/level')

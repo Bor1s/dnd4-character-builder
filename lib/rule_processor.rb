@@ -57,12 +57,12 @@ class RuleProcessor
     end
   end
 
-  private
+  #private
 
-  def validate_stages(stage)
-    raise OutOfStageRangeError, "Stage must be within 1..7" unless stages.include? stage
-    stage
-  end
+  #def validate_stages(stage)
+    #raise OutOfStageRangeError, "Stage must be within 1..7" unless stages.include? stage
+    #stage
+  #end
 
   class OutOfStageRangeError < StandardError; end
 end

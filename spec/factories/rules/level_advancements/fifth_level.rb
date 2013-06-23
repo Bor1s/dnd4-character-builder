@@ -6,7 +6,7 @@ FactoryGirl.define do
       store_as: :utility_powers_known,
       if: "{level} == 5"
     ]
-    one_off true
+    stage 1
   end
 
   factory :feats_known_at_fifth_level_rule, parent: :rule do
@@ -16,7 +16,7 @@ FactoryGirl.define do
       store_as: :feats_known,
       if: "{level} == 5"
     ]
-    one_off true
+    stage 1
   end
 
   factory :atwills_known_at_fifth_level_rule, parent: :rule do
@@ -26,7 +26,7 @@ FactoryGirl.define do
       store_as: :atwill_powers_known,
       if: "{level} == 5"
     ]
-    one_off true
+    stage 1
   end
   
   factory :encounters_known_at_fifth_level_rule, parent: :rule do
@@ -36,7 +36,7 @@ FactoryGirl.define do
       store_as: :encounter_powers_known,
       if: "{level} == 5"
     ]
-    one_off true
+    stage 1
   end
   
   factory :dailies_known_at_fifth_level_rule, parent: :rule do
@@ -46,7 +46,7 @@ FactoryGirl.define do
       store_as: :daily_powers_known,
       if: "{level} == 5"
     ]
-    one_off true
+    stage 1
   end
 
 end

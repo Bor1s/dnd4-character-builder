@@ -57,11 +57,10 @@ describe Rest::CharactersController do
 
   context "#update" do
     let(:character) { Character.create! }
-    #NOTE All skills MUST be always present in JSON
     let(:character_params) do
       {
         level: 1,
-        character_race_id: FactoryGirl.create(:dragonborn).id,
+        race_id: FactoryGirl.create(:dragonborn).id,
         character_class_id: FactoryGirl.create(:cleric).id,
         religion: 7,
         acrobatics: 0,
@@ -96,7 +95,6 @@ describe Rest::CharactersController do
       body.should include("success", "character")
       body["success"].should be_true
       body["character"].should be
-      p body["character"]
     end
     
     it "returns success and rules marked by current stage" do

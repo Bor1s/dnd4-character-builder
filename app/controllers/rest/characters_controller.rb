@@ -1,5 +1,7 @@
 class Rest::CharactersController < Rest::BaseController
 
+  before_filter :find_character, only: [:update, :show]
+
   def index
     characters = Character.all
     unless characters.empty?
@@ -11,9 +13,8 @@ class Rest::CharactersController < Rest::BaseController
   end
 
   def show
-    character = Character.where(id: params[:id]).first
-    if character
-      result = { success: true, character: character }
+    if @character
+      result = { success: true, character: @character }
     else
       result = { success: false, error: "No character with #{params[:id]} found!" }
     end
@@ -31,14 +32,14 @@ class Rest::CharactersController < Rest::BaseController
   end
 
   def update
-    character = Character.where(id: params[:id]).first
-    if character
-      character.attributes = params[:character]
+    if @character
+      RuleProcessor.new(@character).revert(params[:stage])
+
+      @character.attributes = params[:character]
       begin
-        RuleProcessor.new(character).revert(params[:stage])
-        RuleProcessor.new(character).process(params[:stage])
-        character.save!
-        result = { success: true, character: character }
+        RuleProcessor.new(@character).process(params[:stage])
+        @character.save!
+        result = { success: true, character: @character }
       rescue => e
         result = { success: false, error: e.message }
       end
@@ -47,5 +48,11 @@ class Rest::CharactersController < Rest::BaseController
     end
 
     render json: result
+  end
+
+  private
+
+  def find_character
+    @character = Character.where(id: params[:id]).first
   end
 end

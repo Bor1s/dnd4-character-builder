@@ -8,7 +8,7 @@ FactoryGirl.define do
 
     factory :dragonborn_cleric, parent: :character do
       before(:create) do |char, evaluator|
-        char.race = FactoryGirl.build(:dragonborn)
+        char.race = FactoryGirl.build(:dragonborn_race)
         char.character_class = FactoryGirl.build(:cleric)
       end
 

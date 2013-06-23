@@ -40,18 +40,26 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.before(:suite) do
-    [Character, Rule, RuleMapper, Power, Feat,
-     Language, OneOffRulesFlag].each do |klass|
+    [Character, Race, CharacterClass, Rule, RuleMapper, Power, Feat,
+     Language].each do |klass|
       klass.delete_all
     end
 
-    prepare_rules_set
     prepare_character_races
     prepare_character_classes
+
+    prepare_rules_set
     prepare_skills
     prepare_languages
     prepare_feats
     prepare_powers
+
+    #DbDumper.dump Race
+    #DbDumper.dump CharacterClass
+    #DbDumper.dump Rule
+    #DbDumper.dump Power
+    #DbDumper.dump Feat
+    #DbDumper.dump Language
   end
 
 end

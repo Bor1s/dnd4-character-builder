@@ -11,7 +11,7 @@ module RulePoolHelper
   end
 
   def prepare_character_races
-    FactoryGirl.create(:dragonborn)
+    FactoryGirl.create(:dragonborn_race)
   end
 
   def prepare_character_classes
