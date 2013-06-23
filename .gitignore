@@ -19,4 +19,4 @@ capybara-*.html
 **.swo
 rerun.txt
 pickle-email-*.html
-tags
+.tags
