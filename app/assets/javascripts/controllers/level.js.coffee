@@ -11,7 +11,7 @@
         level: $scope.level
       (data) ->
         $rootScope.currentCharacter = data.character
-        $location.path('/new_character/race')
+        $location.path('/race')
       () ->
         alert 'Fail :('
     )

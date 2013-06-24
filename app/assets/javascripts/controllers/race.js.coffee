@@ -13,10 +13,10 @@
         race_id: $scope.raceId
       (data) ->
         $rootScope.currentCharacter = data.character
-        $location.path('/new_character/class')
+        $location.path('/class')
       () ->
         alert 'Fail :('
     )
 
   $scope.backToLevel = ()->
-    $location.path('/new_character/level')
+    $location.path('/level')

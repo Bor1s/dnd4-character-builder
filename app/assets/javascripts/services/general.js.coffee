@@ -24,4 +24,7 @@ angular.module('characterServices', ['ngResource']).
         method: 'PUT'
         isArray: false
         params: {id: '@id'}
+      query:
+        method: 'GET'
+        isArray: true
     )

@@ -1,3 +1,5 @@
+<div ng-show="!$rootScope.currentCharacter" ng-include src="'/assets/partials/top-bar.html'"></div>
+
 <select ng-model='raceId' ng-options="r._id as r.name for r in races">
 </select>
 

@@ -1,3 +1,4 @@
+<div ng-show="!$rootScope.currentCharacter" ng-include src="'/assets/partials/top-bar.html'"></div>
 <select ng-model='classId' ng-options="c._id as c.name for c in classes">
 </select>
 

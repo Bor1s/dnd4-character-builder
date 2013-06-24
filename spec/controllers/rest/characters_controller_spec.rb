@@ -6,16 +6,14 @@ describe Rest::CharactersController do
       Character.stub(:all).and_return([Character.new])
       get :index, format: :json
       body = JSON.parse(response.body)
-      body.should include("success", "characters")
-      body["characters"].should_not be_empty
+      body.should_not be_empty
     end
 
-    it "returns success: false if no characters found" do
+    it "returns empty array" do
       Character.stub(:all).and_return([])
       get :index, format: :json
       body = JSON.parse(response.body)
-      body.should include("success", "error")
-      body["success"].should be_false
+      body.should be_empty
     end
   end
 
@@ -25,15 +23,12 @@ describe Rest::CharactersController do
       Character.should_receive(:where).and_return([character])
       get :show, { id: character.id, format: :json }
       body = JSON.parse(response.body)
-      body.should include("success", "character")
-      body["character"].should be
+      body.should_not be_empty
     end
 
-    it "returns success: false if no characters found" do
+    it "returns empty result" do
       get :show, { id: "unexisting-id", format: :json }
-      body = JSON.parse(response.body)
-      body.should include("success", "error")
-      body["success"].should be_false
+      response.status.should eq 204
     end
   end
 

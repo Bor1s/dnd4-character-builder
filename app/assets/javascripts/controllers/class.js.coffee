@@ -2,7 +2,7 @@
   $scope.classes = Cls.query(
     {}
     ()->
-      $scope.classId = $rootScope.currentCharacter.class_id
+      $scope.classId = $rootScope.currentCharacter.character_class_id
   )
 
   $scope.updateClass = ()->
@@ -13,10 +13,10 @@
         character_class_id: $scope.classId
       (data) ->
         $rootScope.currentCharacter = data.character
-        $location.path('/new_character/ability_scores')
+        $location.path('/ability_scores')
       () ->
         alert 'Fail :('
     )
 
   $scope.backToRace = ()->
-    $location.path('/new_character/race')
+    $location.path('/race')

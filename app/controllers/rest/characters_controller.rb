@@ -4,21 +4,11 @@ class Rest::CharactersController < Rest::BaseController
 
   def index
     characters = Character.all
-    unless characters.empty?
-      result = { success: true, characters: characters }
-    else
-      result = { success: false, error: "No characters found!" }
-    end
-    render json: result
+    render json: characters
   end
 
   def show
-    if @character
-      result = { success: true, character: @character }
-    else
-      result = { success: false, error: "No character with #{params[:id]} found!" }
-    end
-    render json: result
+    render json: @character
   end
 
   def create
@@ -54,5 +44,6 @@ class Rest::CharactersController < Rest::BaseController
 
   def find_character
     @character = Character.where(id: params[:id]).first
+    render nothing: true, status: 204 unless @character
   end
 end
