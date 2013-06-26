@@ -1,33 +1,19 @@
-@AbsCtrl = ($scope, $http, Character) ->
+@AbsCtrl = ($scope, $http, Character, $location, $rootScope) ->
   $http.get('/rest/ability_scores/names').success (data)->
     $scope.abilityScoresNames = data
 
-  $scope.gtypes =
-    [
-      { id: 1, name: "Standard Array", url: "/rest/ability_scores/standard_array" },
-      { id: 2, name: "Random", url: "/rest/ability_scores/roll_ability_scores" },
-      { id: 3, name: "Custom", url: "/rest/ability_scores/custom_ability_scores" }
-    ]
+  $http.get('/rest/ability_scores/custom_ability_scores').success (data)->
+    $scope.spendPoints = data.ability_scores.spend_points
 
-  $scope._setAbilityScoresValues = (scores)->
-    $scope.str = scores[0]
-    $scope.con = scores[1]
-    $scope.dex = scores[2]
-    $scope.int = scores[3]
-    $scope.wis = scores[4]
-    $scope.cha = scores[5]
+  $scope.str = $rootScope.currentCharacter.strength
+  $scope.con = $rootScope.currentCharacter.constitution
+  $scope.dex = $rootScope.currentCharacter.dexterity
+  $scope.int = $rootScope.currentCharacter.intelligence
+  $scope.wis = $rootScope.currentCharacter.wisdom
+  $scope.cha = $rootScope.currentCharacter.charisma
 
-  $scope.generateScores = ()->
-    _el = $scope.gtypes.filter (obj) ->
-      parseInt(obj.id) == parseInt($scope.scoreType)
-
-    $http.get(_el[0].url).success (data)->
-      if data.ability_scores instanceof Array
-        $scope.scoreArray = data.ability_scores
-      else
-        $scope.spendPoints = data.ability_scores.spend_points
-        $scope.scoreArray  = data.ability_scores.scores
-      $scope._setAbilityScoresValues($scope.scoreArray)
+  $scope.backToClass = ()->
+    $location.path('/class')
 
   $scope.changeAs = (value, ng_model)->
     _from = parseInt($scope[ng_model])
@@ -44,7 +30,8 @@
 
   $scope.updateAbilityScores = ()->
     Character.update(
-      id: currentCharacter._id
+      stage: 4
+      id: $rootScope.currentCharacter._id
       character:
         strength: $scope.str
         dexterity: $scope.dex
@@ -52,4 +39,9 @@
         charisma: $scope.cha
         intelligence: $scope.int
         wisdom: $scope.wis
+      (data) ->
+        $rootScope.currentCharacter = data.character
+        $location.path('/skills')
+      () ->
+        alert 'Fail :('
     )

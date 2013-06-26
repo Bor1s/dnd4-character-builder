@@ -1,4 +1,15 @@
 class AbilityScoreGenerator
+  SCORES_BY_LEVEL = [
+    {1 => {spend_points: 22}},
+    {4 => {spend_points: 2}},
+    {8 => {spend_points: 2}},
+    {11 => {to_all_value: 1}},
+    {14 => {spend_points: 2}},
+    {18 => {spend_points: 2}},
+    {21 => {to_all_value: 1}},
+    {24 => {spend_points: 2}},
+    {28 => {spend_points: 2}},
+  ]
 
   class << self
     #Plain array of values to use for 6 ability scores. Choose rest one fornext ability score.
@@ -7,10 +18,17 @@ class AbilityScoreGenerator
       [16, 14, 13, 12, 11, 10]
     end
 
-    # Start scores and points to spend for upgrading (See score_up_cost table).
+    # Start points to spend for upgrading (See score_up_cost table).
+    # Depends of character level.
     # @return [Hash<Array, Integer>] 
-    def custom_ability_scores
-      { scores: [8, 10, 10, 10, 10, 10], spend_points: 22 }
+    def custom_ability_scores(from_level=0, to_level)
+      intermidiate_points = SCORES_BY_LEVEL.select {|s| s.keys.first > from_level and s.keys.first <= to_level }
+      points = intermidiate_points.inject([]) { |acc,h| acc += h.values; acc }
+      points.inject({spend_points: 0, to_all_value: 0}) do |acc,ip|
+        acc[:spend_points] += ip[:spend_points].to_i
+        acc[:to_all_value] += ip[:to_all_value].to_i
+        acc
+      end
     end
 
     # Randomly generated ability scores
@@ -66,7 +84,6 @@ class AbilityScoreGenerator
     end
 
   end
-
 
   class ScoreValueError < StandardError; end
 end

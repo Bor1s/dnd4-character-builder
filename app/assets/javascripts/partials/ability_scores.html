@@ -1,9 +1,4 @@
 <div ng-show="!$rootScope.currentCharacter" ng-include src="'/assets/partials/top-bar.html'"></div>
-<div class='select-ability-scores'>
-  <select ng-model='scoreType' ng-change='generateScores()'>
-    <option ng-repeat='gtype in gtypes' value='{{gtype.id}}'>{{gtype.name}}</option>
-  </select>
-</div>
 
 <div class='ability-score-names'>
   <div>
@@ -57,7 +52,7 @@
   </div>
 </div>
 
-<div class='inc-dec' ng-show="scoreType == 3">
+<div class='inc-dec'>
   <div>
     <div ng-click='changeAs(1, "str")'>+</div>
     <div ng-click='changeAs(-1, "str")'>-</div>
@@ -89,8 +84,9 @@
   </div>
 </div>
 
-<div class='points-left' ng-show='spendPoints != undefined && scoreType == 3'>{{spendPoints}}</div>
+<div class='points-left' ng-show='spendPoints != undefined'>{{spendPoints}}</div>
 
-<button ng-click='updateAbilityScores()'>Save ability scores</button>
+<hr />
 
-<hr/ >
+<a ng-click='backToClass()'>Back to class</a>
+<a ng-click='updateAbilityScores()'>Next</a>

@@ -28,11 +28,11 @@ shared_context "dragonborn race" do
       end
 
       it '+2 to charisma' do
-        @char.charisma.should eq 2
+        @char.charisma.should eq 12
       end
 
       it '+2 to strength' do
-        @char.strength.should eq 2
+        @char.strength.should eq 10
       end
 
       it '+2 to history' do
@@ -59,12 +59,13 @@ shared_context "dragonborn race" do
         RuleProcessor.new(@char).revert(stage)
       end
 
+      # Ability scores are set to default array for new character
       it '+2 to charisma' do
-        @char.charisma.should eq 0
+        @char.charisma.should eq 10
       end
 
       it '+2 to strength' do
-        @char.strength.should eq 0
+        @char.strength.should eq 8
       end
 
       it '+2 to history' do

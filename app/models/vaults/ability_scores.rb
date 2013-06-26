@@ -1,12 +1,12 @@
 module Vaults::AbilityScores
   def self.included(base)
     base.class_exec do
-      field :strength, type: Integer
-      field :dexterity, type: Integer
-      field :constitution, type: Integer
-      field :charisma, type: Integer
-      field :intelligence, type: Integer
-      field :wisdom, type: Integer
+      field :strength, type: Integer, default: 8
+      field :dexterity, type: Integer, default: 10
+      field :constitution, type: Integer, default: 10
+      field :charisma, type: Integer, default: 10
+      field :intelligence, type: Integer, default: 10
+      field :wisdom, type: Integer, default: 10
     end
 
     base.class_eval do
