@@ -54,8 +54,33 @@ describe AbilityScoreGenerator do
 
     context "for existing character with level" do
       it 'returns spend points for 1-3 lvl' do
-        # TODO implements
-        #subject.custom_ability_scores(1,2)
+        expected_result = {spend_points: 0, to_all_value: 0}
+        subject.custom_ability_scores(1,2).should eq expected_result
+      end
+
+      it "returns spend points for 1-7 lvl" do
+        expected_result = {spend_points: 2, to_all_value: 0}
+        subject.custom_ability_scores(1,7).should eq expected_result
+      end
+
+      it "returns spend points for 1-13 lvl" do
+        expected_result = {spend_points: 4, to_all_value: 1}
+        subject.custom_ability_scores(1,13).should eq expected_result
+      end
+
+      it "returns spend points for 8-17 lvl" do
+        expected_result = {spend_points: 2, to_all_value: 1}
+        subject.custom_ability_scores(8,17).should eq expected_result
+      end
+
+      it "returns spend points for 10-28 lvl" do
+        expected_result = {spend_points: 8, to_all_value: 2}
+        subject.custom_ability_scores(10,28).should eq expected_result
+      end
+
+      it "returns spend points for 1-30 lvl" do
+        expected_result = {spend_points: 12, to_all_value: 2}
+        subject.custom_ability_scores(1,30).should eq expected_result
       end
     end
 
