@@ -21,7 +21,7 @@ class AbilityScoreGenerator
     # Start points to spend for upgrading (See score_up_cost table).
     # Depends of character level.
     # @return [Hash<Array, Integer>] 
-    def custom_ability_scores(from_level=0, to_level)
+    def custom_ability_scores(from_level, to_level)
       intermidiate_points = SCORES_BY_LEVEL.select {|s| s.keys.first > from_level and s.keys.first <= to_level }
       points = intermidiate_points.inject([]) { |acc,h| acc += h.values; acc }
       points.inject({spend_points: 0, to_all_value: 0}) do |acc,ip|

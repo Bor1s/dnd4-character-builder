@@ -1,5 +1,30 @@
-<div ng-show="!$rootScope.currentCharacter" ng-include src="'/assets/partials/top-bar.html'"></div>
+<!-- Level -->
+<select ng-model='level' ng-options="l for l in levels">
+</select>
 
+<a ng-click='updateLevel()'>Next</a>
+
+<!-- Race -->
+
+<select ng-model='raceId' ng-options="r._id as r.name for r in races">
+</select>
+
+<a ng-click='updateRace()'>Next</a>
+
+<!-- Class -->
+<select ng-model='classId' ng-options="c._id as c.name for c in classes">
+</select>
+
+<a ng-click='updateClass()'>Next</a>
+
+<!-- Create new character -->
+<a ng-click='newCharacter()'>Create new character</a>
+
+<!-- Select character for editing -->
+<select ng-model='characterId' ng-options='char._id as char.name for char in characters'></select>
+<button ng-click="selectCharacter()">Select</button>
+
+<!-- Ability scores -->
 <div class='ability-score-names'>
   <div>
     {{abilityScoresNames[0]}}
@@ -86,7 +111,4 @@
 
 <div class='points-left' ng-show='spendPoints != undefined'>{{spendPoints}}</div>
 
-<hr />
-
-<a ng-click='backToClass()'>Back to class</a>
 <a ng-click='updateAbilityScores()'>Next</a>
