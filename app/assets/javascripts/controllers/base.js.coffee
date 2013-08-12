@@ -22,9 +22,8 @@
   # Selecting and createting character
   $scope.newCharacter = ()->
     Character.save({}, (data)->
-      $scope.currentCharacter = data.character
+      $rootScope.currentCharacter = data.character
     )
-    $location.path('/level')
 
   $scope.selectCharacter = ()->
     _characters = $scope.characters.filter (c)->
@@ -36,12 +35,11 @@
   $scope.updateLevel = ()->
     Character.update(
       stage: 1
-      id: $scope.currentCharacter._id
+      id: $rootScope.currentCharacter._id
       character:
         level: $scope.level
       (data) ->
-        $scope.currentCharacter = data.character
-        $location.path('/race')
+        $rootScope.currentCharacter = data.character
       () ->
         alert 'Fail :('
     )
@@ -62,12 +60,11 @@
   $scope.updateRace = ()->
     Character.update(
       stage: 2
-      id: $scope.currentCharacter._id
+      id: $rootScope.currentCharacter._id
       character:
         race_id: $scope.raceId
       (data) ->
-        $scope.currentCharacter = data.character
-        $location.path('/class')
+        $rootScope.currentCharacter = data.character
       () ->
         alert 'Fail :('
     )

@@ -2,15 +2,40 @@
   <div class='col-lg-3'></div>
   <div class='col-lg-6'>
     <div class='rounded-border text-center'>
-      <h1>Choose destiny</h1>
+      <h2>Create or choose existing protagonist</h2>
       <div class='container'>
-        <%= button_tag 'Create Protagonist', class: 'btn btn-default', :'ng-click' => 'newCharacter()' %>
-        <%= button_tag 'Choose Protagonist', class: 'btn btn-primary' %>
+        <%= button_tag 'Create', class: 'btn btn-default', :'ng-click' => 'newCharacter()' %>
+        <%= button_tag 'Choose', class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
   <div class='col-lg-3'></div>
 </div>
 
-<div class='row'>
+<!-- Level -->
+<div class='row' ng-show='$root.currentCharacter'>
+  <div class='col-lg-3'></div>
+  <div class='col-lg-6'>
+    <div class='rounded-border'>
+      <p class='step-header'>What is your level?</p>
+      <div class='container'>
+        <%= select_tag '', '', :'ng-model' => 'level', :'ng-options' => "l for l in levels" %>
+        <%= button_tag 'Next', class: 'btn btn-success left-bottom', :'ng-show' => 'level', :'ng-click' => 'updateLevel()' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Race -->
+<div class='row' ng-show='$root.currentCharacter.level'>
+  <div class='col-lg-3'></div>
+  <div class='col-lg-6'>
+    <div class='rounded-border'>
+      <p class='step-header'>Whom you were born?</p>
+      <div class='container'>
+        <%= select_tag '', '', :'ng-model' => 'raceId', :'ng-options' => "r._id as r.name for r in races" %>
+        <%= button_tag 'Next', class: 'btn btn-success left-bottom', :'ng-show' => 'raceId', :'ng-click' => 'updateRace()' %>
+      </div>
+    </div>
+  </div>
 </div>
