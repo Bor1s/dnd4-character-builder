@@ -13,12 +13,26 @@
 
 .step-header {
   @include radius-border;
+  text-align: left;
   padding: 10px;
-  background-color: #3a3c3c;
+  background-color: #e0e0e0;
   color: white;
   font-weight: bold;
 }
 
 .left-bottom {
   float: right;
+}
+
+ul {
+  li {
+    line-height: 1.9em;
+  }
+  padding-left: 2px;
+  display: inline-block;
+  list-style: none;
+}
+
+.btn-mini {
+  padding: 1px 5px;
 }

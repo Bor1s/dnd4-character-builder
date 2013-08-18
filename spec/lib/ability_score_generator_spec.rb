@@ -26,29 +26,29 @@ describe AbilityScoreGenerator do
     specify { subject.should respond_to :custom_ability_scores }
 
     context "for new character without level" do
-      it "returns spend points for 1-3 lvl" do
+      it "returns spend points for 0-3 lvl" do
         expected_result = {spend_points: 22, to_all_value: 0}
-        subject.custom_ability_scores(3).should eq expected_result
+        subject.custom_ability_scores(0,3).should eq expected_result
       end
 
-      it "returns spend points for 1-4 lvl" do
+      it "returns spend points for 0-4 lvl" do
         expected_result = {spend_points: 24, to_all_value: 0}
-        subject.custom_ability_scores(4).should eq expected_result
+        subject.custom_ability_scores(0,4).should eq expected_result
       end
 
-      it "returns spend points for 1-12 lvl" do
+      it "returns spend points for 0-12 lvl" do
         expected_result = {spend_points: 26, to_all_value: 1}
-        subject.custom_ability_scores(12).should eq expected_result
+        subject.custom_ability_scores(0,12).should eq expected_result
       end
 
-      it "returns spend points for 1-22 lvl" do
+      it "returns spend points for 0-22 lvl" do
         expected_result = {spend_points: 30, to_all_value: 2}
-        subject.custom_ability_scores(22).should eq expected_result
+        subject.custom_ability_scores(0,22).should eq expected_result
       end
 
-      it "returns spend points for 1-30 lvl" do
+      it "returns spend points for 0-30 lvl" do
         expected_result = {spend_points: 34, to_all_value: 2}
-        subject.custom_ability_scores(30).should eq expected_result
+        subject.custom_ability_scores(0,30).should eq expected_result
       end
     end
 

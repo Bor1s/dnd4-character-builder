@@ -1,41 +1,45 @@
 <div class='row'>
-  <div class='col-lg-3'></div>
-  <div class='col-lg-6'>
+  <div class='offset3 span6'>
     <div class='rounded-border text-center'>
-      <h2>Create or choose existing protagonist</h2>
-      <div class='container'>
-        <%= button_tag 'Create', class: 'btn btn-default', :'ng-click' => 'newCharacter()' %>
-        <%= button_tag 'Choose', class: 'btn btn-primary' %>
-      </div>
+      <p class='step-header'>Create or choose existing protagonist</p>
+      <%= button_tag 'Create', class: 'btn btn-default', :'ng-click' => 'newCharacter()' %>
+      <%= button_tag 'Choose', class: 'btn btn-primary' %>
     </div>
   </div>
-  <div class='col-lg-3'></div>
 </div>
 
 <!-- Level -->
 <div class='row' ng-show='$root.currentCharacter'>
-  <div class='col-lg-3'></div>
-  <div class='col-lg-6'>
+  <div class='offset3 span6'>
     <div class='rounded-border'>
       <p class='step-header'>What is your level?</p>
-      <div class='container'>
-        <%= select_tag '', '', :'ng-model' => 'level', :'ng-options' => "l for l in levels" %>
-        <%= button_tag 'Next', class: 'btn btn-success left-bottom', :'ng-show' => 'level', :'ng-click' => 'updateLevel()' %>
-      </div>
+      <%= select_tag '', '', :'ng-model' => 'level', :'ng-options' => "l for l in levels" %>
+      <%= button_tag 'Save', class: 'btn btn-success left-bottom', :'ng-show' => 'level', :'ng-click' => 'updateLevel()' %>
     </div>
   </div>
 </div>
 
 <!-- Race -->
 <div class='row' ng-show='$root.currentCharacter.level'>
-  <div class='col-lg-3'></div>
-  <div class='col-lg-6'>
+  <div class='offset3 span6'>
     <div class='rounded-border'>
       <p class='step-header'>Whom you were born?</p>
-      <div class='container'>
-        <%= select_tag '', '', :'ng-model' => 'raceId', :'ng-options' => "r._id as r.name for r in races" %>
-        <%= button_tag 'Next', class: 'btn btn-success left-bottom', :'ng-show' => 'raceId', :'ng-click' => 'updateRace()' %>
-      </div>
+      <%= select_tag '', '', :'ng-model' => 'raceId', :'ng-options' => "r._id as r.name for r in races" %>
+      <%= button_tag 'Save', class: 'btn btn-success left-bottom', :'ng-show' => 'raceId', :'ng-click' => 'updateRace()' %>
     </div>
   </div>
 </div>
+
+<!-- Class -->
+<div class='row' ng-show='$root.currentCharacter.race_id'>
+  <div class='offset3 span6'>
+    <div class='rounded-border'>
+      <p class='step-header'>What is your profession?</p>
+      <%= select_tag '', '', :'ng-model' => 'classId', :'ng-options' => "c._id as c.name for c in classes" %>
+      <%= button_tag 'Save', class: 'btn btn-success left-bottom', :'ng-show' => 'classId', :'ng-click' => 'updateClass()' %>
+    </div>
+  </div>
+</div>
+
+<!-- Ability Scores -->
+<%= render 'ability_scores' %>

@@ -1,0 +1,60 @@
+<div class='row' ng-show='$root.currentCharacter.character_class_id'>
+
+  <div class='offset3 span6'>
+    <div class='rounded-border'>
+      <p class='step-header'>What are your ability scores?</p>
+      <div class='text-center'>
+        <span ng-show='spendPoints != undefined'>
+          Points to spend: {{spendPoints}}
+        </span>
+      </div>
+      <ul>
+        <li>{{abilityScoresNames[0]}}</li>
+        <li>{{abilityScoresNames[1]}}</li>
+        <li>{{abilityScoresNames[2]}}</li>
+        <li>{{abilityScoresNames[3]}}</li>
+        <li>{{abilityScoresNames[4]}}</li>
+        <li>{{abilityScoresNames[5]}}</li>
+      </ul>
+      <ul>
+        <li>{{str}}</li>
+        <li>{{con}}</li>
+        <li>{{dex}}</li>
+        <li>{{int}}</li>
+        <li>{{wis}}</li>
+        <li>{{cha}}</li>
+      </ul>
+      <ul>
+        <li>
+          <%= button_tag '+', class: 'btn btn-mini', :'ng-click' => 'changeAs(1, "str")' %>
+          <%= button_tag '-', class: 'btn btn-mini', :'ng-click' => 'changeAs(-1, "str")' %>
+        </li>
+        <li>
+          <%= button_tag '+', class: 'btn btn-mini', :'ng-click' => 'changeAs(1, "con")' %>
+          <%= button_tag '-', class: 'btn btn-mini', :'ng-click' => 'changeAs(-1, "con")' %>
+        </li>
+        <li>
+          <%= button_tag '+', class: 'btn btn-mini', :'ng-click' => 'changeAs(1, "dex")' %>
+          <%= button_tag '-', class: 'btn btn-mini', :'ng-click' => 'changeAs(-1, "dex")' %>
+        </li>
+        <li>
+          <%= button_tag '+', class: 'btn btn-mini', :'ng-click' => 'changeAs(1, "int")' %>
+          <%= button_tag '-', class: 'btn btn-mini', :'ng-click' => 'changeAs(-1, "int")' %>
+        </li>
+        <li>
+          <%= button_tag '+', class: 'btn btn-mini', :'ng-click' => 'changeAs(1, "wis")' %>
+          <%= button_tag '-', class: 'btn btn-mini', :'ng-click' => 'changeAs(-1, "wis")' %>
+        </li>
+        <li>
+          <%= button_tag '+', class: 'btn btn-mini', :'ng-click' => 'changeAs(1, "cha")' %>
+          <%= button_tag '-', class: 'btn btn-mini', :'ng-click' => 'changeAs(-1, "cha")' %>
+        </li>
+      </ul>
+
+      
+      <%= button_tag 'Save', class: 'btn btn-success left-bottom', :'ng-click' => 'updateAbilityScores()' %>
+    </div>
+
+  </div>
+
+</div>
