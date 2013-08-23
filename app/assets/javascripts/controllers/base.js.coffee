@@ -111,6 +111,7 @@
     _from = parseInt($scope[ng_model])
     _to   = parseInt($scope[ng_model]) + value
     $http.get("/rest/ability_scores/score_cost/#{_from}/#{_to}").success (data) ->
+      console.log data
       unless data.error
         if value == -1
           $scope.spendPoints = $scope.spendPoints + parseInt(data.cost)

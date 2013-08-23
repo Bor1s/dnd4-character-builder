@@ -1,33 +1,31 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem "mongoid", git: 'https://github.com/mongoid/mongoid.git'
 
-#gem 'mysql2'
-gem "mongoid", "~> 3.0.0"
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
 
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+gem 'angularjs-rails'
 
-  gem 'uglifier', '>= 1.0.3'
-  gem 'angularjs-rails'
-end
-
+# Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'therubyracer'
 
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
 group :test, :development do
   gem 'thin'
-  gem "rspec-rails", "~> 2.12"
+  gem "rspec-rails"
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'pry-rails'
@@ -36,6 +34,11 @@ end
 
 group :test do
   gem 'database_cleaner'
+end
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
 
 # To use ActiveModel has_secure_password

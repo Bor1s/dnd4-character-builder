@@ -1,6 +1,6 @@
 class Rest::CharactersController < Rest::BaseController
 
-  before_filter :find_character, only: [:update, :show]
+  before_action :find_character, only: [:update, :show]
 
   def index
     characters = Character.all
@@ -25,7 +25,7 @@ class Rest::CharactersController < Rest::BaseController
     if @character
       RuleProcessor.new(@character).revert(params[:stage])
 
-      @character.attributes = params[:character]
+      @character.attributes = character_attrs
       begin
         RuleProcessor.new(@character).process(params[:stage])
         @character.save!
@@ -45,5 +45,9 @@ class Rest::CharactersController < Rest::BaseController
   def find_character
     @character = Character.where(id: params[:id]).first
     render nothing: true, status: 204 unless @character
+  end
+
+  def character_attrs
+    params.require(:character).permit!
   end
 end
